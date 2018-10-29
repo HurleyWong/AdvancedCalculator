@@ -2,7 +2,14 @@ package com.example.advancedcalculator.util;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.advancedcalculator.R;
 
 /**
  * <pre>
@@ -46,8 +53,46 @@ public class DialogUtils{
     //显示货币的Dialog
     public static Dialog showIconDialog(Activity activity,
                                         String title) {
+        int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity);
+        View contentView =LayoutInflater.from(activity).inflate(R.layout.dialog_icon_type, null);
+        showIconDialog.setContentView(contentView);
+        //设置Dialog标题
+        TextView titleTv = contentView.findViewById(R.id.tv_dialog_title);
+        titleTv.setText(title);
+        //设置Dialog内容
+        RecyclerView contentRv = contentView.findViewById(R.id.rv_dialog_content);
+        //点击取消按钮
+        TextView cancelTv = contentView.findViewById(R.id.tv_dialog_cancel);
+        cancelTv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //隐藏dialog
+                dismissDialog(showIconDialog);
+            }
+        });
+
+        //显示Dialog
+        showIconDialog.setOwnerActivity(activity);
+        if (showIconDialog.getOwnerActivity() != null
+                && !showIconDialog.getOwnerActivity().isFinishing())
+            showIconDialog.show();
+
         return showIconDialog;
     }
 
+    //隐藏Dialog
+    public static void dismissDialog(Dialog dialog) {
+        if (dialog != null && dialog.isShowing()) {
+            Activity ownerActivity = dialog.getOwnerActivity();
+            if (ownerActivity != null && !ownerActivity.isFinishing()) {
+                try{
+                    dialog.dismiss();
+                } catch(Exception e) {
+                    //在一些三星手机上dismiss可能出现问题
+                    Log.e(TAG, "error dismiss dialog" + e.getMessage());
+                }
+            }
+        }
+    }
 }

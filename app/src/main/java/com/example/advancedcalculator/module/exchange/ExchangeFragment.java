@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
 import com.example.advancedcalculator.util.ChangeMoneyUtils;
+import com.example.advancedcalculator.util.DialogUtils;
 import com.example.advancedcalculator.util.TextUtils;
 
 import butterknife.BindView;
@@ -252,6 +253,12 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         }
     }
 
-    //TODO 分割线? 删除图标 api获取汇率 国家 选择国家Dialog
+    //点击国家弹出选择货币种类Dialog
+    @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
+    public void onClickCountry() {
+        DialogUtils.showIconDialog(getActivity(), "选择币种");
+    }
+
+    //TODO 分割线? 删除图标 api获取汇率 国家 选择国家Dialog!（RecyclerView适配器，间距问题）
 
 }

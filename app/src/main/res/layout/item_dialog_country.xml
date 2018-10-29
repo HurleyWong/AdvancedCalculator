@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_icon_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="人民币"
+        android:textSize="16sp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/tv_icon_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_icon_title"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:text="CNY"
+        android:textSize="16sp"
+        android:textColor="@color/black"/>
+</RelativeLayout>
