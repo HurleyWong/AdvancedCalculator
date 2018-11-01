@@ -8,7 +8,7 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/tv_icon_title"
+        android:id="@+id/tv_coin_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -16,10 +16,10 @@
         android:textSize="16sp"
         android:textColor="@color/black"/>
     <TextView
-        android:id="@+id/tv_icon_subtitle"
+        android:id="@+id/tv_coin_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tv_icon_title"
+        android:layout_toRightOf="@+id/tv_coin_title"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:text="CNY"

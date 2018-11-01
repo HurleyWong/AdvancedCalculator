@@ -41,8 +41,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     @BindView(R.id.country_money1)
     TextView mTvMoney1;
 
-    @BindView(R.id.country_icon_type1)
-    TextView mTvIconType1;
+    @BindView(R.id.country_coin_type1)
+    TextView mTvCoinType1;
 
     @BindView(R.id.img_flag2)
     ImageView mIvFlag2;
@@ -53,8 +53,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     @BindView(R.id.country_money2)
     TextView mTvMoney2;
 
-    @BindView(R.id.country_icon_type2)
-    TextView mTvIconType2;
+    @BindView(R.id.country_coin_type2)
+    TextView mTvCoinType2;
 
     @BindView(R.id.img_flag3)
     ImageView mIvFlag3;
@@ -65,8 +65,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     @BindView(R.id.country_money3)
     TextView mTvMoney3;
 
-    @BindView(R.id.country_icon_type3)
-    TextView mTvIconType3;
+    @BindView(R.id.country_coin_type3)
+    TextView mTvCoinType3;
 
     @BindView(R.id.ll_keyboard)
     LinearLayout mLlKeyBoard;
@@ -113,6 +113,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     @BindView(R.id.divide_vertical1)
     View mViewDivide;
 
+
     private StringBuffer mMoney = new StringBuffer("");
 
     //汇率
@@ -120,6 +121,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     //是否可添加
     private boolean isAdd = true;
+
+
+
 
 
     private ExchangeContract.Presenter mPresenter;
@@ -149,12 +153,14 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         ButterKnife.bind(this, root);
         //设置第一列的竖直分割线的高度
 
+
         return root;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
 
     @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8,
@@ -260,5 +266,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     }
 
     //TODO 分割线? 删除图标 api获取汇率 国家 选择国家Dialog!（RecyclerView适配器，间距问题）
+    //TODO 直接点击.闪退问题（修改逻辑）
 
 }

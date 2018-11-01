@@ -2,6 +2,7 @@ package com.example.advancedcalculator.util;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.advancedcalculator.R;
+import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
+import com.example.advancedcalculator.module.bean.Currency;
+import com.example.advancedcalculator.module.exchange.ExchangePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <pre>
@@ -55,13 +62,26 @@ public class DialogUtils{
                                         String title) {
         int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity);
-        View contentView =LayoutInflater.from(activity).inflate(R.layout.dialog_icon_type, null);
+        View contentView =LayoutInflater.from(activity).inflate(R.layout.dialog_coin_type, null);
         showIconDialog.setContentView(contentView);
         //设置Dialog标题
         TextView titleTv = contentView.findViewById(R.id.tv_dialog_title);
         titleTv.setText(title);
+
+        //获取Dialog显示内容
+        ExchangePresenter.newInstance().getData("http://op.juhe.cn/onebox/exchange/query?key=e179779db8e8afee7e459cc5af3f7b5b");
+
         //设置Dialog内容
         RecyclerView contentRv = contentView.findViewById(R.id.rv_dialog_content);
+        CurrencyAdapter adapter;
+        //货币名称
+        List<Currency> mTitleList = new ArrayList<>();
+        //货币代码
+        List<Currency> mSubTitleList = new ArrayList<>();
+        contentRv.setLayoutManager(new LinearLayoutManager(activity));
+        adapter = new CurrencyAdapter(activity, mTitleList, mSubTitleList);
+        contentRv.setAdapter(adapter);
+
         //点击取消按钮
         TextView cancelTv = contentView.findViewById(R.id.tv_dialog_cancel);
         cancelTv.setOnClickListener(new View.OnClickListener(){

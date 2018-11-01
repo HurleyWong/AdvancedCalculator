@@ -16,6 +16,10 @@ public class Currency{
     private String name;
     private String code;
 
+    public static Currency newInstance() {
+        return new Currency();
+    }
+
     public String getName(){
         return name;
     }

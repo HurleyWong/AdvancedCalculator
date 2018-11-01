@@ -54,7 +54,7 @@
                     android:textColor="#FF0000"
                     android:layout_marginBottom="2dp"/>
                 <TextView
-                    android:id="@+id/country_icon_type1"
+                    android:id="@+id/country_coin_type1"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -109,7 +109,7 @@
                     android:textColor="#FF0000"
                     android:layout_marginBottom="2dp"/>
                 <TextView
-                    android:id="@+id/country_icon_type2"
+                    android:id="@+id/country_coin_type2"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -164,7 +164,7 @@
                     android:textColor="#FF0000"
                     android:layout_marginBottom="2dp"/>
                 <TextView
-                    android:id="@+id/country_icon_type3"
+                    android:id="@+id/country_coin_type3"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
