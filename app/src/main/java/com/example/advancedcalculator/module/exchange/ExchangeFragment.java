@@ -216,8 +216,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     mMoney.append("9");
                     break;
                 case R.id.btn_point:
-                    //如果已经含有小数点，则再点击没用
-                    if (!mMoney.toString().contains(".")) {
+                    //如果已经含有小数点，则再点击没用；如果输入后首位为.，则不增加.
+                    if (!mMoney.toString().contains(".") && mMoney.toString().length() == 0) {
                         mMoney.append(".");
                     }
                     break;
