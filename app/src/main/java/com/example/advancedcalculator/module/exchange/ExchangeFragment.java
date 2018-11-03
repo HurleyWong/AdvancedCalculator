@@ -168,7 +168,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     }
     
     @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
-    public void onClicktNum(TextView textView) {
+    public void onClickNum(TextView textView) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
         switch (textView.getId()) {
             case R.id.btn_AC:
@@ -180,7 +180,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 break;
             case R.id.btn_del:
                 //如果长度不为0，则去掉末尾
-                if (mMoney.length() != 0) {
+                if (mMoney.length() > 0) {
                     mMoney.deleteCharAt(mMoney.length() - 1);
                 }
                 break;

@@ -2,6 +2,8 @@
     <string name="app_name">AdvancedCalculator</string>
 
     <!-- 亲戚 -->
+    <string name="me">我</string>
+    <string name="link">的</string>
     <string name="husband1">丈夫</string>
     <string name="husband2">老公</string>
     <string name="wife1">妻子</string>

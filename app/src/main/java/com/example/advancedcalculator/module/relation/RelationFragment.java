@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,7 +45,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     TextView mTvWife;
     
     @BindView(R.id.btn_del)
-    ImageView mIvDel;
+    TextView mTvDel;
     
     @BindView(R.id.btn_AC)
     TextView mTvAC;
@@ -96,7 +95,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     
     @Override
     public void initViews() {
-        mRelation.append("我");
+        mRelation.append(getString(R.string.me));
     }
     
     @Override
@@ -118,9 +117,9 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     
     @OnClick({R.id.btn_husband, R.id.btn_wife, R.id.btn_fathter, R.id.btn_mother,
                 R.id.btn_bro1, R.id.btn_bro2, R.id.btn_sister1, R.id.btn_sister2,
-                R.id.btn_son, R.id.btn_daughter, R.id.btn_AC})
+                R.id.btn_son, R.id.btn_daughter, R.id.btn_AC, R.id.btn_del})
     public void onClickRelation(TextView textView) {
-        String link = "的";
+        String link = getString(R.string.link);
         switch (textView.getId()) {
             case R.id.btn_husband:
                 mRelation.append(link).append(getString(R.string.husband1));
@@ -158,8 +157,15 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
                 mRelation.append("我");
                 Log.e(TAG, mRelation.toString());
                 break;
+            case R.id.btn_del:
+                //删除
+                if (mRelation.length() >= 4) {
+                    mRelation.delete(mRelation.length()-3, mRelation.length());
+                }
+                break;
         }
         
+        Log.e(TAG, "长度：" + mRelation.length());
         mTvRelation.setText(mRelation);
     }
 }
