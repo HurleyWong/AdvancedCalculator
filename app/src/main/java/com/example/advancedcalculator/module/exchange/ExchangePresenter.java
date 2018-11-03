@@ -31,7 +31,6 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
     
     /**
      * 获取数据
-     *
      * @param url          获取货币的url
      * @param currencyList
      * @return
@@ -41,17 +40,18 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
         OkHttpEngine.getInstance().getAsynHttp(url, new ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
-            
+                //获取请求失败
             }
             
             @Override
             public void onResponse(String str) throws IOException {
-                Log.d(TAG, str);
+                //获取请求成功
+                Log.e(TAG, str);
                 //把json转变成对象
                 final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
                 for (int i = 0; i < currency.getResult().getList().size(); i++) {
                     currencyList.add(new Currency.ResultBean.ListBean(currency.getResult().getList().get(i).getName(), currency.getResult().getList().get(i).getCode()));
-                    Log.d(TAG, currency.getResult().getList().get(i).getName());
+                    Log.e(TAG, currency.getResult().getList().get(i).getName());
                 }
             }
         });

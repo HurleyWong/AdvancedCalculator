@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
@@ -77,6 +78,19 @@ public class DialogUtils {
         contentRv.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
         adapter = new CurrencyAdapter(activity, currencyList);
         contentRv.setAdapter(adapter);
+        
+        //RecyclerView中item点击事件
+        ((CurrencyAdapter) adapter).setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(activity, "1", Toast.LENGTH_LONG).show();
+            }
+    
+            @Override
+            public void onItemLongClick(View view, int position) {
+        
+            }
+        });
         
         //点击取消按钮
         TextView cancelTv = contentView.findViewById(R.id.tv_dialog_cancel);

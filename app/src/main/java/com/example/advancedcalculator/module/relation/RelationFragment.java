@@ -1,6 +1,7 @@
 package com.example.advancedcalculator.module.relation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.advancedcalculator.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * <pre>
@@ -79,6 +81,8 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     @BindView(R.id.btn_equal)
     TextView mTvEqual;
     
+    private StringBuffer mRelation = new StringBuffer("");
+    
     private RelationContract.Presenter mPresenter;
     
     public static RelationFragment newInstance() {
@@ -92,7 +96,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     
     @Override
     public void initViews() {
-        ButterKnife.bind(getActivity());
+        mRelation.append("我");
     }
     
     @Override
@@ -103,12 +107,59 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
-        initViews();
+        ButterKnife.bind(this,root);
         return root;
     }
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+    
+    @OnClick({R.id.btn_husband, R.id.btn_wife, R.id.btn_fathter, R.id.btn_mother,
+                R.id.btn_bro1, R.id.btn_bro2, R.id.btn_sister1, R.id.btn_sister2,
+                R.id.btn_son, R.id.btn_daughter, R.id.btn_AC})
+    public void onClickRelation(TextView textView) {
+        String link = "的";
+        switch (textView.getId()) {
+            case R.id.btn_husband:
+                mRelation.append(link).append(getString(R.string.husband1));
+                break;
+            case R.id.btn_wife:
+                mRelation.append(link).append(getString(R.string.wife1));
+                break;
+            case R.id.btn_fathter:
+                mRelation.append(link).append(getString(R.string.father));
+                break;
+            case R.id.btn_mother:
+                mRelation.append(link).append(getString(R.string.mother));
+                break;
+            case R.id.btn_bro1:
+                mRelation.append(link).append(getString(R.string.brother1));
+                break;
+            case R.id.btn_bro2:
+                mRelation.append(link).append(getString(R.string.brother2));
+                break;
+            case R.id.btn_sister1:
+                mRelation.append(link).append(getString(R.string.sister1));
+                break;
+            case R.id.btn_sister2:
+                mRelation.append(link).append(getString(R.string.sister2));
+                break;
+            case R.id.btn_son:
+                mRelation.append(link).append(getString(R.string.son));
+                break;
+            case R.id.btn_daughter:
+                mRelation.append(link).append(getString(R.string.daughter));
+                break;
+            case R.id.btn_AC:
+                //清空文本内容
+                mRelation.delete(0, mRelation.length());
+                mRelation.append("我");
+                Log.e(TAG, mRelation.toString());
+                break;
+        }
+        
+        mTvRelation.setText(mRelation);
     }
 }

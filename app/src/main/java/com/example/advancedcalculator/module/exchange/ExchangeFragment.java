@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
@@ -168,12 +167,12 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         
     }
     
-    @OnClick( {R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
+    @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
     public void onClicktNum(TextView textView) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
         switch (textView.getId()) {
             case R.id.btn_AC:
-                //清空StringBuffer
+                //清空文本内容
                 mMoney.delete(0, mMoney.length());
                 mMoney = new StringBuffer("");
                 //AC清空后又可以重新输入数据
@@ -273,18 +272,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         ExchangePresenter.newInstance().getData(url, currencyList);
         DialogUtils.showIconDialog(getActivity(), "选择币种", mAdapter, currencyList);
         
-        //RecyclerView中item点击事件
-        mAdapter.setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
-            }
-        
-            @Override
-            public void onItemLongClick(View view, int position) {
-            
-            }
-        });
     }
     
     

@@ -16,6 +16,10 @@ import android.view.View;
  *      time   : 2018/11/03
  * </pre>
  */
+
+/**
+ * 自定义RecyclerView分割线
+ */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     
     private static final String TAG = "DividerItemDecoration";

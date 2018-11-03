@@ -1,3 +1,67 @@
 <resources>
     <string name="app_name">AdvancedCalculator</string>
+
+    <!-- 亲戚 -->
+    <string name="husband1">丈夫</string>
+    <string name="husband2">老公</string>
+    <string name="wife1">妻子</string>
+    <string name="wife2">老婆</string>
+    <string name="father">爸爸</string>
+    <string name="mother">妈妈</string>
+    <string name="brother1">哥哥</string>
+    <string name="brother2">弟弟</string>
+    <string name="sister1">姐姐</string>
+    <string name="sister2">妹妹</string>
+    <string name="son">儿子</string>
+    <string name="daughter">女儿</string>
+    <string name="father_father">爷爷</string>
+    <string name="father_mother">奶奶</string>
+    <string name="mother_father">外公</string>
+    <string name="mother_mother">外婆</string>
+    <string name="son_son">孙子</string>
+    <string name="son_daughter">孙女</string>
+    <string name="daughter_son">外孙</string>
+    <string name="daughter_daughter">外孙女</string>
+    <string name="father_in_law_1">公公</string>
+    <string name="father_in_law_2">岳父</string>
+    <string name="mother_in_law_1">婆婆</string>
+    <string name="mother_in_law_2">岳母</string>
+    <string name="bro1_in_law_1">大伯子</string>
+    <string name="bro2_in_law_1">小叔子</string>
+    <string name="bro1_in_law_2">大舅子</string>
+    <string name="bro2_in_law_2">小舅子</string>
+    <string name="sis1_in_law_1">大姑子</string>
+    <string name="sis2_in_law_1">小姑子</string>
+    <string name="sis1_in_law_2">大姨子</string>
+    <string name="sis2_in_law_2">小姨子</string>
+    <string name="father_bro1">伯父</string>
+    <string name="father_bro2">叔叔</string>
+    <string name="mother_bro1">大舅舅</string>
+    <string name="mothter_bro2">小舅舅</string>
+    <string name="father_sis1">大姑姑</string>
+    <string name="father_sis2">小姑姑</string>
+    <string name="mother_sis1">大姨</string>
+    <string name="mother_sis2">小姨</string>
+    <string name="bro1_wife">嫂子</string>
+    <string name="bro2_wife">弟妹</string>
+    <string name="sis1_hus">姐夫</string>
+    <string name="sis2_hus">妹夫</string>
+    <string name="bro_son">侄子</string>
+    <string name="bro_daughter">侄女</string>
+    <string name="sis_son">外甥</string>
+    <string name="sis_daughter">外甥女</string>
+
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
