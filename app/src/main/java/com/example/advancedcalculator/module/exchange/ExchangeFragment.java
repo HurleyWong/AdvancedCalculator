@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.advancedcalculator.R;
@@ -113,11 +114,13 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     TextView mTvBtnAC;
     
     @BindView(R.id.btn_del)
-    TextView mTvBtnDel;
+    RelativeLayout mRlBtnDel;
     
     @BindView(R.id.divide_vertical1)
-    View mViewDivide;
+    View mViewDivide1;
     
+    @BindView(R.id.ll_column1)
+    LinearLayout mLlColumn1;
     
     private StringBuffer mMoney = new StringBuffer("");
     
@@ -155,8 +158,18 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, root);
-        //设置第一列的竖直分割线的高度
         
+        
+        //设置第一列的竖直分割线的高度
+        final ViewGroup.LayoutParams layoutParams = mViewDivide1.getLayoutParams();
+        mViewDivide1.post(new Runnable() {
+            @Override
+            public void run() {
+                layoutParams.height = mViewDivide1.getHeight() * 3 / 4;
+                mViewDivide1.setLayoutParams(layoutParams);
+                Log.e(TAG, String.valueOf(mViewDivide1.getHeight()));
+            }
+        });
         
         return root;
     }
@@ -167,10 +180,11 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         
     }
     
-    @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
-    public void onClickNum(TextView textView) {
+    @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6,
+                R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
+    public void onClickNum(View view) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
-        switch (textView.getId()) {
+        switch (view.getId()) {
             case R.id.btn_AC:
                 //清空文本内容
                 mMoney.delete(0, mMoney.length());
@@ -178,15 +192,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 //AC清空后又可以重新输入数据
                 isAdd = true;
                 break;
-            case R.id.btn_del:
-                //如果长度不为0，则去掉末尾
-                if (mMoney.length() > 0) {
-                    mMoney.deleteCharAt(mMoney.length() - 1);
-                }
-                break;
         }
         if (isAdd) {
-            switch (textView.getId()) {
+            switch (view.getId()) {
                 case R.id.btn_0:
                     //如果长度大于0且首位不为0
                     if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
@@ -227,6 +235,12 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         mMoney.append(".");
                     }
                     break;
+                case R.id.btn_del:
+                    //如果长度不为0，则去掉末尾
+                    if (mMoney.length() > 0) {
+                        mMoney.deleteCharAt(mMoney.length() - 1);
+                    }
+                    break;
             }
         }
         if (mMoney.equals("") || mMoney.length() == 0) {
@@ -265,7 +279,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     }
     
     //点击国家弹出选择货币种类Dialog
-    @OnClick( {R.id.country_title1, R.id.country_title2, R.id.country_title3})
+    @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
     public void onClickCountry() {
         final List<Currency.ResultBean.ListBean> currencyList = new ArrayList<>();
         String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";

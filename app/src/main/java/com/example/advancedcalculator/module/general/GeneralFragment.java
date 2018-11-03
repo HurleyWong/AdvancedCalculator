@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,7 +46,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
     TextView mBtn1;
     
     @BindView(R.id.btn_del)
-    ImageView mIvDel;
+    RelativeLayout mBtnDel;
     
     @BindView(R.id.btn_8)
     TextView mBtn8;

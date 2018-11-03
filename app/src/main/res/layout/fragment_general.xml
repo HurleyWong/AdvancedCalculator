@@ -118,12 +118,12 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/btn_del"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center">
-                <TextView
-                    android:id="@+id/btn_del"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn_delete"

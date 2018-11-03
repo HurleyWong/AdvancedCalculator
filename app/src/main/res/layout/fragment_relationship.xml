@@ -81,12 +81,12 @@
                 style="@style/divide.vertical"/>
 
             <RelativeLayout
+                android:id="@+id/btn_del"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
-                <TextView
-                    android:id="@+id/btn_del"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn_delete"

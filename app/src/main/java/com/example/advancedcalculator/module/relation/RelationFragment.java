@@ -45,7 +45,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     TextView mTvWife;
     
     @BindView(R.id.btn_del)
-    TextView mTvDel;
+    RelativeLayout mRlDel;
     
     @BindView(R.id.btn_AC)
     TextView mTvAC;
@@ -118,9 +118,9 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     @OnClick({R.id.btn_husband, R.id.btn_wife, R.id.btn_fathter, R.id.btn_mother,
                 R.id.btn_bro1, R.id.btn_bro2, R.id.btn_sister1, R.id.btn_sister2,
                 R.id.btn_son, R.id.btn_daughter, R.id.btn_AC, R.id.btn_del})
-    public void onClickRelation(TextView textView) {
+    public void onClickRelation(View view) {
         String link = getString(R.string.link);
-        switch (textView.getId()) {
+        switch (view.getId()) {
             case R.id.btn_husband:
                 mRelation.append(link).append(getString(R.string.husband1));
                 break;

@@ -2,6 +2,8 @@ package com.example.advancedcalculator.util;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 
 /**
  * <pre>
@@ -36,11 +38,24 @@ public class ScreenUtils {
         return dm.density;
     }
     
-    //设置分割线高度
-    /*
-    public static void setDivideHeight(View view) {
-        view.getLayoutParams().height = getScreenHeight() * 3 / 8;
-        Log.e(TAG, "百分比：" + String.valueOf(view.getLayoutParams().height));
-
-    }*/
+    //获取控件的高度或宽度
+    public static int getViewHeightOrWidth(View view, boolean isHeight) {
+        int result;
+        if (view == null) {
+            return 0;
+        } else {
+            if (isHeight) {
+                int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                view.measure(height, 0);
+                result = view.getMeasuredHeight();
+            } else {
+                int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                view.measure(0, width);
+                result = view.getMeasuredWidth();
+            }
+            Log.e(TAG, String.valueOf(result));
+            return result;
+        }
+    }
+    
 }
