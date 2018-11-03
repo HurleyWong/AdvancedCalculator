@@ -22,13 +22,13 @@ import okhttp3.Response;
 /**
  * 对OkHttp进行封装
  */
-public class OkHttpEngine{
-    private static final String TAG="OkHttpEngine";
-
+public class OkHttpEngine {
+    private static final String TAG = "OkHttpEngine";
+    
     private static volatile OkHttpEngine mInstance;
     private OkHttpClient mOkHttpClient;
     private Handler mHandler;
-
+    
     public static OkHttpEngine getInstance() {
         if (mInstance == null) {
             synchronized(OkHttpEngine.class) {
@@ -39,70 +39,66 @@ public class OkHttpEngine{
         }
         return mInstance;
     }
-
+    
     private OkHttpEngine() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(15,TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS).writeTimeout(20, TimeUnit.SECONDS).readTimeout(20, TimeUnit.SECONDS);
         mOkHttpClient = builder.build();
         mHandler = new Handler();
     }
-
+    
     /**
      * 异步GET请求
+     *
      * @param url
      * @param callback
      */
     public void getAsynHttp(String url, ResultCallback callback) {
-        final Request request = new Request.Builder()
-                .url(url)
-                .build();
+        final Request request = new Request.Builder().url(url).build();
         Call call = mOkHttpClient.newCall(request);
         dealResult(call, callback);
     }
-
-    private void dealResult(Call call,final ResultCallback callback) {
-        call.enqueue(new Callback(){
+    
+    private void dealResult(Call call, final ResultCallback callback) {
+        call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call,IOException e){
+            public void onFailure(Call call, IOException e) {
                 requestError(call.request(), e, callback);
             }
-
+            
             @Override
-            public void onResponse(Call call,Response response) throws IOException{
+            public void onResponse(Call call, Response response) throws IOException {
                 requestSuccess(response.body().string(), callback);
             }
-
-            private void requestSuccess(final String str,final ResultCallback callback) {
-                mHandler.post(new Runnable(){
+            
+            private void requestSuccess(final String str, final ResultCallback callback) {
+                mHandler.post(new Runnable() {
                     @Override
-                    public void run(){
+                    public void run() {
                         if (callback != null) {
-                            try{
+                            try {
                                 callback.onResponse(str);
-                            } catch(IOException e) {
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
                 });
             }
-
-            private void requestError(final Request request,final Exception e,final ResultCallback back) {
-                mHandler.post(new Runnable(){
+            
+            private void requestError(final Request request, final Exception e, final ResultCallback back) {
+                mHandler.post(new Runnable() {
                     @Override
-                    public void run(){
+                    public void run() {
                         if (back != null)
                             back.onError(request, e);
                     }
                 });
             }
-
+            
         });
     }
-
-
+    
+    
 }
 
 

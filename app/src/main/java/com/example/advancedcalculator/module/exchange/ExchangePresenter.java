@@ -6,9 +6,10 @@ import com.example.advancedcalculator.base.BasePresenter;
 import com.example.advancedcalculator.http.OkHttpEngine;
 import com.example.advancedcalculator.http.ResultCallback;
 import com.example.advancedcalculator.module.bean.Currency;
-import com.google.gson.Gson;
+import com.example.advancedcalculator.util.GsonUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Request;
 
@@ -19,29 +20,43 @@ import okhttp3.Request;
  *      time   : 2018/10/23
  * </pre>
  */
-public class ExchangePresenter extends BasePresenter implements ExchangeContract.Presenter{
+public class ExchangePresenter extends BasePresenter implements ExchangeContract.Presenter {
     private static final String TAG = "ExchangePresenter";
-
+    
     private ExchangeContract.View mView;
-
+    
     public static ExchangePresenter newInstance() {
         return new ExchangePresenter();
     }
-
-    public void getData(String url) {
-        OkHttpEngine.getInstance().getAsynHttp(url,new ResultCallback(){
+    
+    /**
+     * 获取数据
+     *
+     * @param url          获取货币的url
+     * @param currencyList
+     * @return
+     */
+    public List getData(String url, final List<Currency.ResultBean.ListBean> currencyList) {
+        
+        OkHttpEngine.getInstance().getAsynHttp(url, new ResultCallback() {
             @Override
-            public void onError(Request request,Exception e){
-
+            public void onError(Request request, Exception e) {
+            
             }
-
+            
             @Override
-            public void onResponse(String str) throws IOException{
-                Log.e(TAG, str);
-                Log.e(TAG, "! " + new Gson().fromJson(str,Currency.class).getName());
+            public void onResponse(String str) throws IOException {
+                Log.d(TAG, str);
+                //把json转变成对象
+                final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                for (int i = 0; i < currency.getResult().getList().size(); i++) {
+                    currencyList.add(new Currency.ResultBean.ListBean(currency.getResult().getList().get(i).getName(), currency.getResult().getList().get(i).getCode()));
+                    Log.d(TAG, currency.getResult().getList().get(i).getName());
+                }
             }
         });
+        
+        return currencyList;
     }
-
-    //TODO 封装Gson
+    
 }

@@ -9,5 +9,5 @@ import com.example.advancedcalculator.base.BasePresenter;
  *      time   : 2018/10/23
  * </pre>
  */
-public class RelationPresenter extends BasePresenter implements RelationContract.Presenter{
+public class RelationPresenter extends BasePresenter implements RelationContract.Presenter {
 }

@@ -8,12 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
+import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
+import com.example.advancedcalculator.module.bean.Currency;
 import com.example.advancedcalculator.util.ChangeMoneyUtils;
 import com.example.advancedcalculator.util.DialogUtils;
 import com.example.advancedcalculator.util.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,164 +32,165 @@ import butterknife.OnClick;
  *      time   : 2018/10/23
  * </pre>
  */
-public class ExchangeFragment extends BaseFragment implements ExchangeContract.View{
+public class ExchangeFragment extends BaseFragment implements ExchangeContract.View {
     private static final String TAG = "ExchangeFragment";
-
+    
     @BindView(R.id.ll_country)
     LinearLayout mLlCountry;
-
+    
     @BindView(R.id.img_flag1)
     ImageView mIvFlag1;
-
+    
     @BindView(R.id.country_title1)
     TextView mTvTitle1;
-
+    
     @BindView(R.id.country_money1)
     TextView mTvMoney1;
-
+    
     @BindView(R.id.country_coin_type1)
     TextView mTvCoinType1;
-
+    
     @BindView(R.id.img_flag2)
     ImageView mIvFlag2;
-
+    
     @BindView(R.id.country_title2)
     TextView mTvTitle2;
-
+    
     @BindView(R.id.country_money2)
     TextView mTvMoney2;
-
+    
     @BindView(R.id.country_coin_type2)
     TextView mTvCoinType2;
-
+    
     @BindView(R.id.img_flag3)
     ImageView mIvFlag3;
-
+    
     @BindView(R.id.country_title3)
     TextView mTvTitle3;
-
+    
     @BindView(R.id.country_money3)
     TextView mTvMoney3;
-
+    
     @BindView(R.id.country_coin_type3)
     TextView mTvCoinType3;
-
+    
     @BindView(R.id.ll_keyboard)
     LinearLayout mLlKeyBoard;
-
+    
     @BindView(R.id.btn_7)
     TextView mTvBtn7;
-
+    
     @BindView(R.id.btn_4)
     TextView mTvBtn4;
-
+    
     @BindView(R.id.btn_0)
     TextView mTvBtn0;
-
+    
     @BindView(R.id.btn_8)
     TextView mTvBtn8;
-
+    
     @BindView(R.id.btn_5)
     TextView mTvBtn5;
-
+    
     @BindView(R.id.btn_2)
     TextView mTvBtn2;
-
+    
     @BindView(R.id.btn_empty)
     TextView mTvBtnEmpty;
-
+    
     @BindView(R.id.btn_9)
     TextView mTvBtn9;
-
+    
     @BindView(R.id.btn_6)
     TextView mTvBtn6;
-
+    
     @BindView(R.id.btn_3)
     TextView mTvBtn3;
-
+    
     @BindView(R.id.btn_point)
     TextView mTvBtnPoint;
-
+    
     @BindView(R.id.btn_AC)
     TextView mTvBtnAC;
-
+    
     @BindView(R.id.btn_del)
     TextView mTvBtnDel;
-
+    
     @BindView(R.id.divide_vertical1)
     View mViewDivide;
-
-
+    
+    
     private StringBuffer mMoney = new StringBuffer("");
-
+    
     //汇率
     private double rate;
-
+    
     //是否可添加
     private boolean isAdd = true;
-
-
-
-
-
+    
+    private CurrencyAdapter mAdapter;
+    
+    
     private ExchangeContract.Presenter mPresenter;
-
+    
     public static ExchangeFragment newInstance() {
         return new ExchangeFragment();
     }
-
+    
     @Override
-    public int getLayoutId(){
+    public int getLayoutId() {
         return R.layout.fragment_exchange_rate;
     }
-
+    
     @Override
-    public void initViews(){
-
+    public void initViews() {
+    
     }
-
+    
     @Override
-    public void setPresenter(ExchangeContract.Presenter presenter){
+    public void setPresenter(ExchangeContract.Presenter presenter) {
         mPresenter = presenter;
     }
-
+    
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, root);
         //设置第一列的竖直分割线的高度
-
-
+        
+        
         return root;
     }
-
+    
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        
     }
-
-    @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8,
-            R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
+    
+    @OnClick( {R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
     public void onClicktNum(TextView textView) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
-        switch(textView.getId()) {
+        switch (textView.getId()) {
             case R.id.btn_AC:
                 //清空StringBuffer
-                mMoney.delete(0,mMoney.length());
+                mMoney.delete(0, mMoney.length());
                 mMoney = new StringBuffer("");
                 //AC清空后又可以重新输入数据
                 isAdd = true;
                 break;
             case R.id.btn_del:
-                mMoney.deleteCharAt(mMoney.length() - 1);
+                //如果长度不为0，则去掉末尾
+                if (mMoney.length() != 0) {
+                    mMoney.deleteCharAt(mMoney.length() - 1);
+                }
                 break;
         }
         if (isAdd) {
-            switch(textView.getId()) {
+            switch (textView.getId()) {
                 case R.id.btn_0:
                     //如果长度大于0且首位不为0
-                    if (mMoney.length() > 0 && mMoney.charAt(0) != '0'){
+                    if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
                         mMoney.append("0");
                         Log.d(TAG, "点击0");
                     }
@@ -216,8 +223,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     mMoney.append("9");
                     break;
                 case R.id.btn_point:
-                    //如果已经含有小数点，则再点击没用；如果输入后首位为.，则不增加.
-                    if (!mMoney.toString().contains(".") && mMoney.toString().length() == 0) {
+                    //如果不包含.，则可以添加.；如果长度不为0，则可以添加.
+                    if (!mMoney.toString().contains(".") && mMoney.toString().length() != 0) {
                         mMoney.append(".");
                     }
                     break;
@@ -227,8 +234,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
             mTvMoney1.setText("0");
             mTvMoney2.setText("0");
             mTvMoney3.setText("0");
-        }
-        else {
+        } else {
             double money1 = Double.parseDouble(mMoney.toString());
             //判断money1
             if (TextUtils.howManyDecimal(money1) <= 4) {
@@ -237,7 +243,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 //超过4位小数，不可再添加数字
                 isAdd = false;
             }
-
+            
             double money2 = ChangeMoneyUtils.showExchangedMoney(money1, 0.3);
             //判断money2
             //如果小数不多于4
@@ -247,7 +253,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 //保留4位小数
                 mTvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(money2)));
             }
-
+            
             double money3 = ChangeMoneyUtils.showExchangedMoney(money1, 0.2);
             //判断money3
             if (TextUtils.howManyDecimal(money3) <= 4) {
@@ -258,14 +264,28 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
             }
         }
     }
-
+    
     //点击国家弹出选择货币种类Dialog
-    @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
+    @OnClick( {R.id.country_title1, R.id.country_title2, R.id.country_title3})
     public void onClickCountry() {
-        DialogUtils.showIconDialog(getActivity(), "选择币种");
+        final List<Currency.ResultBean.ListBean> currencyList = new ArrayList<>();
+        String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";
+        ExchangePresenter.newInstance().getData(url, currencyList);
+        DialogUtils.showIconDialog(getActivity(), "选择币种", mAdapter, currencyList);
+        
+        //RecyclerView中item点击事件
+        mAdapter.setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
+            }
+        
+            @Override
+            public void onItemLongClick(View view, int position) {
+            
+            }
+        });
     }
-
-    //TODO 分割线? 删除图标 api获取汇率 国家 选择国家Dialog!（RecyclerView适配器，间距问题）
-    //TODO 直接点击.闪退问题（修改逻辑）
-
+    
+    
 }

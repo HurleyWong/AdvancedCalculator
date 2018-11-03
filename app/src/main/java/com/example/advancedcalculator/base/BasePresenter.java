@@ -10,25 +10,25 @@ import android.view.View;
  *      time   : 2018/10/23
  * </pre>
  */
-public abstract class BasePresenter implements IBasePresenter{
-
-    public void lazyFetchData(){
-
+public abstract class BasePresenter implements IBasePresenter {
+    
+    public void lazyFetchData() {
+    
     }
-
+    
     public void createView(View view) {
-
+    
     }
-
+    
     public void createView() {
-
+    
     }
-
+    
     public void destroyView() {
-
+    
     }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-
+    
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    
     }
 }

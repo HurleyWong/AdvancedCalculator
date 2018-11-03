@@ -7,6 +7,6 @@ package com.example.advancedcalculator.base;
  *      time   : 2018/10/23
  * </pre>
  */
-public interface IBaseView<T>{
+public interface IBaseView<T> {
     void setPresenter(T presenter);
 }

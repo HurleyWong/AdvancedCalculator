@@ -7,5 +7,5 @@ package com.example.advancedcalculator.base;
  *      time   : 2018/10/23
  * </pre>
  */
-public interface IBasePresenter{
+public interface IBasePresenter {
 }

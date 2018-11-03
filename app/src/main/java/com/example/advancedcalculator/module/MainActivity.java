@@ -18,40 +18,40 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-
+    
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
-
+    
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        
         initViewPager();
     }
-
+    
     private void initViewPager() {
         List<String> titles = new ArrayList<>();
         titles.add("计算");
         titles.add("汇率");
         titles.add("关系");
-
+        
         //为TabLayout设置标题
-        for(int i = 0; i < titles.size(); i ++) {
+        for (int i = 0; i < titles.size(); i++) {
             mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(i)));
         }
-
+        
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(GeneralFragment.newInstance());
         fragments.add(ExchangeFragment.newInstance());
         fragments.add(RelationFragment.newInstance());
-
+        
         BaseFragmentAdapter adapter = new BaseFragmentAdapter(getSupportFragmentManager(), fragments, titles);
         //给ViewPager设置适配器
         mViewPager.setAdapter(adapter);
@@ -60,5 +60,5 @@ public class MainActivity extends AppCompatActivity{
         //给TabLayout设置适配器
         mTabLayout.setTabsFromPagerAdapter(adapter);
     }
-
+    
 }

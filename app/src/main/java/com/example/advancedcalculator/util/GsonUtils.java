@@ -17,69 +17,87 @@ import java.util.List;
  *      time   : 2018/10/31
  * </pre>
  */
-public class GsonHelper{
-    private static final String TAG="GsonHelper";
-
-    private static GsonHelper helper;
-
-    public static GsonHelper getInstance() {
-        if (helper == null) {
-            helper = new GsonHelper();
+public class GsonUtils {
+    private static final String TAG = "GsonUtils";
+    
+    private static GsonUtils mGson;
+    
+    public static GsonUtils getInstance() {
+        if (mGson == null) {
+            mGson = new GsonUtils();
         }
-        return helper;
+        return mGson;
     }
-
-    private GsonHelper() {
+    
+    private GsonUtils() {
         super();
     }
-
-    public String createGsonString(Object value) {
+    
+    public static String createGsonString(Object value) {
         Gson gson = new Gson();
         String str = gson.toJson(value);
         return str;
     }
-
-    public <T> T getObject(String jsonString, Class<T> clazz) {
+    
+    /**
+     * 把json转变成对象
+     *
+     * @param jsonString
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T getObject(String jsonString, Class<T> clazz) {
         T t = null;
-        try{
+        try {
             if (isJsonRight(jsonString)) {
                 Gson gson = new Gson();
                 t = gson.fromJson(jsonString, clazz);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return t;
     }
-
-    public <T> List<T> getList(String jsonString,TypeToken<T> t) {
+    
+    
+    /**
+     * 把json转变成集合
+     *
+     * @param jsonString
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> getList(String jsonString, TypeToken<T> t) {
         List<T> list = new ArrayList<>();
-        try{
+        try {
             if (isJsonRight(jsonString)) {
                 Gson gson = new Gson();
                 list = gson.fromJson(jsonString, t.getType());
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-
-    public boolean isJsonWrong(String json) {
+    
+    public static boolean isJsonWrong(String json) {
         return !isJsonRight(json);
     }
-
-    public boolean isJsonRight(String json) {
+    
+    public static boolean isJsonRight(String json) {
         if (TextUtils.isEmpty(json)) {
             return false;
         }
-        try{
+        try {
             new JsonParser().parse(json);
-        } catch(JsonParseException e) {
+        } catch (JsonParseException e) {
             return false;
         }
         return true;
     }
+    
 }
 
 

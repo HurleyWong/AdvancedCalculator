@@ -9,6 +9,6 @@ import com.example.advancedcalculator.base.BasePresenter;
  *      time   : 2018/10/23
  * </pre>
  */
-public class GeneralPresenter extends BasePresenter implements GeneralContract.Presenter{
+public class GeneralPresenter extends BasePresenter implements GeneralContract.Presenter {
 
 }

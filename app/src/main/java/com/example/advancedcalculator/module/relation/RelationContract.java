@@ -10,13 +10,13 @@ import com.example.advancedcalculator.base.IBaseView;
  *      time   : 2018/10/23
  * </pre>
  */
-public interface RelationContract{
-
-    interface Presenter extends IBasePresenter{
-
+public interface RelationContract {
+    
+    interface Presenter extends IBasePresenter {
+    
     }
-
-    interface View extends IBaseView<Presenter>{
-
+    
+    interface View extends IBaseView<Presenter> {
+    
     }
 }

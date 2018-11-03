@@ -11,8 +11,8 @@ import okhttp3.Request;
  *      time   : 2018/10/30
  * </pre>
  */
-public abstract class ResultCallback{
+public abstract class ResultCallback {
     public abstract void onError(Request request, Exception e);
-
+    
     public abstract void onResponse(String str) throws IOException;
 }
