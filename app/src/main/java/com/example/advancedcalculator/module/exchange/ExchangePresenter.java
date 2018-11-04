@@ -61,6 +61,12 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
         return currencyList;
     }
     
+    /**
+     * 从本地读取数据
+     * @param currencyList
+     * @param context
+     * @return
+     */
     public List getDataFromLocal(final List<Currency.ResultBean.ListBean> currencyList, Context context) {
         String jsonContext = FileUtils.readFileFromAssets("icon.json", context);
         final Currency currency = GsonUtils.getInstance().getObject(jsonContext, Currency.class);

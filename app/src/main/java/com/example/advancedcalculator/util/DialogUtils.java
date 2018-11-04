@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
@@ -64,7 +63,8 @@ public class DialogUtils {
      */
     public static Dialog showIconDialog(final Activity activity,
                                         String title,
-                                        final TextView textView,
+                                        final TextView tvCoinCode,
+                                        final TextView tvCoinName,
                                         RecyclerView.Adapter adapter,
                                         final List<Currency.ResultBean.ListBean> currencyList) {
         //Dialog主题
@@ -88,7 +88,9 @@ public class DialogUtils {
             @Override
             public void onItemClick(View view, int position) {
                 //点击事件
-                Toast.makeText(activity, currencyList.get(position).getCode(), Toast.LENGTH_SHORT).show();
+                tvCoinCode.setText(currencyList.get(position).getCode());
+                tvCoinName.setText(currencyList.get(position).getName());
+                dismissDialog(showIconDialog);
             }
     
             @Override

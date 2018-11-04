@@ -130,6 +130,10 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     //是否可添加
     private boolean isAdd = true;
     
+    //货币名称
+    private View mCoin;
+    private TextView mCoinName;
+    
     private CurrencyAdapter mAdapter;
     
     
@@ -282,19 +286,25 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
     public void onClickCountry(TextView textView) {
         final List<Currency.ResultBean.ListBean> currencyList = new ArrayList<>();
-        String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";
+        //String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";
         //ExchangePresenter.newInstance().getDataFromNet(url, currencyList);
         ExchangePresenter.newInstance().getDataFromLocal(currencyList, getContext());
-        DialogUtils.showIconDialog(getActivity(), getString(R.string.currency_dialog_title), textView, mAdapter, currencyList);
         switch (textView.getId()) {
             case R.id.country_title1:
+                mCoin = getActivity().getWindow().getDecorView().findViewById(R.id.country_coin1);
+                mCoinName = mCoin.findViewById(R.id.country_coin_type1);
                 break;
             case R.id.country_title2:
+                mCoin = getActivity().getWindow().getDecorView().findViewById(R.id.country_coin2);
+                mCoinName = mCoin.findViewById(R.id.country_coin_type2);
                 break;
             case R.id.country_title3:
-                
+                mCoin = getActivity().getWindow().getDecorView().findViewById(R.id.country_coin3);
+                mCoinName = mCoin.findViewById(R.id.country_coin_type3);
                 break;
         }
+        
+        DialogUtils.showIconDialog(getActivity(), getString(R.string.currency_dialog_title), textView, mCoinName, mAdapter, currencyList);
     }
     
     
