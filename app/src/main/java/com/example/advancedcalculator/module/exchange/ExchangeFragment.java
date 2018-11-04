@@ -280,12 +280,21 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     
     //点击国家弹出选择货币种类Dialog
     @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
-    public void onClickCountry() {
+    public void onClickCountry(TextView textView) {
         final List<Currency.ResultBean.ListBean> currencyList = new ArrayList<>();
         String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";
-        ExchangePresenter.newInstance().getData(url, currencyList);
-        DialogUtils.showIconDialog(getActivity(), "选择币种", mAdapter, currencyList);
-        
+        //ExchangePresenter.newInstance().getDataFromNet(url, currencyList);
+        ExchangePresenter.newInstance().getDataFromLocal(currencyList, getContext());
+        DialogUtils.showIconDialog(getActivity(), getString(R.string.currency_dialog_title), textView, mAdapter, currencyList);
+        switch (textView.getId()) {
+            case R.id.country_title1:
+                break;
+            case R.id.country_title2:
+                break;
+            case R.id.country_title3:
+                
+                break;
+        }
     }
     
     

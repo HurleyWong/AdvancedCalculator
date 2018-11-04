@@ -62,7 +62,11 @@ public class DialogUtils {
      * @param currencyList
      * @return
      */
-    public static Dialog showIconDialog(final Activity activity, String title, RecyclerView.Adapter adapter, List<Currency.ResultBean.ListBean> currencyList) {
+    public static Dialog showIconDialog(final Activity activity,
+                                        String title,
+                                        final TextView textView,
+                                        RecyclerView.Adapter adapter,
+                                        final List<Currency.ResultBean.ListBean> currencyList) {
         //Dialog主题
         int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity);
@@ -83,12 +87,13 @@ public class DialogUtils {
         ((CurrencyAdapter) adapter).setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(activity, "1", Toast.LENGTH_LONG).show();
+                //点击事件
+                Toast.makeText(activity, currencyList.get(position).getCode(), Toast.LENGTH_SHORT).show();
             }
     
             @Override
             public void onItemLongClick(View view, int position) {
-        
+                //长点击事件
             }
         });
         

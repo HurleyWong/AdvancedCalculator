@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AdvancedCalculator</string>
+    
+    <!-- 汇率 -->
+    <string name="currency_dialog_title">选择币种</string>
 
     <!-- 亲戚 -->
     <string name="me">我</string>
