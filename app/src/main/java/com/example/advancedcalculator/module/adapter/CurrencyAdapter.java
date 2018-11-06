@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.module.adapter.viewholder.CurrencyViewHolder;
-import com.example.advancedcalculator.module.bean.Currency;
+import com.example.advancedcalculator.module.bean.Coin;
 
 import java.util.List;
 
@@ -30,10 +30,10 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
     OnItemClickListener mOnItemClickListener;
     
     //货币
-    private List<Currency.ResultBean.ListBean> mCurrencyList;
+    private List<Coin.ResultBean.ListBean> mCurrencyList;
     private Context mContext;
     
-    public CurrencyAdapter(Context mContext, List<Currency.ResultBean.ListBean> mCurrencyList) {
+    public CurrencyAdapter(Context mContext, List<Coin.ResultBean.ListBean> mCurrencyList) {
         this.mContext = mContext;
         this.mCurrencyList = mCurrencyList;
     }

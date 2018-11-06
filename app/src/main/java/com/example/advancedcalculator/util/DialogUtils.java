@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
-import com.example.advancedcalculator.module.bean.Currency;
+import com.example.advancedcalculator.module.bean.Coin;
 
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class DialogUtils {
                                         final TextView tvCoinCode,
                                         final TextView tvCoinName,
                                         RecyclerView.Adapter adapter,
-                                        final List<Currency.ResultBean.ListBean> currencyList) {
+                                        final List<Coin.ResultBean.ListBean> currencyList) {
         //Dialog主题
         int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity);

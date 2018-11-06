@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
 import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
-import com.example.advancedcalculator.module.bean.Currency;
+import com.example.advancedcalculator.module.bean.Coin;
 import com.example.advancedcalculator.util.ChangeMoneyUtils;
 import com.example.advancedcalculator.util.DialogUtils;
 import com.example.advancedcalculator.util.TextUtils;
@@ -143,6 +143,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         return new ExchangeFragment();
     }
     
+    private String key = "e179779db8e8afee7e459cc5af3f7b5b";
+    private String currencyPath = "http://op.juhe.cn/onebox/exchange/currency?key=";
+    
     @Override
     public int getLayoutId() {
         return R.layout.fragment_exchange_rate;
@@ -185,7 +188,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     }
     
     @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6,
-                R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del})
+                R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del, R.id.btn_empty})
     public void onClickNum(View view) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
         switch (view.getId()) {
@@ -200,6 +203,14 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         if (isAdd) {
             switch (view.getId()) {
                 case R.id.btn_0:
+                    //如果长度大于0且首位不为0
+                    if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
+                        mMoney.append("0");
+                        Log.d(TAG, "点击0");
+                    }
+                    break;
+                //点击0
+                case R.id.btn_empty:
                     //如果长度大于0且首位不为0
                     if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
                         mMoney.append("0");
@@ -252,6 +263,12 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
             mTvMoney2.setText("0");
             mTvMoney3.setText("0");
         } else {
+            String coin1 = mTvMoney1.getText().toString();
+            String coin2 = mTvMoney2.getText().toString();
+            String coin3 = mTvMoney3.getText().toString();
+            String url = currencyPath + key + "&from=" + coin1 + "&to=" + coin2;
+            
+            
             double money1 = Double.parseDouble(mMoney.toString());
             //判断money1
             if (TextUtils.howManyDecimal(money1) <= 4) {
@@ -260,6 +277,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 //超过4位小数，不可再添加数字
                 isAdd = false;
             }
+            
             
             double money2 = ChangeMoneyUtils.showExchangedMoney(money1, 0.3);
             //判断money2
@@ -273,6 +291,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
             
             double money3 = ChangeMoneyUtils.showExchangedMoney(money1, 0.2);
             //判断money3
+            //如果小数不多于4
             if (TextUtils.howManyDecimal(money3) <= 4) {
                 mTvMoney3.setText(String.valueOf(money3));
             } else {
@@ -285,10 +304,10 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     //点击国家弹出选择货币种类Dialog
     @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
     public void onClickCountry(TextView textView) {
-        final List<Currency.ResultBean.ListBean> currencyList = new ArrayList<>();
+        final List<Coin.ResultBean.ListBean> coinList = new ArrayList<>();
         //String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";
         //ExchangePresenter.newInstance().getDataFromNet(url, currencyList);
-        ExchangePresenter.newInstance().getDataFromLocal(currencyList, getContext());
+        ExchangePresenter.newInstance().getCoinFromLocal(coinList, getContext());
         switch (textView.getId()) {
             case R.id.country_title1:
                 mCoin = getActivity().getWindow().getDecorView().findViewById(R.id.country_coin1);
@@ -304,7 +323,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 break;
         }
         
-        DialogUtils.showIconDialog(getActivity(), getString(R.string.currency_dialog_title), textView, mCoinName, mAdapter, currencyList);
+        DialogUtils.showIconDialog(getActivity(), getString(R.string.currency_dialog_title), textView, mCoinName, mAdapter, coinList);
     }
     
     

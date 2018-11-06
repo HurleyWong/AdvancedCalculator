@@ -29,8 +29,7 @@ public class GsonUtils {
         return mGson;
     }
     
-    private GsonUtils() {
-        super();
+    public  GsonUtils() {
     }
     
     public static String createGsonString(Object value) {
