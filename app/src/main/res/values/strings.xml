@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">AdvancedCalculator</string>
-    
+
+    <!-- 主界面 -->
+    <string name="calcalator">计算</string>
+    <string name="exchange">汇率</string>
+    <string name="relation">关系</string>
+    <string name=""></string>
+
+
     <!-- 汇率 -->
     <string name="currency_dialog_title">选择币种</string>
 

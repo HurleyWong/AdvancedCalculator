@@ -61,9 +61,9 @@ public class Coin {
              * name : 人民币
              * code : CNY
              */
-            
-            private String name;
-            private String code;
+
+            private String name;        //货币名称
+            private String code;        //货币缩写
             
             public ListBean() {
             

@@ -14,6 +14,10 @@ import java.util.ArrayList;
  *      time   : 2018/11/07
  * </pre>
  */
+
+/**
+ * Application基类
+ */
 public abstract class BaseApplication extends Application {
     protected static BaseApplication instance;
     protected ArrayList<Activity> mActivityList;
@@ -36,8 +40,7 @@ public abstract class BaseApplication extends Application {
         String processName = AppUtils.getProcessName(this);
         return packageName.equals(processName);
     }
-    
-    //关闭所有Activity
+
     public void finishAllActivity() {
         if (mActivityList != null) {
             for (Activity activity : mActivityList) {
@@ -48,7 +51,8 @@ public abstract class BaseApplication extends Application {
             mActivityList.clear();
         }
     }
-    
+
+    //关闭所有Activity
     public void exit() {
         finishAllActivity();
     }

@@ -13,6 +13,8 @@ import android.support.v4.app.FragmentTransaction;
  * </pre>
  */
 public class ActivityUtils {
+
+    private static final String TAG = "ActivityUtils";
     
     //添加Fragment
     public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {

@@ -167,7 +167,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         ButterKnife.bind(this, root);
         
         
-        //设置第一列的竖直分割线的高度
+        //设置第一列的竖直分割线的高度为3/4
         final ViewGroup.LayoutParams layoutParams = mViewDivide1.getLayoutParams();
         mViewDivide1.post(new Runnable() {
             @Override

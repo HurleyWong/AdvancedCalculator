@@ -60,15 +60,15 @@ public class Currency {
         public ResultBean(String exchange) {
             this.exchange = exchange;
         }
-        
-        private String currencyF;
-        private String currencyF_Name;
-        private String currencyT;
-        private String currencyT_Name;
-        private String currencyFD;
-        private String exchange;
-        private String result;
-        private String updateTime;
+
+        private String currencyF;               //转换前的货币缩写
+        private String currencyF_Name;          //转换前的货币名称
+        private String currencyT;               //转换后的货币缩写
+        private String currencyT_Name;          //转换后的货币名称
+        private String currencyFD;              //金额
+        private String exchange;                //汇率
+        private String result;                  //转换后的结果
+        private String updateTime;              //获取汇率日期
         
         public String getCurrencyF() {
             return currencyF;

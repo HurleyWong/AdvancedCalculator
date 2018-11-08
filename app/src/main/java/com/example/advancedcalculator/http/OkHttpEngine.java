@@ -57,7 +57,12 @@ public class OkHttpEngine {
         Call call = mOkHttpClient.newCall(request);
         dealResult(call, callback);
     }
-    
+
+    /**
+     * 处理结果
+     * @param call
+     * @param callback
+     */
     private void dealResult(Call call, final ResultCallback callback) {
         call.enqueue(new Callback() {
             @Override

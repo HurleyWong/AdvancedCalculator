@@ -13,6 +13,10 @@ import android.view.View;
  *      time   : 2018/10/27
  * </pre>
  */
+
+/**
+ * 屏幕工具类
+ */
 public class ScreenUtils {
     
     private static final String TAG = "ScreenUtils";

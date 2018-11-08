@@ -8,6 +8,8 @@ package com.example.advancedcalculator.util;
  * </pre>
  */
 public class ChangeMoneyUtils {
+    private static final String TAG = "ChangeMoneyUtils";
+
     //显示转换汇率后的金额
     public static double showExchangedMoney(double money, double rate) {
         return money * rate;

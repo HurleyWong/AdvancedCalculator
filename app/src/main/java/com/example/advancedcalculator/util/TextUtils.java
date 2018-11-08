@@ -9,6 +9,10 @@ import java.text.DecimalFormat;
  *      time   : 2018/10/26
  * </pre>
  */
+
+/**
+ * 文本工具类
+ */
 public class TextUtils {
     
     //保留两位小数

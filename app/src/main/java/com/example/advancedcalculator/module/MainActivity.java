@@ -35,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
         
         initViewPager();
     }
-    
+
+    //初始化ViewPager
     private void initViewPager() {
         List<String> titles = new ArrayList<>();
-        titles.add("计算");
-        titles.add("汇率");
-        titles.add("关系");
+        titles.add(getString(R.string.calcalator));
+        titles.add(getString(R.string.exchange));
+        titles.add(getString(R.string.relation));
         
         //为TabLayout设置标题
         for (int i = 0; i < titles.size(); i++) {
