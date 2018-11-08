@@ -165,7 +165,6 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
                 break;
         }
         
-        Log.e(TAG, "长度：" + mRelation.length());
         mTvRelation.setText(mRelation);
     }
 }
