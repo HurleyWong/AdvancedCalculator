@@ -1,10 +1,14 @@
 package com.example.advancedcalculator.util;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * <pre>
@@ -20,7 +24,7 @@ import android.view.View;
 public class ScreenUtils {
     
     private static final String TAG = "ScreenUtils";
-    
+
     public static DisplayMetrics getDisplayMetrics() {
         return Resources.getSystem().getDisplayMetrics();
     }
@@ -74,7 +78,6 @@ public class ScreenUtils {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
-    
-    
+
     
 }

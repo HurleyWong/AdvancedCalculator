@@ -18,7 +18,7 @@ public interface GeneralContract {
     
     }
     
-    interface View extends IBaseView<Presenter> {
+    interface View extends IBaseView {
     
     }
 }

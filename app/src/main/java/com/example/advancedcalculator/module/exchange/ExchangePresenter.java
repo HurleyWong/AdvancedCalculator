@@ -1,6 +1,8 @@
 package com.example.advancedcalculator.module.exchange;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.example.advancedcalculator.base.BasePresenter;
@@ -12,6 +14,7 @@ import com.example.advancedcalculator.util.FileUtils;
 import com.example.advancedcalculator.util.GsonUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Request;
@@ -31,8 +34,13 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
     public static ExchangePresenter newInstance() {
         return new ExchangePresenter();
     }
-    
-    public List getCurrencyFromNet(String url, final List<Currency.ResultBean> currencyList) {
+
+    /**
+     * 从网络获取实时汇率
+     * @param url
+     * @return
+     */
+    public List getCurrencyFromNet(String url, final List<String> mCurrencyList) {
         OkHttpEngine.getInstance().getAsynHttp(url, new ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -46,13 +54,14 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
                 //把json转变成对象
                 final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
                 for (int i = 0; i < currency.getResult().size(); i ++) {
-                    currencyList.add(new Currency.ResultBean(currency.getResult().get(0).getExchange()));
+                    mCurrencyList.add(currency.getResult().get(i).getResult());
+                    Log.e(TAG, mCurrencyList.get(i));
                 }
-                currencyList.get(0).getExchange();
             }
         });
-        return currencyList;
+        return mCurrencyList;
     }
+
     
     /**
      * 从网络获取数据
@@ -61,7 +70,6 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
      * @return
      */
     public List getCoinFromNet(String url, final List<Coin.ResultBean.ListBean> coinList) {
-        
         OkHttpEngine.getInstance().getAsynHttp(url, new ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -80,7 +88,6 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
                 }
             }
         });
-        
         return coinList;
     }
     
@@ -93,7 +100,6 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
     public List getCoinFromLocal(final List<Coin.ResultBean.ListBean> coinList, Context context) {
         String jsonContext = FileUtils.readFileFromAssets("icon.json", context);
         final Coin currency = GsonUtils.getInstance().getObject(jsonContext, Coin.class);
-        Log.e(TAG, currency.getResult().getList().get(0).getCode());
         for (int i = 0; i < currency.getResult().getList().size(); i++) {
             coinList.add(new Coin.ResultBean.ListBean(currency.getResult().getList().get(i).getName(), currency.getResult().getList().get(i).getCode()));
             Log.e(TAG, currency.getResult().getList().get(i).getName());

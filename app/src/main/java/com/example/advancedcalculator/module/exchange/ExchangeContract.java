@@ -15,7 +15,7 @@ public interface ExchangeContract {
     
     }
     
-    interface View extends IBaseView<ExchangeContract.Presenter> {
+    interface View extends IBaseView {
     
     }
 }

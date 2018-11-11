@@ -1,5 +1,8 @@
 package com.example.advancedcalculator.base;
 
+import android.os.Message;
+import android.support.annotation.NonNull;
+
 /**
  * <pre>
  *      author : Hurley
@@ -7,6 +10,5 @@ package com.example.advancedcalculator.base;
  *      time   : 2018/10/23
  * </pre>
  */
-public interface IBaseView<T> {
-    void setPresenter(T presenter);
+public interface IBaseView {
 }

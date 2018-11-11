@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
 import com.example.advancedcalculator.module.bean.Coin;
+import com.example.advancedcalculator.module.bean.Currency;
+import com.example.advancedcalculator.module.exchange.ExchangeFragment;
+import com.example.advancedcalculator.module.exchange.ExchangePresenter;
 
 import java.util.List;
 
@@ -51,7 +54,7 @@ public class DialogUtils {
         final Dialog editDialog = new Dialog(activity);
         return editDialog;
     }
-    
+
     /**
      * 显示货币的Dialog
      *
@@ -61,17 +64,25 @@ public class DialogUtils {
      * @param currencyList
      * @return
      */
-    public static Dialog showIconDialog(final Activity activity,
+    public static Dialog showCoinDialog(final Activity activity,
                                         String title,
                                         final TextView tvCoinCode,
                                         final TextView tvCoinName,
-                                        RecyclerView.Adapter adapter,
-                                        final List<Coin.ResultBean.ListBean> currencyList) {
+                                        CurrencyAdapter adapter,
+                                        final List<Coin.ResultBean.ListBean> currencyList,
+                                        final TextView tv1,
+                                        final TextView tv2,
+                                        final TextView tv3,
+                                        final TextView tvMoney1,
+                                        final TextView tvMoney2,
+                                        final TextView tvmoney3) {
         //Dialog主题
         int dialogTheme = R.style.defaultDialogTheme;
-        final Dialog showIconDialog = new Dialog(activity);
+        final Dialog showIconDialog = new Dialog(activity, dialogTheme);
         View contentView = LayoutInflater.from(activity).inflate(R.layout.dialog_coin_type, null);
         showIconDialog.setContentView(contentView);
+
+
         //设置Dialog标题
         TextView titleTv = contentView.findViewById(R.id.tv_dialog_title);
         titleTv.setText(title);
@@ -84,15 +95,17 @@ public class DialogUtils {
         contentRv.setAdapter(adapter);
         
         //RecyclerView中item点击事件
-        ((CurrencyAdapter) adapter).setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 //点击事件
+                Log.e(TAG, "顺序2");
                 tvCoinCode.setText(currencyList.get(position).getCode());
                 tvCoinName.setText(currencyList.get(position).getName());
                 dismissDialog(showIconDialog);
+                ExchangeFragment.newInstance().getCurrency(tv1, tv2, tv3, tvMoney1, tvMoney2, tvmoney3);
             }
-    
+
             @Override
             public void onItemLongClick(View view, int position) {
                 //长点击事件

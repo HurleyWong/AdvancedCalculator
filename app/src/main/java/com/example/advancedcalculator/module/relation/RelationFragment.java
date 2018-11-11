@@ -1,6 +1,8 @@
 package com.example.advancedcalculator.module.relation;
 
 import android.os.Bundle;
+import android.os.Message;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,11 +101,6 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     }
     
     @Override
-    public void setPresenter(RelationContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
-    
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this,root);
@@ -167,4 +164,5 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
         
         mTvRelation.setText(mRelation);
     }
+
 }

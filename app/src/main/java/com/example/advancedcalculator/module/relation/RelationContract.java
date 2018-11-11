@@ -16,7 +16,7 @@ public interface RelationContract {
     
     }
     
-    interface View extends IBaseView<Presenter> {
+    interface View extends IBaseView {
     
     }
 }
