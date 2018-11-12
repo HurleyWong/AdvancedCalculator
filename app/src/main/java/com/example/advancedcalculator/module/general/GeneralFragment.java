@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.advancedcalculator.R;
@@ -94,6 +95,21 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
 
     private StringBuffer mMoney = new StringBuffer("");
 
+    //运算结果表达式
+    private StringBuffer result = new StringBuffer();
+
+    //运算结果
+    private String num = "0";
+
+    //是否计算过，初始为false
+    private boolean isCal = false;
+
+    //是否可以删除
+    private boolean isDelete = true;
+
+    //是否可以在计算结果后添加数字
+    private boolean isAddNum = true;
+
     private static GeneralPresenter mPresenter = GeneralPresenter.newInstance();
 
     
@@ -128,6 +144,13 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
             R.id.btn_divide, R.id.btn_percent, R.id.btn_equal, R.id.btn_del, R.id.btn_AC})
     public void onClickNum(View view) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
+        //如果已经计算过，则只显示运算结果，不再显示原算术式
+        if (isCal) {
+            mMoney.delete(0, mMoney.length());
+            mMoney.append(num);
+            Log.e(TAG, "赋值：" + num + " ! " + mMoney);
+            isCal = false;
+        }
         switch (view.getId()) {
             case R.id.btn_AC:
                 //清空文本内容
@@ -135,40 +158,83 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney = new StringBuffer("");
                 break;
             case R.id.btn_0:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 //如果长度大于0且首位不为0
                 if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
                     mMoney.append(0);
-                    Log.d(TAG, "点击0");
                 }
                 break;
             case R.id.btn_1:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("1");
                 break;
             case R.id.btn_2:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("2");
                 break;
             case R.id.btn_3:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("3");
                 break;
             case R.id.btn_4:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("4");
                 break;
             case R.id.btn_5:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("5");
                 break;
             case R.id.btn_6:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("6");
                 break;
             case R.id.btn_7:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("7");
                 break;
             case R.id.btn_8:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("8");
                 break;
             case R.id.btn_9:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 mMoney.append("9");
                 break;
             case R.id.btn_point:
+                if (!isAddNum) {
+                    mMoney.delete(0, mMoney.length());
+                    isAddNum = true;
+                }
                 //如果长度为0，则补0
                 if (mMoney.toString().length() == 0)
                     mMoney.append("0");
@@ -177,12 +243,21 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney.append(".");
                 break;
             case R.id.btn_del:
-                //如果长度不为0，则去掉末尾
-                if (mMoney.length() > 0) {
-                    mMoney.deleteCharAt(mMoney.length() - 1);
+                if (!isDelete) {
+                    isDelete = true;
+                } else {
+                    //如果长度不为0，则去掉末尾
+                    if (mMoney.length() > 0) {
+                        mMoney.deleteCharAt(mMoney.length() - 1);
+                    }
                 }
                 break;
             case R.id.btn_add:
+                isAddNum = true;
+                //如果刚开始没有输入数字，则补0
+                if (mMoney.length() == 0) {
+                    mMoney.append("0");
+                }
                 if (mMoney.length() != 0){
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
@@ -191,6 +266,11 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney.append("+");
                 break;
             case R.id.btn_subtract:
+                isAddNum = true;
+                //如果刚开始没有输入数字，则补0
+                if (mMoney.length() == 0) {
+                    mMoney.append("0");
+                }
                 if (mMoney.length() != 0){
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
@@ -200,14 +280,26 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney.append("-");
                 break;
             case R.id.btn_multiply:
+                isAddNum = true;
+                //如果刚开始没有输入数字，则补0
+                if (mMoney.length() == 0) {
+                    mMoney.append("0");
+                }
                 if (mMoney.length() != 0){
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
                 }
+                Log.e(TAG, "检查下mMoney1" + mMoney);
                 mPresenter.deleteLastStr(mMoney);
+                Log.e(TAG, "检查下mMoney2" + mMoney);
                 mMoney.append("*");
                 break;
             case R.id.btn_divide:
+                isAddNum = true;
+                //如果刚开始没有输入数字，则补0
+                if (mMoney.length() == 0) {
+                    mMoney.append("0");
+                }
                 if (mMoney.length() != 0){
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
@@ -220,9 +312,21 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney.append("%");
                 break;
             case R.id.btn_equal:
+                mPresenter.changeIfLastIsChar(mMoney);
+                if (mMoney.charAt(0) == '-') {
+                    mMoney.insert(0, "0");
+                    Log.e(TAG, "加0：" + mMoney);
+                }
                 Log.e(TAG, "长度是" + mMoney.length());
-                String result = CalculatorUtils.calculate(CalculatorUtils.Suffix(mMoney));
-                Log.e(TAG, "运算结果：" + result);
+                num = CalculatorUtils.calculate(CalculatorUtils.Suffix(mMoney));
+                Log.e(TAG, "运算结果：" + num);
+                mMoney.append("=" + num);
+                //已经计算过
+                isCal = true;
+                //计算结果不可删除
+                isDelete = false;
+                //是否能在计算结果后添加数字
+                isAddNum = false;
                 break;
         }
         //如果已输入，将AC换成C
@@ -233,7 +337,8 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
             mBtnAC.setText("AC");
             mTvNum.setText("0");
         } else {
-            mTvNum.setText(mMoney);
+            result = mPresenter.replaceMultiply(mMoney, "*", "x");
+            mTvNum.setText(result);
         }
     }
 

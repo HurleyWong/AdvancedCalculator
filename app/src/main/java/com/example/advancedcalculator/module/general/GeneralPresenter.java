@@ -24,7 +24,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         //获取算数式的最后一个字符
         String last = buffer.substring(buffer.length() - 1);
         //如果前一个字符为符号
-        if (last.equals("+") || last.equals("-") || last.equals("×") || last.equals("÷") || last.equals("%")) {
+        if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("%")) {
             //去掉末尾的符号
             buffer.deleteCharAt(buffer.length() - 1);
         }
@@ -38,11 +38,37 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         }
     }
 
+    //如果StringBuffer的最后一个字符是符号，则补0
     public void addZeroIfChar(StringBuffer buffer) {
         String last = buffer.substring(buffer.length() - 1);
-        if (last.equals("+") || last.equals("-") || last.equals("×") || last.equals("÷") || last.equals("%")) {
+        if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("%")) {
             buffer.append("0");
         }
+    }
+
+    //如果StringBuffer的最后一个字符是符号，则根据不同的符号进行不同的操作
+    public void changeIfLastIsChar(StringBuffer buffer) {
+        String last = buffer.substring(buffer.length() - 1);
+        //如果最后一位是+号或-号
+        if (last.equals("+") || last.equals("-")) {
+            buffer.append("0");
+        }
+        //如果最后一位是*号或÷号
+        else if (last.equals("*") || last.equals("÷")) {
+            buffer.append("1");
+        }
+    }
+
+
+    //替换乘号*为x
+    public StringBuffer replaceMultiply(StringBuffer buffer, String s1, String s2) {
+        //如果StringBuffer中含有某个字符
+        if (buffer.toString().contains(s1)) {
+            StringBuffer temp = new StringBuffer();
+            temp.append(buffer.toString().replace(s1, s2));
+            buffer = temp;
+        }
+        return buffer;
     }
 
 }

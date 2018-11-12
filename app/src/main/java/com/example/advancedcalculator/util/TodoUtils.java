@@ -17,7 +17,7 @@ public class TodoUtils {
 
 
     //TODO 余数
-    //TODO *全部替换成x的问题
     //TODO 小数问题
-    //TODO 等于
+    //TODO 负数问题
+    //TODO -号后可以跟数字
 }

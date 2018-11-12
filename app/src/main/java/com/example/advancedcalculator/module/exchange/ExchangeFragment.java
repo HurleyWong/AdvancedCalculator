@@ -325,32 +325,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
                 Log.e(TAG, "怎么会为空？" + money2);
                 setMoney(money1, money2, 2);
-
-                /*//判断money1
-                if (TextUtils.howManyDecimal(money1) <= 4) {
-                    mTvMoney1.setText(mMoney);
-                } else {
-                    //超过4位小数，不可再添加数字
-                    isAdd = false;
-                }
-
-                //判断money2
-                //如果小数不多于4
-                if (TextUtils.howManyDecimal(money2) <= 4) {
-                    mTvMoney2.setText(String.valueOf(money2));
-                } else {
-                    //保留4位小数
-                    mTvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(money2)));
-                }
-
-                //判断money3
-                //如果小数不多于4
-                if (TextUtils.howManyDecimal(money3) <= 4) {
-                    mTvMoney3.setText(String.valueOf(money3));
-                } else {
-                    //保留4位小数
-                    mTvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(money3)));
-                }*/
             }
         });
 
