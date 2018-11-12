@@ -161,7 +161,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     private List<String> mCurrencyList;
     
-    private ExchangePresenter mPresenter;
+    private ExchangePresenter mPresenter = ExchangePresenter.newInstance();
     
     public static ExchangeFragment newInstance() {
         return new ExchangeFragment();
@@ -181,8 +181,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, root);
-        mPresenter = ExchangePresenter.newInstance();
-        
+
         //设置第一列的竖直分割线的高度为3/4
         final ViewGroup.LayoutParams layoutParams = mViewDivide1.getLayoutParams();
         mViewDivide1.post(new Runnable() {

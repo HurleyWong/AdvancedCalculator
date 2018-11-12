@@ -16,6 +16,8 @@ public class TodoUtils {
 
 
 
-    //TODO 小数点的逻辑
+    //TODO 余数
+    //TODO *全部替换成x的问题
+    //TODO 小数问题
     //TODO 等于
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
+import com.example.advancedcalculator.util.CalculatorUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,7 +94,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
 
     private StringBuffer mMoney = new StringBuffer("");
 
-    private GeneralContract.Presenter mPresenter;
+    private static GeneralPresenter mPresenter = GeneralPresenter.newInstance();
 
     
     public static final GeneralFragment newInstance() {
@@ -168,12 +169,12 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney.append("9");
                 break;
             case R.id.btn_point:
-                //如果不包含.，则可以添加.；如果长度不为0，则可以添加
-                if (!mMoney.toString().contains(".")) {
-                    if (mMoney.toString().length() == 0)
-                        mMoney.append("0");
-                    mMoney.append(".");
-                }
+                //如果长度为0，则补0
+                if (mMoney.toString().length() == 0)
+                    mMoney.append("0");
+                //如果最后一个为符号，则补0
+                mPresenter.addZeroIfChar(mMoney);
+                mMoney.append(".");
                 break;
             case R.id.btn_del:
                 //如果长度不为0，则去掉末尾
@@ -182,41 +183,57 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 }
                 break;
             case R.id.btn_add:
-                deleteLastStr();
+                if (mMoney.length() != 0){
+                    //如果最后一位是.，则先补0
+                    mPresenter.addZeroIfPoint(mMoney);
+                }
+                mPresenter.deleteLastStr(mMoney);
                 mMoney.append("+");
                 break;
             case R.id.btn_subtract:
-                deleteLastStr();
+                if (mMoney.length() != 0){
+                    //如果最后一位是.，则先补0
+                    mPresenter.addZeroIfPoint(mMoney);
+                }
+                //TODO 负号
+                mPresenter.deleteLastStr(mMoney);
                 mMoney.append("-");
                 break;
             case R.id.btn_multiply:
-                deleteLastStr();
-                mMoney.append("×");
+                if (mMoney.length() != 0){
+                    //如果最后一位是.，则先补0
+                    mPresenter.addZeroIfPoint(mMoney);
+                }
+                mPresenter.deleteLastStr(mMoney);
+                mMoney.append("*");
                 break;
             case R.id.btn_divide:
-                deleteLastStr();
+                if (mMoney.length() != 0){
+                    //如果最后一位是.，则先补0
+                    mPresenter.addZeroIfPoint(mMoney);
+                }
+                mPresenter.deleteLastStr(mMoney);
                 mMoney.append("÷");
                 break;
             case R.id.btn_percent:
-                deleteLastStr();
+                mPresenter.deleteLastStr(mMoney);
                 mMoney.append("%");
                 break;
+            case R.id.btn_equal:
+                Log.e(TAG, "长度是" + mMoney.length());
+                String result = CalculatorUtils.calculate(CalculatorUtils.Suffix(mMoney));
+                Log.e(TAG, "运算结果：" + result);
+                break;
+        }
+        //如果已输入，将AC换成C
+        if (mMoney.length() > 0) {
+            mBtnAC.setText("C");
         }
         if (mMoney.equals("") || mMoney.length() == 0) {
+            mBtnAC.setText("AC");
             mTvNum.setText("0");
         } else {
             mTvNum.setText(mMoney);
-        }
-    }
-
-    //如果StringBuffer的最后一个字符为符号，则去掉
-    private void deleteLastStr() {
-        //获取算数式的最后一个字符
-        String last = mMoney.substring(mMoney.length() - 1);
-        //如果前一个字符为符号
-        if (last.equals("+") || last.equals("-") || last.equals("×") || last.equals("÷") || last.equals("%")) {
-            //去掉末尾的符号
-            mMoney.deleteCharAt(mMoney.length() - 1);
         }
     }
 
