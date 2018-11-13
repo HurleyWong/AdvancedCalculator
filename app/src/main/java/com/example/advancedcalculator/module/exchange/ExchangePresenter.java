@@ -1,8 +1,6 @@
 package com.example.advancedcalculator.module.exchange;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import com.example.advancedcalculator.base.BasePresenter;
@@ -14,7 +12,6 @@ import com.example.advancedcalculator.util.FileUtils;
 import com.example.advancedcalculator.util.GsonUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Request;
@@ -28,15 +25,16 @@ import okhttp3.Request;
  */
 public class ExchangePresenter extends BasePresenter implements ExchangeContract.Presenter {
     private static final String TAG = "ExchangePresenter";
-    
+
     private ExchangeContract.View mView;
-    
+
     public static ExchangePresenter newInstance() {
         return new ExchangePresenter();
     }
 
     /**
      * 从网络获取实时汇率
+     *
      * @param url
      * @return
      */
@@ -46,14 +44,14 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
             public void onError(Request request, Exception e) {
                 //获取请求失败
             }
-    
+
             @Override
             public void onResponse(String str) throws IOException {
                 //获取请求成功
                 Log.e(TAG, str);
                 //把json转变成对象
                 final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
-                for (int i = 0; i < currency.getResult().size(); i ++) {
+                for (int i = 0; i < currency.getResult().size(); i++) {
                     mCurrencyList.add(currency.getResult().get(i).getResult());
                     Log.e(TAG, mCurrencyList.get(i));
                 }
@@ -62,10 +60,11 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
         return mCurrencyList;
     }
 
-    
+
     /**
      * 从网络获取数据
-     * @param url          获取货币的url
+     *
+     * @param url      获取货币的url
      * @param coinList
      * @return
      */
@@ -75,7 +74,7 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
             public void onError(Request request, Exception e) {
                 //获取请求失败
             }
-            
+
             @Override
             public void onResponse(String str) throws IOException {
                 //获取请求成功
@@ -90,21 +89,22 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
         });
         return coinList;
     }
-    
+
     /**
      * 从本地读取数据
+     *
      * @param coinList
      * @param context
      * @return
      */
     public List getCoinFromLocal(final List<Coin.ResultBean.ListBean> coinList, Context context) {
-        String jsonContext = FileUtils.readFileFromAssets("icon.json", context);
-        final Coin currency = GsonUtils.getInstance().getObject(jsonContext, Coin.class);
-        for (int i = 0; i < currency.getResult().getList().size(); i++) {
-            coinList.add(new Coin.ResultBean.ListBean(currency.getResult().getList().get(i).getName(), currency.getResult().getList().get(i).getCode()));
-            Log.e(TAG, currency.getResult().getList().get(i).getName());
+        String jsonContext = FileUtils.readFileFromAssets("coin.json", context);
+        final Coin coin = GsonUtils.getInstance().getObject(jsonContext, Coin.class);
+        for (int i = 0; i < coin.getResult().getList().size(); i++) {
+            coinList.add(new Coin.ResultBean.ListBean(coin.getResult().getList().get(i).getName(), coin.getResult().getList().get(i).getCode()));
+            Log.e(TAG, coin.getResult().getList().get(i).getName());
         }
         return coinList;
     }
-    
+
 }

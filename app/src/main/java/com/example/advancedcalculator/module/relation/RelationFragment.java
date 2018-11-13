@@ -10,9 +10,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
+import com.example.advancedcalculator.module.bean.Relation;
+import com.example.advancedcalculator.widget.SingleLineZoomTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +38,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     RelativeLayout mRlScreen;
     
     @BindView(R.id.tv_call)
-    TextView mTvCall;
+    SingleLineZoomTextView mTvCall;
     
     @BindView(R.id.tv_relation)
     TextView mTvRelation;
@@ -84,7 +90,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     
     private StringBuffer mRelation = new StringBuffer("");
     
-    private RelationContract.Presenter mPresenter;
+    private RelationPresenter mPresenter = RelationPresenter.newInstance();
     
     public static RelationFragment newInstance() {
         return new RelationFragment();
@@ -153,6 +159,9 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
                 mRelation.delete(0, mRelation.length());
                 mRelation.append("我");
                 Log.e(TAG, mRelation.toString());
+
+                //清空称呼
+                mTvCall.setText("");
                 break;
             case R.id.btn_del:
                 //删除
@@ -163,6 +172,17 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
         }
         
         mTvRelation.setText(mRelation);
+    }
+
+    @OnClick(R.id.btn_equal)
+    public void onClickEqual() {
+        final List<Relation.ResultBean.RelationBean> relationList = new ArrayList<>();
+        mPresenter.getRelationByJSON(relationList, getContext());
+        String call = mPresenter.getRelationship(mRelation, relationList);
+        Log.e(TAG, "关系：" + mRelation);
+        Log.e(TAG, "最终称呼：" + call);
+
+        mTvCall.setText(call);
     }
 
 }

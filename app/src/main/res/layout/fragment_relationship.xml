@@ -13,18 +13,18 @@
         android:layout_weight="1"
         android:background="@color/white_96">
 
-        <TextView
+        <com.example.advancedcalculator.widget.SingleLineZoomTextView
             android:id="@+id/tv_call"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:gravity="center"
-            android:text="哥哥"
+            android:text=""
             android:textSize="32sp"
             android:textColor="@color/black"
             android:padding="25dp"
-            android:visibility="invisible"/>
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/tv_relation"

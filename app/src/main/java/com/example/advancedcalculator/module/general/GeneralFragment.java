@@ -148,7 +148,6 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
         if (isCal) {
             mMoney.delete(0, mMoney.length());
             mMoney.append(num);
-            Log.e(TAG, "赋值：" + num + " ! " + mMoney);
             isCal = false;
         }
         switch (view.getId()) {
@@ -240,7 +239,10 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                     mMoney.append("0");
                 //如果最后一个为符号，则补0
                 mPresenter.addZeroIfChar(mMoney);
-                mMoney.append(".");
+                //判断是否能添加.
+                if (mPresenter.isAddPointOrNot(mMoney)) {
+                    mMoney.append(".");
+                }
                 break;
             case R.id.btn_del:
                 if (!isDelete) {
@@ -289,9 +291,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
                 }
-                Log.e(TAG, "检查下mMoney1" + mMoney);
                 mPresenter.deleteLastStr(mMoney);
-                Log.e(TAG, "检查下mMoney2" + mMoney);
                 mMoney.append("*");
                 break;
             case R.id.btn_divide:
@@ -315,7 +315,6 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mPresenter.changeIfLastIsChar(mMoney);
                 if (mMoney.charAt(0) == '-') {
                     mMoney.insert(0, "0");
-                    Log.e(TAG, "加0：" + mMoney);
                 }
                 Log.e(TAG, "长度是" + mMoney.length());
                 num = CalculatorUtils.calculate(CalculatorUtils.Suffix(mMoney));

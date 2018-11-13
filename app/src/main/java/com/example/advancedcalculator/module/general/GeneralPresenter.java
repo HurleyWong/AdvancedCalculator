@@ -1,8 +1,12 @@
 package com.example.advancedcalculator.module.general;
 
-import android.widget.TextView;
+import android.util.Log;
 
 import com.example.advancedcalculator.base.BasePresenter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <pre>
@@ -27,6 +31,41 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("%")) {
             //去掉末尾的符号
             buffer.deleteCharAt(buffer.length() - 1);
+        }
+    }
+
+    //判断是否能添加.
+    public boolean isAddPointOrNot(StringBuffer buffer) {
+        String str = buffer.toString();
+        //如果StringBuffer中含有符号
+        if (str.contains("+") || str.contains("-") || str.contains("*") || str.contains("÷") || str.contains("%")) {
+            List<Integer> positions = new ArrayList<Integer>();
+            int lastIndex1 = str.lastIndexOf("+");
+            int lastIndex2 = str.lastIndexOf("-");
+            int lastIndex3 = str.lastIndexOf("*");
+            int lastIndex4 = str.lastIndexOf("÷");
+            int lastIndex5 = str.lastIndexOf("%");
+            positions.add(lastIndex1);
+            positions.add(lastIndex2);
+            positions.add(lastIndex3);
+            positions.add(lastIndex4);
+            positions.add(lastIndex5);
+            //获得最后一个符号所在位置
+            int lastIndexChar = Collections.max(positions);
+            String lastStr = str.substring(lastIndexChar + 1, str.length());
+            Log.e(TAG, "最后一个符号所在位置：" + lastIndexChar + " 最后的字符串：" + lastStr);
+            if (lastStr.contains(".")) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            //如果StringBuffer中含有.
+            if (str.contains(".")) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
