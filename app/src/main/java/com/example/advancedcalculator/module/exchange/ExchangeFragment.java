@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
@@ -133,6 +134,15 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     
     @BindView(R.id.ll_column1)
     LinearLayout mLlColumn1;
+
+    @BindView(R.id.rl_country1)
+    RelativeLayout mRlCountry1;
+
+    @BindView(R.id.rl_country2)
+    RelativeLayout mRlCountry2;
+
+    @BindView(R.id.rl_country3)
+    RelativeLayout mRlCountry3;
     
     private StringBuffer mMoney = new StringBuffer("");
 
@@ -146,12 +156,26 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     private double rate1to2;
     private double rate1to3;
 
+    //基础url
     private String baseUrl = path + key;
+    //货币1换算成货币2的url
     private String url1to2;
+    //货币1换算成货币3的url
     private String url1to3;
+    //货币2换算成货币1的url
+    private String url2to1;
+    //货币2换算成货币3的url
+    private String url2to3;
+    //货币3换算成货币1的url
+    private String url3to1;
+    //货币3换算成货币2的url
+    private String url3to2;
 
     //是否可添加
     private boolean isAdd = true;
+
+    //点击光标所在的item，默认为1
+    private int mClickItem = 1;
     
     //货币名称
     private View mCoin;
@@ -162,6 +186,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     private List<String> mCurrencyList;
     
     private ExchangePresenter mPresenter = ExchangePresenter.newInstance();
+
+    public ExchangeFragment mFragment;
     
     public static ExchangeFragment newInstance() {
         return new ExchangeFragment();
@@ -202,7 +228,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     }
 
     @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6,
-                R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del, R.id.btn_empty})
+                R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del, R.id.btn_empty,
+                R.id.rl_country1, R.id.rl_country2, R.id.rl_country3})
     public void onClickNum(View view) {
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
         switch (view.getId()) {
@@ -212,6 +239,18 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 mMoney = new StringBuffer("");
                 //AC清空后又可以重新输入数据
                 isAdd = true;
+                break;
+            case R.id.rl_country1:
+                mClickItem = 1;
+                Log.e(TAG, "测试光标所在的item" + mClickItem);
+                break;
+            case R.id.rl_country2:
+                mClickItem = 2;
+                Log.e(TAG, "测试光标所在的item" + mClickItem);
+                break;
+            case R.id.rl_country3:
+                mClickItem = 3;
+                Log.e(TAG, "测试光标所在的item" + mClickItem);
                 break;
         }
         if (isAdd) {
@@ -274,126 +313,358 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     break;
             }
         }
+
+        //显示金额
         if (mMoney.equals("") || mMoney.length() == 0) {
-            mTvMoney1.setText("0");
-            mTvMoney2.setText("0");
-            mTvMoney3.setText("0");
+            mPresenter.onClickAC(mTvMoney1, mTvMoney2, mTvMoney3);
         } else {
-            double money1 = Double.parseDouble(mMoney.toString());
-            //设置money1
-            if (TextUtils.howManyDecimal(money1) <= 4) {
-                mTvMoney1.setText(mMoney);
-            } else {
-                //超过4位小数，不可再添加数字
-                isAdd = false;
+            if (mClickItem == 1) {
+                double money1 = Double.parseDouble(mMoney.toString());
+                //设置money1
+                if (TextUtils.howManyDecimal(money1) <= 4) {
+                    mTvMoney1.setText(mMoney);
+                } else {
+                    //超过4位小数，不可再添加数字
+                    isAdd = false;
+                }
+            } else if (mClickItem == 2) {
+                double money2 = Double.parseDouble(mMoney.toString());
+                //设置money2
+                if (TextUtils.howManyDecimal(money2) <= 4) {
+                    mTvMoney2.setText(mMoney);
+                } else {
+                    //超过4位小数，不可再添加数字
+                    isAdd = false;
+                }
+            } else if (mClickItem == 3) {
+                double money3 = Double.parseDouble(mMoney.toString());
+                //设置money3
+                if (TextUtils.howManyDecimal(money3) <= 4) {
+                    mTvMoney3.setText(mMoney);
+                } else {
+                    //超过4位小数，不可再添加数字
+                    isAdd = false;
+                }
             }
-            getCurrency(mTvTitle1, mTvTitle2, mTvTitle3, mTvMoney1, mTvMoney2, mTvMoney3);
+
+            getCurrency(mTvTitle1, mTvTitle2, mTvTitle3, mTvMoney1, mTvMoney2, mTvMoney3, mClickItem);
         }
     }
 
     //获取汇率
     public void getCurrency(TextView tv1, TextView tv2, TextView tv3,
-                            final TextView tvMoney1, final TextView tvMoney2, final TextView tvMoney3) {
+                            final TextView tvMoney1, final TextView tvMoney2, final TextView tvMoney3,
+                            final int onClickItem) {
         String coin1 = tv1.getText().toString();
         String coin2 = tv2.getText().toString();
         String coin3 = tv3.getText().toString();
         url1to2 = ExchangeUtils.getUrl(baseUrl, coin1, coin2);
         url1to3 = ExchangeUtils.getUrl(baseUrl, coin1, coin3);
-        Log.e(TAG, "获取链接1：" + url1to2);
-        Log.e(TAG, "获取链接2：" + url1to3);
+        url2to1 = ExchangeUtils.getUrl(baseUrl, coin2, coin1);
+        url2to3 = ExchangeUtils.getUrl(baseUrl, coin2, coin3);
+        url3to1 = ExchangeUtils.getUrl(baseUrl, coin3, coin1);
+        url3to2 = ExchangeUtils.getUrl(baseUrl, coin3, coin2);
 
-        //获取1到2
-        OkHttpEngine.getInstance().getAsynHttp(url1to2, new ResultCallback() {
-            @Override
-            public void onError(Request request, Exception e) {
+        if (onClickItem == 1) {
+            Log.e(TAG, "获取链接url1to2：" + url1to2);
+            Log.e(TAG, "获取链接url1to3：" + url1to3);
 
-            }
+            //获取1到2
+            OkHttpEngine.getInstance().getAsynHttp(url1to2, new ResultCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
 
-            @Override
-            public void onResponse(String str) throws IOException {
-                mCurrencyList = new ArrayList<>();
-                //获取请求成功
-                Log.e(TAG, str);
-                //把json转变成对象
-                final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
-                for (int i = 0; i < currency.getResult().size(); i ++) {
-                    mCurrencyList.add(currency.getResult().get(i).getResult());
-                    Log.e(TAG, mCurrencyList.get(i));
                 }
 
-                double money1 = Double.parseDouble(tvMoney1.getText().toString());
-                double money2 = ExchangeUtils.showExchangedMoney(money1,
-                        Double.parseDouble(mCurrencyList.get(0)));
+                @Override
+                public void onResponse(String str) throws IOException {
+                    mCurrencyList = new ArrayList<>();
+                    //获取请求成功
+                    Log.e(TAG, str);
+                    //把json转变成对象
+                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    if (!mPresenter.isResultRight(currency)) {
+                        if (getActivity() != null) {
+                            DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
+                        }
+                        mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
+                    } else {
+                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                            mCurrencyList.add(currency.getResult().get(i).getResult());
+                            Log.e(TAG, mCurrencyList.get(i));
+                        }
 
-                Log.e(TAG, "怎么会为空？" + money2);
-                setMoney(tvMoney2, tvMoney3, money2, 2);
-            }
-        });
+                        double money1 = Double.parseDouble(tvMoney1.getText().toString());
+                        double money2 = ExchangeUtils.showExchangedMoney(money1,
+                                Double.parseDouble(mCurrencyList.get(0)));
 
-        //获取1到3
-        OkHttpEngine.getInstance().getAsynHttp(url1to3, new ResultCallback() {
-            @Override
-            public void onError(Request request, Exception e) {
+                        Log.e(TAG, "怎么会为空？" + money2);
+                        setMoney(tvMoney1, tvMoney2, tvMoney3, money2, 2, onClickItem);
+                    }
+                }
+            });
 
-            }
+            //获取1到3
+            OkHttpEngine.getInstance().getAsynHttp(url1to3, new ResultCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
 
-            @Override
-            public void onResponse(String str) throws IOException {
-                mCurrencyList = new ArrayList<>();
-                //获取请求成功
-                Log.e(TAG, str);
-                //把json转变成对象
-                final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
-                for (int i = 0; i < currency.getResult().size(); i ++) {
-                    mCurrencyList.add(currency.getResult().get(i).getResult());
-                    Log.e(TAG, mCurrencyList.get(i));
                 }
 
-                double money1 = Double.parseDouble(tvMoney1.getText().toString());
-                double money3 = ExchangeUtils.showExchangedMoney(money1,
-                        Double.parseDouble(mCurrencyList.get(0)));
-                Log.e(TAG, "怎么会为空？" + money3);
-                setMoney(tvMoney2, tvMoney3, money3, 3);
-            }
-        });
+                @Override
+                public void onResponse(String str) throws IOException {
+                    mCurrencyList = new ArrayList<>();
+                    //获取请求成功
+                    Log.e(TAG, str);
+                    //把json转变成对象
+                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    if (!mPresenter.isResultRight(currency)) {
+                        if (getActivity() != null) {
+                            //DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
+                        }
+                        mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
+                    } else {
+                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                            mCurrencyList.add(currency.getResult().get(i).getResult());
+                            Log.e(TAG, mCurrencyList.get(i));
+                        }
+
+                        double money1 = Double.parseDouble(tvMoney1.getText().toString());
+                        double money3 = ExchangeUtils.showExchangedMoney(money1,
+                                Double.parseDouble(mCurrencyList.get(0)));
+                        Log.e(TAG, "怎么会为空？" + money3);
+                        setMoney(tvMoney1, tvMoney2, tvMoney3, money3, 3, onClickItem);
+                    }
+
+                }
+            });
+        } else if (onClickItem == 2) {
+            Log.e(TAG, "获取链接url2to1：" + url2to1);
+            Log.e(TAG, "获取链接url2to3：" + url2to3);
+
+            //获取2到1
+            OkHttpEngine.getInstance().getAsynHttp(url2to1, new ResultCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
+
+                }
+
+                @Override
+                public void onResponse(String str) throws IOException {
+                    mCurrencyList = new ArrayList<>();
+                    //获取请求成功
+                    Log.e(TAG, str);
+                    //把json转变成对象
+                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    if (!mPresenter.isResultRight(currency)) {
+                        if (getActivity() != null) {
+                            DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
+                        }
+                        mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
+                    } else {
+                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                            mCurrencyList.add(currency.getResult().get(i).getResult());
+                            Log.e(TAG, mCurrencyList.get(i));
+                        }
+
+                        double money2 = Double.parseDouble(tvMoney2.getText().toString());
+                        double money1 = ExchangeUtils.showExchangedMoney(money2,
+                                Double.parseDouble(mCurrencyList.get(0)));
+
+                        Log.e(TAG, "怎么会为空？" + money1);
+                        setMoney(tvMoney1, tvMoney2, tvMoney3, money1, 1, onClickItem);
+                    }
+                }
+            });
+
+            //获取2到3
+            OkHttpEngine.getInstance().getAsynHttp(url2to3, new ResultCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
+
+                }
+
+                @Override
+                public void onResponse(String str) throws IOException {
+                    mCurrencyList = new ArrayList<>();
+                    //获取请求成功
+                    Log.e(TAG, str);
+                    //把json转变成对象
+                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    if (!mPresenter.isResultRight(currency)) {
+                        if (getActivity() != null) {
+                            //DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
+                        }
+                        mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
+                    } else {
+                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                            mCurrencyList.add(currency.getResult().get(i).getResult());
+                            Log.e(TAG, mCurrencyList.get(i));
+                        }
+
+                        double money2 = Double.parseDouble(tvMoney2.getText().toString());
+                        double money3 = ExchangeUtils.showExchangedMoney(money2,
+                                Double.parseDouble(mCurrencyList.get(0)));
+                        Log.e(TAG, "怎么会为空？" + money3);
+                        setMoney(tvMoney1, tvMoney2, tvMoney3, money3, 3, onClickItem);
+                    }
+                }
+            });
+        } else if (mClickItem == 3) {
+            Log.e(TAG, "获取链接url3to1：" + url3to1);
+            Log.e(TAG, "获取链接url3to2：" + url3to2);
+
+            //获取3到1
+            OkHttpEngine.getInstance().getAsynHttp(url3to1, new ResultCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
+
+                }
+
+                @Override
+                public void onResponse(String str) throws IOException {
+                    mCurrencyList = new ArrayList<>();
+                    //获取请求成功
+                    Log.e(TAG, str);
+                    //把json转变成对象
+                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    if (!mPresenter.isResultRight(currency)) {
+                        if (getActivity() != null) {
+                            DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
+                        }
+                        mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
+                    } else {
+                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                            mCurrencyList.add(currency.getResult().get(i).getResult());
+                            Log.e(TAG, mCurrencyList.get(i));
+                        }
+
+                        double money3 = Double.parseDouble(tvMoney3.getText().toString());
+                        double money1 = ExchangeUtils.showExchangedMoney(money3,
+                                Double.parseDouble(mCurrencyList.get(0)));
+
+                        Log.e(TAG, "怎么会为空？" + money1);
+                        setMoney(tvMoney1, tvMoney2, tvMoney3, money1, 1, onClickItem);
+                    }
+                }
+            });
+
+            //获取3到2
+            OkHttpEngine.getInstance().getAsynHttp(url3to2, new ResultCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
+
+                }
+
+                @Override
+                public void onResponse(String str) throws IOException {
+                    mCurrencyList = new ArrayList<>();
+                    //获取请求成功
+                    Log.e(TAG, str);
+                    //把json转变成对象
+                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    if (!mPresenter.isResultRight(currency)) {
+                        if (getActivity() != null) {
+                            //DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
+                        }
+                        mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
+                    } else {
+                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                            mCurrencyList.add(currency.getResult().get(i).getResult());
+                            Log.e(TAG, mCurrencyList.get(i));
+                        }
+
+                        double money3 = Double.parseDouble(tvMoney3.getText().toString());
+                        double money2 = ExchangeUtils.showExchangedMoney(money3,
+                                Double.parseDouble(mCurrencyList.get(0)));
+                        Log.e(TAG, "怎么会为空？" + money2);
+                        setMoney(tvMoney1, tvMoney2, tvMoney3, money2, 2, onClickItem);
+                    }
+                }
+            });
+        }
+
     }
 
     //货币显示的规则
-    private void setMoney(TextView tvMoney2, TextView tvMoney3, double moneyTo, int to) {
-        /*//判断money1
-        if (TextUtils.howManyDecimal(moneyFrom) <= 4) {
-            Log.e(TAG, "mMoney等于" + mMoney);
-            mTvMoney1.setText(mMoney);
-        } else {
-            //超过4位小数，不可再添加数字
-            isAdd = false;
-        }*/
-
-        //判断money2
-        //如果小数不多于4
-        if (to == 2) {
-            if (TextUtils.howManyDecimal(moneyTo) <= 4) {
-                Log.e(TAG, "moneyTo等于1：" + moneyTo);
-                if (moneyTo == 0.0) {
-                    tvMoney2.setText("0");
+    private void setMoney(TextView tvMoney1, TextView tvMoney2, TextView tvMoney3, double moneyTo, int to, int onClickItem) {
+        if (onClickItem == 1) {
+            if (to == 2) {
+                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                    Log.e(TAG, "moneyTo等于1：" + moneyTo);
+                    if (moneyTo == 0.0) {
+                        tvMoney2.setText("0");
+                    } else {
+                        tvMoney2.setText(String.valueOf(moneyTo));
+                    }
                 } else {
-                    tvMoney2.setText(String.valueOf(moneyTo));
+                    //保留4位小数
+                    tvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
-            } else {
-                //保留4位小数
-                tvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+            } else if (to == 3) {
+                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                    Log.e(TAG, "moneyTo等于2：" + moneyTo);
+                    if (moneyTo == 0.0) {
+                        tvMoney3.setText("0");
+                    } else {
+                        tvMoney3.setText(String.valueOf(moneyTo));
+                    }
+                } else {
+                    //保留4位小数
+                    tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+                }
             }
-        } else if (to == 3) {
-            if (TextUtils.howManyDecimal(moneyTo) <= 4) {
-                Log.e(TAG, "moneyTo等于2：" + moneyTo);
-                if (moneyTo == 0.0) {
-                    tvMoney3.setText("0");
+        }else if (onClickItem == 2) {
+            if (to == 1) {
+                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                    Log.e(TAG, "moneyTo等于1：" + moneyTo);
+                    if (moneyTo == 0.0) {
+                        tvMoney1.setText("0");
+                    } else {
+                        tvMoney1.setText(String.valueOf(moneyTo));
+                    }
                 } else {
-                    tvMoney3.setText(String.valueOf(moneyTo));
+                    //保留4位小数
+                    tvMoney1.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
-            } else {
-                //保留4位小数
-                tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+            } else if (to == 3) {
+                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                    Log.e(TAG, "moneyTo等于2：" + moneyTo);
+                    if (moneyTo == 0.0) {
+                        tvMoney3.setText("0");
+                    } else {
+                        tvMoney3.setText(String.valueOf(moneyTo));
+                    }
+                } else {
+                    //保留4位小数
+                    tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+                }
+            }
+        } else if (onClickItem == 3) {
+            if (to == 1) {
+                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                    Log.e(TAG, "moneyTo等于1：" + moneyTo);
+                    if (moneyTo == 0.0) {
+                        tvMoney1.setText("0");
+                    } else {
+                        tvMoney1.setText(String.valueOf(moneyTo));
+                    }
+                } else {
+                    //保留4位小数
+                    tvMoney1.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+                }
+            } else if (to == 2) {
+                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                    Log.e(TAG, "moneyTo等于2：" + moneyTo);
+                    if (moneyTo == 0.0) {
+                        tvMoney2.setText("0");
+                    } else {
+                        tvMoney2.setText(String.valueOf(moneyTo));
+                    }
+                } else {
+                    //保留4位小数
+                    tvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+                }
             }
         }
 
@@ -425,7 +696,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         Log.e(TAG, "顺序1");
         DialogUtils.showCoinDialog(getActivity(), getString(R.string.currency_dialog_title),
                 textView, mCoinName, mAdapter, coinList,
-                mTvTitle1, mTvTitle2, mTvTitle3, mTvMoney1, mTvMoney2, mTvMoney3);
+                mTvTitle1, mTvTitle2, mTvTitle3, mTvMoney1, mTvMoney2, mTvMoney3, mClickItem);
 
         Log.e(TAG, "顺序3");
     }

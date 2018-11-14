@@ -1,7 +1,10 @@
 package com.example.advancedcalculator.util;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -75,7 +78,8 @@ public class DialogUtils {
                                         final TextView tv3,
                                         final TextView tvMoney1,
                                         final TextView tvMoney2,
-                                        final TextView tvmoney3) {
+                                        final TextView tvmoney3,
+                                        final int onClickItem) {
         //Dialog主题
         int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity, dialogTheme);
@@ -103,7 +107,8 @@ public class DialogUtils {
                 tvCoinCode.setText(currencyList.get(position).getCode());
                 tvCoinName.setText(currencyList.get(position).getName());
                 dismissDialog(showIconDialog);
-                ExchangeFragment.newInstance().getCurrency(tv1, tv2, tv3, tvMoney1, tvMoney2, tvmoney3);
+                Log.e(TAG, "这里传入的item变了吗？" + onClickItem);
+                ExchangeFragment.newInstance().getCurrency(tv1, tv2, tv3, tvMoney1, tvMoney2, tvmoney3, onClickItem);
             }
 
             @Override
@@ -129,8 +134,35 @@ public class DialogUtils {
         
         return showIconDialog;
     }
+
+    /**
+     * 警告Dialog
+     * @param activity
+     * @param title             标题
+     * @param content           内容
+     */
+    public static void showAlertDialog(Activity activity,
+                                       String title,
+                                       String content) {
+        final AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
+        //设置Dialog标题
+        alertDialog.setTitle(title);
+        //设置Dialog内容
+        alertDialog.setMessage(content);
+        //设置按钮
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //关闭Dialog
+                dismissDialog(alertDialog);
+            }
+        });
+
+        //显示Dialog
+        alertDialog.show();
+    }
     
-    //隐藏Dialog
+    //关闭Dialog
     public static void dismissDialog(Dialog dialog) {
         if (dialog != null && dialog.isShowing()) {
             Activity ownerActivity = dialog.getOwnerActivity();

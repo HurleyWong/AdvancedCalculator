@@ -10,6 +10,26 @@
     <!-- 汇率 -->
     <string name="currency_dialog_title">选择币种</string>
 
+    <!-- 汇率错误代码 -->
+    <string name="error_10001">错误的请求KEY</string>
+    <string name="error_10002">该KEY无请求权限</string>
+    <string name="error_10003">KEY过期</string>
+    <string name="error_10004">错误的OPENID</string>
+    <string name="error_10005">应用未审核超时，请提交认证</string>
+    <string name="error_10007">未知的请求源</string>
+    <string name="error_10008">被禁止的IP</string>
+    <string name="error_10009">被禁止的KEY</string>
+    <string name="error_10011">当前IP请求超过限制</string>
+    <string name="error_10012">请求超过次数限制</string>
+    <string name="error_10013">测试KEY超过请求限制</string>
+    <string name="error_10014">系统内部异常</string>
+    <string name="error_208001">货币兑换名称不能为空</string>
+    <string name="error_208002">查询不到汇率相关信息</string>
+    <string name="error_208003">网络错误，请重试</string>
+    <string name="error_208004">查询不到常用货币相关信息</string>
+    <string name="error_208005">不存在的货币种类</string>
+    <string name="error_208006">查询不到该货币兑换相关信息</string>
+
     <!-- 亲戚 -->
     <string name="me">我</string>
     <string name="link">的</string>
