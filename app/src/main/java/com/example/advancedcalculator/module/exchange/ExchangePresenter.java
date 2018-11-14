@@ -102,7 +102,7 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
         final Coin coin = GsonUtils.getInstance().getObject(jsonContext, Coin.class);
         for (int i = 0; i < coin.getResult().getList().size(); i++) {
             coinList.add(new Coin.ResultBean.ListBean(coin.getResult().getList().get(i).getName(), coin.getResult().getList().get(i).getCode()));
-            Log.e(TAG, coin.getResult().getList().get(i).getName());
+            Log.d(TAG, coin.getResult().getList().get(i).getName());
         }
         return coinList;
     }

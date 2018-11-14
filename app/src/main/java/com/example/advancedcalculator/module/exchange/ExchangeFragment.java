@@ -293,12 +293,14 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     //获取汇率
     public void getCurrency(TextView tv1, TextView tv2, TextView tv3,
-                            final TextView tvMoney1, TextView tvMoney2, TextView tvMoney3) {
+                            final TextView tvMoney1, final TextView tvMoney2, final TextView tvMoney3) {
         String coin1 = tv1.getText().toString();
         String coin2 = tv2.getText().toString();
         String coin3 = tv3.getText().toString();
         url1to2 = ExchangeUtils.getUrl(baseUrl, coin1, coin2);
         url1to3 = ExchangeUtils.getUrl(baseUrl, coin1, coin3);
+        Log.e(TAG, "获取链接1：" + url1to2);
+        Log.e(TAG, "获取链接2：" + url1to3);
 
         //获取1到2
         OkHttpEngine.getInstance().getAsynHttp(url1to2, new ResultCallback() {
@@ -321,10 +323,10 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
                 double money1 = Double.parseDouble(tvMoney1.getText().toString());
                 double money2 = ExchangeUtils.showExchangedMoney(money1,
-                        Double.parseDouble(mCurrencyList.get(1)));
+                        Double.parseDouble(mCurrencyList.get(0)));
 
                 Log.e(TAG, "怎么会为空？" + money2);
-                setMoney(money1, money2, 2);
+                setMoney(tvMoney2, tvMoney3, money2, 2);
             }
         });
 
@@ -349,15 +351,15 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
                 double money1 = Double.parseDouble(tvMoney1.getText().toString());
                 double money3 = ExchangeUtils.showExchangedMoney(money1,
-                        Double.parseDouble(mCurrencyList.get(1)));
+                        Double.parseDouble(mCurrencyList.get(0)));
                 Log.e(TAG, "怎么会为空？" + money3);
-                setMoney(money1, money3, 3);
+                setMoney(tvMoney2, tvMoney3, money3, 3);
             }
         });
     }
 
     //货币显示的规则
-    private void setMoney(double moneyFrom, double moneyTo, int to) {
+    private void setMoney(TextView tvMoney2, TextView tvMoney3, double moneyTo, int to) {
         /*//判断money1
         if (TextUtils.howManyDecimal(moneyFrom) <= 4) {
             Log.e(TAG, "mMoney等于" + mMoney);
@@ -371,19 +373,27 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         //如果小数不多于4
         if (to == 2) {
             if (TextUtils.howManyDecimal(moneyTo) <= 4) {
-                Log.e(TAG, "moneyTo等于" + moneyTo);
-                mTvMoney2.setText(String.valueOf(moneyTo));
+                Log.e(TAG, "moneyTo等于1：" + moneyTo);
+                if (moneyTo == 0.0) {
+                    tvMoney2.setText("0");
+                } else {
+                    tvMoney2.setText(String.valueOf(moneyTo));
+                }
             } else {
                 //保留4位小数
-                mTvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+                tvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
             }
         } else if (to == 3) {
             if (TextUtils.howManyDecimal(moneyTo) <= 4) {
-                Log.e(TAG, "moneyTo等于" + moneyTo);
-                mTvMoney3.setText(String.valueOf(moneyTo));
+                Log.e(TAG, "moneyTo等于2：" + moneyTo);
+                if (moneyTo == 0.0) {
+                    tvMoney3.setText("0");
+                } else {
+                    tvMoney3.setText(String.valueOf(moneyTo));
+                }
             } else {
                 //保留4位小数
-                mTvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
+                tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
             }
         }
 
