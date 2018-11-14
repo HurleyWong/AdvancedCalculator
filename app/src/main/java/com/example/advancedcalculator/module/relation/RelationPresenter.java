@@ -64,6 +64,8 @@ public class RelationPresenter extends BasePresenter implements RelationContract
             //第一个关系是"我的XX"，肯定称呼为"XX"，所以直接判断哪些等于"XX"
             if (relationList.get(i).getName().equals(call.substring(1, 3))) {
                 Log.d(TAG, "i的位置：" + i);
+                Log.d(TAG, "第一个关系：" + call.substring(1, 3));
+                temp = call.substring(1, 3);
                 for (int j = 3; j < call.length(); j = j + 2) {
                     nextRelation = call.substring(j, j + 2);
                     Log.e(TAG, "下一个关系：" + nextRelation);
@@ -71,62 +73,42 @@ public class RelationPresenter extends BasePresenter implements RelationContract
                     if (nextRelation.equals("爸爸")) {
                         temp = relationList.get(i).getFather();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"爸爸"的序号
-                        //i = 1;
                     }
                     if (nextRelation.equals("妈妈")) {
                         temp = relationList.get(i).getMother();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"妈妈"的序号
-                        //i = 2;
                     }
                     if (nextRelation.equals("哥哥")) {
                         temp = relationList.get(i).getBro1();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"哥哥"的序号
-                        //i = 3;
                     }
                     if (nextRelation.equals("弟弟")) {
                         temp = relationList.get(i).getBro2();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"弟弟"的序号
-                        //i = 4;
                     }
                     if (nextRelation.equals("姐姐")) {
                         temp = relationList.get(i).getSis1();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"姐姐"的序号
-                        //i = 5;
                     }
                     if (nextRelation.equals("妹妹")) {
                         temp = relationList.get(i).getSis2();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"妹妹"的序号
-                        //i = 6;
                     }
                     if (nextRelation.equals("丈夫")) {
                         temp = relationList.get(i).getHusband();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"丈夫"的序号
-                        //i = 7;
                     }
                     if (nextRelation.equals("妻子")) {
                         temp = relationList.get(i).getWife();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"妻子"的序号
-                        //i = 8;
                     }
                     if (nextRelation.equals("儿子")) {
                         temp = relationList.get(i).getSon();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"儿子"的序号
-                        //i = 9;
                     }
                     if (nextRelation.equals("女儿")) {
                         temp = relationList.get(i).getDaughter();
                         Log.e(TAG, "temp改变：" + temp);
-                        //切换成"女儿"的序号
-                        //i = 10;
                     }
 
                     Log.d(TAG, "temp：" + temp);

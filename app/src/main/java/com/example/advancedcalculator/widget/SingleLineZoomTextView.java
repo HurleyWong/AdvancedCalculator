@@ -1,5 +1,6 @@
 package com.example.advancedcalculator.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,9 +15,10 @@ import android.widget.TextView;
  *      e-mail : 1401682479@qq.com
  *      github : https://github.com/HurleyJames
  *      time   : 2018/11/14 上午12:18
- *      desc   :
+ *      desc   : 自动调整TextView字体大小仅显示一行
  * </pre>
  */
+@SuppressLint("AppCompatCustomView")
 public class SingleLineZoomTextView extends TextView {
     private static final String TAG = "SingleLineZoomTextView";
 

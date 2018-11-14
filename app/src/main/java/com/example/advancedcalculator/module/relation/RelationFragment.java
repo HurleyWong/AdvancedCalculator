@@ -178,11 +178,15 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     public void onClickEqual() {
         final List<Relation.ResultBean.RelationBean> relationList = new ArrayList<>();
         mPresenter.getRelationByJSON(relationList, getContext());
-        String call = mPresenter.getRelationship(mRelation, relationList);
-        Log.e(TAG, "关系：" + mRelation);
-        Log.e(TAG, "最终称呼：" + call);
+        if (mRelation.toString().equals("我")) {
+            mTvCall.setText("我");
+        } else {
+            String call = mPresenter.getRelationship(mRelation, relationList);
+            Log.e(TAG, "关系：" + mRelation);
+            Log.e(TAG, "最终称呼：" + call);
 
-        mTvCall.setText(call);
+            mTvCall.setText(call);
+        }
     }
 
 }
