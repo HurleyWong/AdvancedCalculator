@@ -15,6 +15,7 @@ import java.util.List;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/10/31
+ *      desc   : Gson解析工具类
  * </pre>
  */
 public class GsonUtils {

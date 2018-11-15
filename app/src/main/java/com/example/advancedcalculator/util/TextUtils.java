@@ -7,11 +7,8 @@ import java.text.DecimalFormat;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/10/26
+ *      desc   : 文本工具类
  * </pre>
- */
-
-/**
- * 文本工具类
  */
 public class TextUtils {
     

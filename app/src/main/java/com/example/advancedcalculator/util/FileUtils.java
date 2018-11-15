@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/11/04
+ *      desc   : 文件工具类
  * </pre>
  */
 public class FileUtils {

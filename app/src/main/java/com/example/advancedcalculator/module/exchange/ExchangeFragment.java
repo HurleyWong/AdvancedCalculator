@@ -365,6 +365,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         url3to1 = ExchangeUtils.getUrl(baseUrl, coin3, coin1);
         url3to2 = ExchangeUtils.getUrl(baseUrl, coin3, coin2);
 
+        Log.e(TAG, "传过来的item：" + onClickItem);
+
         if (onClickItem == 1) {
             Log.e(TAG, "获取链接url1to2：" + url1to2);
             Log.e(TAG, "获取链接url1to3：" + url1to3);
@@ -510,7 +512,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     }
                 }
             });
-        } else if (mClickItem == 3) {
+        } else if (onClickItem == 3) {
             Log.e(TAG, "获取链接url3to1：" + url3to1);
             Log.e(TAG, "获取链接url3to2：" + url3to2);
 

@@ -28,6 +28,7 @@ import java.util.List;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/10/27
+ *      desc   : Dialog工具类
  * </pre>
  */
 public class DialogUtils {

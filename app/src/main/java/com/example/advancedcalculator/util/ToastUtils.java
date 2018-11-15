@@ -8,11 +8,8 @@ import android.widget.Toast;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/11/07
+ *      desc   : Toast工具类
  * </pre>
- */
-
-/**
- * Toast工具类
  */
 public class ToastUtils {
     private static final String TAG = "ToastUtils";

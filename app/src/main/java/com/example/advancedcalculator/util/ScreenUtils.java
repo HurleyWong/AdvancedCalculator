@@ -15,12 +15,10 @@ import android.view.WindowManager;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/10/27
+ *      desc   : 屏幕工具类
  * </pre>
  */
 
-/**
- * 屏幕工具类
- */
 public class ScreenUtils {
     
     private static final String TAG = "ScreenUtils";

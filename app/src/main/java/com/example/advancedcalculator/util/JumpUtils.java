@@ -1,19 +1,16 @@
 package com.example.advancedcalculator.util;
 
-/**
- * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/11/07
- * </pre>
- */
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
 /**
- * 跳转工具类
+ * <pre>
+ *      author : Hurley
+ *      e-mail : 1401682479@qq.com
+ *      time   : 2018/11/07
+ *      desc   : 跳转工具类
+ * </pre>
  */
 public class JumpUtils {
     private static final String TAG = "JumpUtils";
