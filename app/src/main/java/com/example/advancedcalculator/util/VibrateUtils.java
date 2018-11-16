@@ -6,11 +6,7 @@ import android.os.Vibrator;
 public class VibrateUtils {
     private static final String TAG = "VibrateUtils";
 
-    private static Vibrator mVibrator;
-
-    private static VibrateUtils newInstance() {
-        return new VibrateUtils();
-    }
+    private static Vibrator sVibrator;
 
     /**
      * 开启震动
@@ -19,14 +15,14 @@ public class VibrateUtils {
      */
     @SuppressWarnings("static-access")
     public static void startVibrate(Context context, int millSecond) {
-        mVibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
-        mVibrator.vibrate(millSecond);
+        sVibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        sVibrator.vibrate(millSecond);
     }
 
     //停止震动
     public static void stopVibrate() {
-        if (mVibrator != null) {
-            mVibrator.cancel();
+        if (sVibrator != null) {
+            sVibrator.cancel();
         }
     }
 }
