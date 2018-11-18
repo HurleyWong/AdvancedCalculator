@@ -4,9 +4,10 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/11/05
+ *      @author hurley
+ *      date : 2018/11/05
+ *      github : https://github.com/HurleyJames
+ *      desc : 汇率实体类
  * </pre>
  */
 public class Currency {
@@ -61,14 +62,38 @@ public class Currency {
             this.exchange = exchange;
         }
 
-        private String currencyF;               //转换前的货币缩写
-        private String currencyF_Name;          //转换前的货币名称
-        private String currencyT;               //转换后的货币缩写
-        private String currencyT_Name;          //转换后的货币名称
-        private String currencyFD;              //金额
-        private String exchange;                //汇率
-        private String result;                  //转换后的结果
-        private String updateTime;              //获取汇率日期
+        /**
+         * 转换前的货币缩写
+         */
+        private String currencyF;
+        /**
+         * 转换前的货币名称
+         */
+        private String currencyF_Name;
+        /**
+         * 转换后的货币缩写
+         */
+        private String currencyT;
+        /**
+         * 转换后的货币名称
+         */
+        private String currencyT_Name;
+        /**
+         * 金额
+         */
+        private String currencyFD;
+        /**
+         * 汇率
+         */
+        private String exchange;
+        /**
+         * 转换后的结果
+         */
+        private String result;
+        /**
+         * 获取汇率日期
+         */
+        private String updateTime;
         
         public String getCurrencyF() {
             return currencyF;

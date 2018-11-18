@@ -4,9 +4,10 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/27
+ *      @author hurley
+ *      date : 2018/10/27
+ *      github : https://github.com/HurleyJames
+ *      desc : 货币实体类
  * </pre>
  */
 public class Coin {
@@ -62,8 +63,14 @@ public class Coin {
              * code : CNY
              */
 
-            private String name;        //货币名称
-            private String code;        //货币缩写
+            /**
+             * 货币名称
+             */
+            private String name;
+            /**
+             * 货币缩写
+             */
+            private String code;
             
             public ListBean() {
             

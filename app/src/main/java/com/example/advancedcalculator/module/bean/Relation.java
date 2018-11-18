@@ -4,11 +4,10 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
+ *      @author hurley
+ *      date : 2018/11/05
  *      github : https://github.com/HurleyJames
- *      time   : 2018/11/13 上午11:44
- *      desc   : 亲戚关系实体类
+ *      desc : 亲戚关系实体类
  * </pre>
  */
 public class Relation {
