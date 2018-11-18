@@ -87,6 +87,9 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     
     @BindView(R.id.btn_equal)
     TextView mTvEqual;
+
+    //点击次数
+    int count = 0;
     
     private StringBuffer mRelation = new StringBuffer("");
     
@@ -126,36 +129,47 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
         switch (view.getId()) {
             case R.id.btn_husband:
                 mRelation.append(link).append(getString(R.string.husband1));
+                count++;
                 break;
             case R.id.btn_wife:
                 mRelation.append(link).append(getString(R.string.wife1));
+                count++;
                 break;
             case R.id.btn_fathter:
                 mRelation.append(link).append(getString(R.string.father));
+                count++;
                 break;
             case R.id.btn_mother:
                 mRelation.append(link).append(getString(R.string.mother));
+                count++;
                 break;
             case R.id.btn_bro1:
                 mRelation.append(link).append(getString(R.string.brother1));
+                count++;
                 break;
             case R.id.btn_bro2:
                 mRelation.append(link).append(getString(R.string.brother2));
+                count++;
                 break;
             case R.id.btn_sister1:
                 mRelation.append(link).append(getString(R.string.sister1));
+                count++;
                 break;
             case R.id.btn_sister2:
                 mRelation.append(link).append(getString(R.string.sister2));
+                count++;
                 break;
             case R.id.btn_son:
                 mRelation.append(link).append(getString(R.string.son));
+                count++;
                 break;
             case R.id.btn_daughter:
                 mRelation.append(link).append(getString(R.string.daughter));
+                count++;
                 break;
             case R.id.btn_AC:
                 //清空文本内容
+                count = 0;
                 mRelation.delete(0, mRelation.length());
                 mRelation.append("我");
                 Log.e(TAG, mRelation.toString());
@@ -164,14 +178,18 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
                 mTvCall.setText("");
                 break;
             case R.id.btn_del:
+                count--;
                 //删除
                 if (mRelation.length() >= 4) {
                     mRelation.delete(mRelation.length()-3, mRelation.length());
                 }
                 break;
         }
-        
-        mTvRelation.setText(mRelation);
+        if (count > 10) {
+            mTvRelation.setText(getString(R.string.big_count));
+        } else {
+            mTvRelation.setText(mRelation);
+        }
     }
 
     @OnClick(R.id.btn_equal)
