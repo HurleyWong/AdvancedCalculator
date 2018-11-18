@@ -161,8 +161,8 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                     mMoney.delete(0, mMoney.length());
                     isAddNum = true;
                 }
-                //如果长度大于0且首位不为0
-                if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
+                //如果长度大于0且首位不为0或含有.
+                if (mMoney.length() > 0 && (mMoney.charAt(0) != '0' || mMoney.toString().contains("."))) {
                     mMoney.append(0);
                 }
                 break;
@@ -308,24 +308,45 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney.append("÷");
                 break;
             case R.id.btn_percent:
-                mPresenter.deleteLastStr(mMoney);
-                mMoney.append("%");
-                break;
-            case R.id.btn_equal:
-                mPresenter.changeIfLastIsChar(mMoney);
-                if (mMoney.charAt(0) == '-') {
-                    mMoney.insert(0, "0");
+                if (mMoney.length() != 0) {
+                    String last = mMoney.substring(mMoney.length() - 1);
+                    //如果最后一位是符号
+                    if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("=")) {
+                        break;
+                    } else {
+                        String strLastNum = mPresenter.getLastNum(mMoney);
+                        double lastNumAfterDivide = Double.parseDouble(strLastNum) / 100;
+                        String strLastNumAfterDivied = String.valueOf(lastNumAfterDivide);
+                        mPresenter.deleteLastNum(mMoney);
+                        if (strLastNumAfterDivied.contains(".")
+                                && strLastNumAfterDivied.substring(strLastNumAfterDivied.length() - 1).equals("0")) {
+                            int lastNum = (int) lastNumAfterDivide;
+                            mMoney.append(lastNum);
+                        } else {
+                            mMoney.append(lastNumAfterDivide);
+                        }
+                        break;
+                    }
+                } else {
+                    break;
                 }
-                Log.e(TAG, "长度是" + mMoney.length());
-                num = CalculatorUtils.calculate(CalculatorUtils.Suffix(mMoney));
-                Log.e(TAG, "运算结果：" + num);
-                mMoney.append("=" + num);
-                //已经计算过
-                isCal = true;
-                //计算结果不可删除
-                isDelete = false;
-                //是否能在计算结果后添加数字
-                isAddNum = false;
+            case R.id.btn_equal:
+                if (mMoney.length() != 0) {
+                    mPresenter.changeIfLastIsChar(mMoney);
+                    if (mMoney.charAt(0) == '-') {
+                        mMoney.insert(0, "0");
+                    }
+                    Log.e(TAG, "长度是" + mMoney.length());
+                    num = CalculatorUtils.calculate(CalculatorUtils.Suffix(mMoney));
+                    Log.e(TAG, "运算结果：" + num);
+                    mMoney.append("=" + num);
+                    //已经计算过
+                    isCal = true;
+                    //计算结果不可删除
+                    isDelete = false;
+                    //是否能在计算结果后添加数字
+                    isAddNum = false;
+                }
                 break;
         }
         //如果已输入，将AC换成C

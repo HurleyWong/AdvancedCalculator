@@ -28,7 +28,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         //获取算数式的最后一个字符
         String last = buffer.substring(buffer.length() - 1);
         //如果前一个字符为符号
-        if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("%")) {
+        if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷")) {
             //去掉末尾的符号
             buffer.deleteCharAt(buffer.length() - 1);
         }
@@ -38,18 +38,16 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
     public boolean isAddPointOrNot(StringBuffer buffer) {
         String str = buffer.toString();
         //如果StringBuffer中含有符号
-        if (str.contains("+") || str.contains("-") || str.contains("*") || str.contains("÷") || str.contains("%")) {
+        if (str.contains("+") || str.contains("-") || str.contains("*") || str.contains("÷")) {
             List<Integer> positions = new ArrayList<Integer>();
             int lastIndex1 = str.lastIndexOf("+");
             int lastIndex2 = str.lastIndexOf("-");
             int lastIndex3 = str.lastIndexOf("*");
             int lastIndex4 = str.lastIndexOf("÷");
-            int lastIndex5 = str.lastIndexOf("%");
             positions.add(lastIndex1);
             positions.add(lastIndex2);
             positions.add(lastIndex3);
             positions.add(lastIndex4);
-            positions.add(lastIndex5);
             //获得最后一个符号所在位置
             int lastIndexChar = Collections.max(positions);
             String lastStr = str.substring(lastIndexChar + 1, str.length());
@@ -80,7 +78,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
     //如果StringBuffer的最后一个字符是符号，则补0
     public void addZeroIfChar(StringBuffer buffer) {
         String last = buffer.substring(buffer.length() - 1);
-        if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("%")) {
+        if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷")) {
             buffer.append("0");
         }
     }
@@ -110,4 +108,47 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         return buffer;
     }
 
+    //获得最后的数字
+    public String getLastNum(StringBuffer buffer) {
+        String strBuffer = buffer.toString();
+        //如果StringBuffer中包含符号
+        if (strBuffer.contains("+") || strBuffer.contains("-") || strBuffer.contains("*") || strBuffer.contains("÷")) {
+            List<Integer> positions = new ArrayList<Integer>();
+            int lastIndex1 = strBuffer.lastIndexOf("+");
+            int lastIndex2 = strBuffer.lastIndexOf("-");
+            int lastIndex3 = strBuffer.lastIndexOf("*");
+            int lastIndex4 = strBuffer.lastIndexOf("÷");
+            positions.add(lastIndex1);
+            positions.add(lastIndex2);
+            positions.add(lastIndex3);
+            positions.add(lastIndex4);
+            //获得最后一个符号所在位置
+            int lastIndexChar = Collections.max(positions);
+            return strBuffer.substring(lastIndexChar + 1, strBuffer.length());
+        } else {
+            return strBuffer;
+        }
+    }
+
+    //删除最后的数字
+    public String deleteLastNum(StringBuffer buffer) {
+        String strBuffer = buffer.toString();
+        //如果StringBuffer中包含符号
+        if (strBuffer.contains("+") || strBuffer.contains("-") || strBuffer.contains("*") || strBuffer.contains("÷")) {
+            List<Integer> positions = new ArrayList<Integer>();
+            int lastIndex1 = strBuffer.lastIndexOf("+");
+            int lastIndex2 = strBuffer.lastIndexOf("-");
+            int lastIndex3 = strBuffer.lastIndexOf("*");
+            int lastIndex4 = strBuffer.lastIndexOf("÷");
+            positions.add(lastIndex1);
+            positions.add(lastIndex2);
+            positions.add(lastIndex3);
+            positions.add(lastIndex4);
+            //获得最后一个符号所在位置
+            int lastIndexChar = Collections.max(positions);
+            return buffer.delete(lastIndexChar + 1, strBuffer.length()).toString();
+        } else {
+            return buffer.delete(0, buffer.length()).toString();
+        }
+    }
 }
