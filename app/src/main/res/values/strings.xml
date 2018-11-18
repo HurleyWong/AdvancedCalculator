@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">高级计算器</string>
+    <string name="app_name">超级计算器</string>
 
     <!-- 主界面 -->
     <string name="calcalator">计算</string>
