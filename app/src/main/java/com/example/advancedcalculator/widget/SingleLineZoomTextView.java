@@ -11,11 +11,10 @@ import android.widget.TextView;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
+ *      @author hurley
+ *      date : 2018/11/14 上午12:18
  *      github : https://github.com/HurleyJames
- *      time   : 2018/11/14 上午12:18
- *      desc   : 自动调整TextView字体大小仅显示一行
+ *      desc : 自动调整TextView字体大小仅显示一行
  * </pre>
  */
 @SuppressLint("AppCompatCustomView")

@@ -18,6 +18,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * <pre>
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
+ * </pre>
+ */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     
@@ -36,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         initViewPager();
     }
 
-    //初始化ViewPager
+    /**
+     * 初始化ViewPager
+     */
     private void initViewPager() {
         List<String> titles = new ArrayList<>();
         titles.add(getString(R.string.calcalator));

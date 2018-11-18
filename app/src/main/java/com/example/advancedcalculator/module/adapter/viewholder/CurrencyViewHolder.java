@@ -9,9 +9,10 @@ import com.example.advancedcalculator.R;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/30
+ *      @author hurley
+ *      date : 2018/10/30
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public class CurrencyViewHolder extends RecyclerView.ViewHolder {

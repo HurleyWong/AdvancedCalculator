@@ -9,16 +9,21 @@ import java.io.InputStreamReader;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/11/04
- *      desc   : 文件工具类
+ *      @author hurley
+ *      date : 2018/11/04
+ *      github : https://github.com/HurleyJames
+ *      desc : 文件工具类
  * </pre>
  */
 public class FileUtils {
     private static final String TAG = "FileUtils";
-    
-    //读取位于assets文件夹中的文件并转换成字符串
+
+    /**
+     * 读取位于assets文件夹中的文件并转换成字符串
+     * @param fileName
+     * @param context
+     * @return
+     */
     public static String readFileFromAssets(String fileName, Context context) {
         StringBuilder builder = new StringBuilder();
         try {

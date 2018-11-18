@@ -9,8 +9,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * <pre>
+ *      @author hurley
+ *      date : 2018/11/07
+ *      github : https://github.com/HurleyJames
+ *      desc : 计算器算法工具类
+ * </pre>
+ */
 public class CalculatorUtils {
     private static final String TAG = "CalculatorUtils";
+
+    /**
+     * 最大显示长度
+     */
+    private static int maxLength = 30;
 
     /**
      * 中缀转后缀
@@ -75,7 +88,7 @@ public class CalculatorUtils {
         Stack<String> stack = new Stack<>();
 
         //定义符号的优先级
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>(10);
         map.put('*', 1);
         map.put('÷', 1);
         map.put('%', 1);
@@ -167,7 +180,7 @@ public class CalculatorUtils {
 
         if (list.size() == 1) {
             //如果结果长度不长时，直接输出
-            if (list.get(0).length() < 30) {
+            if (list.get(0).length() < maxLength) {
                 BigDecimal decimal = new BigDecimal(list.get(0));
                 //默认直接输出
                 Log.e(TAG, "最终结果：" + decimal.toPlainString());

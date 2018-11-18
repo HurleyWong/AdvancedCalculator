@@ -12,13 +12,12 @@ import android.view.WindowManager;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/27
- *      desc   : 屏幕工具类
+ *      @author hurley
+ *      date : 2018/10/27
+ *      github : https://github.com/HurleyJames
+ *      desc : 屏幕工具类
  * </pre>
  */
-
 public class ScreenUtils {
     
     private static final String TAG = "ScreenUtils";
@@ -26,26 +25,40 @@ public class ScreenUtils {
     public static DisplayMetrics getDisplayMetrics() {
         return Resources.getSystem().getDisplayMetrics();
     }
-    
-    //获得屏幕宽度
+
+    /**
+     * 获得屏幕宽度
+     * @return
+     */
     public static int getScreenWidth() {
         DisplayMetrics dm = getDisplayMetrics();
         return dm.widthPixels;
     }
-    
-    //获得屏幕高度
+
+    /**
+     * 获得屏幕高度
+     * @return
+     */
     public static int getScreenHeight() {
         DisplayMetrics dm = getDisplayMetrics();
         return dm.heightPixels;
     }
-    
-    //获取屏幕密度
+
+    /**
+     * 获取屏幕密度
+     * @return
+     */
     public static float getScreenDensity() {
         DisplayMetrics dm = getDisplayMetrics();
         return dm.density;
     }
-    
-    //获取控件的高度或宽度
+
+    /**
+     * 获取控件的高度或宽度
+     * @param view
+     * @param isHeight
+     * @return
+     */
     public static int getViewHeightOrWidth(View view, boolean isHeight) {
         int result;
         if (view == null) {
@@ -64,14 +77,24 @@ public class ScreenUtils {
             return result;
         }
     }
-    
-    //dp转px
+
+    /**
+     * dp转px
+     * @param context
+     * @param dpValue
+     * @return
+     */
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
-    
-    //px转dp
+
+    /**
+     * px转dp
+     * @param context
+     * @param pxValue
+     * @return
+     */
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);

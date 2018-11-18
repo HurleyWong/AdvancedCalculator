@@ -6,9 +6,10 @@ import android.text.TextUtils;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/11/07
+ *      @author hurley
+ *      date : 2018/11/07
+ *      github : https://github.com/HurleyJames
+ *      desc : App应用工具类
  * </pre>
  */
 public class AppUtils {

@@ -9,30 +9,17 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/31
- *      desc   : Gson解析工具类
+ *      @author hurley
+ *      date : 2018/10/31
+ *      github : https://github.com/HurleyJames
+ *      desc : Gson解析工具类
  * </pre>
  */
 public class GsonUtils {
     private static final String TAG = "GsonUtils";
-    
-    private static GsonUtils mGson;
-    
-    public static GsonUtils getInstance() {
-        if (mGson == null) {
-            mGson = new GsonUtils();
-        }
-        return mGson;
-    }
-    
-    public  GsonUtils() {
-    }
-    
+
     public static String createGsonString(Object value) {
         Gson gson = new Gson();
         String str = gson.toJson(value);

@@ -11,14 +11,11 @@ import android.view.View;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/11/03
+ *      @author hurley
+ *      date : 2018/11/03
+ *      github : https://github.com/HurleyJames
+ *      desc : 自定义RecyclerView分割线
  * </pre>
- */
-
-/**
- * 自定义RecyclerView分割线
  */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     
@@ -60,8 +57,12 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             drawHorizontal(canvas, parent);
         }
     }
-    
-    //绘制纵向分割线
+
+    /**
+     * 绘制纵向分割线
+     * @param canvas
+     * @param parent
+     */
     public void drawVertical(Canvas canvas, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
@@ -75,8 +76,12 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             mDivider.draw(canvas);
         }
     }
-    
-    //绘制横向分割线
+
+    /**
+     * 绘制横向分割线
+     * @param canvas
+     * @param parent
+     */
     public void drawHorizontal(Canvas canvas, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
@@ -90,8 +95,13 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             mDivider.draw(canvas);
         }
     }
-    
-    //设置item的padding属性
+
+    /**
+     * 设置item的padding属性
+     * @param outRect
+     * @param itemPosition
+     * @param parent
+     */
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
         if (mOrientation == VERTICAL_LIST) {

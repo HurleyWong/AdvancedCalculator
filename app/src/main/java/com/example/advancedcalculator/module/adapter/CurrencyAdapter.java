@@ -14,22 +14,21 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/30
+ *      @author hurley
+ *      date : 2018/10/30
+ *      github : https://github.com/HurleyJames
+ *      desc : 货币适配器类
  * </pre>
- */
-
-/**
- * 货币适配器
  */
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
     
     private static final String TAG = "CurrencyAdapter";
     
     OnItemClickListener mOnItemClickListener;
-    
-    //货币
+
+    /**
+     * 货币
+     */
     private List<Coin.ResultBean.ListBean> mCurrencyList;
     private Context mContext;
     
@@ -79,9 +78,18 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
     
     
     public interface OnItemClickListener {
-        //RecyclerView点击事件
+        /**
+         * RecyclerView点击事件
+         * @param view
+         * @param position
+         */
         void onItemClick(View view, int position);
-        //RecyclerView长点击事件
+
+        /**
+         * RecyclerView长点击事件
+         * @param view
+         * @param position
+         */
         void onItemLongClick(View view, int position);
     }
     

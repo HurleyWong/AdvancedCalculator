@@ -2,7 +2,14 @@ package com.example.advancedcalculator.util;
 
 import android.content.Context;
 import android.os.Vibrator;
-
+/**
+ * <pre>
+ *      @author hurley
+ *      date : 2018/10/31
+ *      github : https://github.com/HurleyJames
+ *      desc : 震动工具类
+ * </pre>
+ */
 public class VibrateUtils {
     private static final String TAG = "VibrateUtils";
 
@@ -19,7 +26,9 @@ public class VibrateUtils {
         sVibrator.vibrate(millSecond);
     }
 
-    //停止震动
+    /**
+     * 停止震动
+     */
     public static void stopVibrate() {
         if (sVibrator != null) {
             sVibrator.cancel();

@@ -25,20 +25,31 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/27
- *      desc   : Dialog工具类
+ *      @author hurley
+ *      date : 2018/10/27
+ *      github : https://github.com/HurleyJames
+ *      desc : Dialog工具类
  * </pre>
  */
 public class DialogUtils {
     
     private static final String TAG = "DialogUtils";
-    
-    //通用带输入框的Dialog的回调接口
+
+    /**
+     * 通用带输入框的Dialog的回调接口
+     */
     public interface EditDialogListener {
+        /**
+         * 确定
+         * @param dialog
+         * @param editText
+         */
         void onSummit(Dialog dialog, EditText editText);
-        
+
+        /**
+         * 取消
+         * @param dialog
+         */
         void onCancel(Dialog dialog);
     }
     
@@ -130,8 +141,9 @@ public class DialogUtils {
         
         //显示Dialog
         showIconDialog.setOwnerActivity(activity);
-        if (showIconDialog.getOwnerActivity() != null && !showIconDialog.getOwnerActivity().isFinishing())
+        if (showIconDialog.getOwnerActivity() != null && !showIconDialog.getOwnerActivity().isFinishing()) {
             showIconDialog.show();
+        }
         
         return showIconDialog;
     }
@@ -162,8 +174,11 @@ public class DialogUtils {
         //显示Dialog
         alertDialog.show();
     }
-    
-    //关闭Dialog
+
+    /**
+     * 关闭Dialog
+     * @param dialog
+     */
     public static void dismissDialog(Dialog dialog) {
         if (dialog != null && dialog.isShowing()) {
             Activity ownerActivity = dialog.getOwnerActivity();

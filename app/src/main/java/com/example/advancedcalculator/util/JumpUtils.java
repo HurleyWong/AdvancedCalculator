@@ -6,10 +6,10 @@ import android.content.Intent;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/11/07
- *      desc   : 跳转工具类
+ *      @author hurley
+ *      date : 2018/11/07
+ *      github : https://github.com/HurleyJames
+ *      desc : 跳转工具类
  * </pre>
  */
 public class JumpUtils {
@@ -18,8 +18,12 @@ public class JumpUtils {
     private static JumpUtils singletion;
     private static Context mContext;
     private static Intent mIntent;
-    
-    //单例模式
+
+    /**
+     * 单例模式
+     * @param context
+     * @return
+     */
     public static JumpUtils from(Context context) {
         if (context == null) {
             throw new RuntimeException("context can not be null!");
