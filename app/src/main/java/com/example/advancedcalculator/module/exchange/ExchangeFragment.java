@@ -40,9 +40,10 @@ import okhttp3.Request;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/23
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public class ExchangeFragment extends BaseFragment implements ExchangeContract.View {
@@ -146,38 +147,67 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
     
     private StringBuffer mMoney = new StringBuffer("");
 
-    //换算汇率路径
+    /**
+     * 换算汇率路径
+     */
     private static String path = "http://op.juhe.cn/onebox/exchange/currency?key=";
 
-    //聚合数据key
+    /**
+     * 聚合数据key
+     */
     private static String key = "e179779db8e8afee7e459cc5af3f7b5b";
 
-    //汇率
-    private double rate1to2;
-    private double rate1to3;
-
-    //基础url
+    /**
+     * 基础url
+     */
     private String baseUrl = path + key;
-    //货币1换算成货币2的url
+    /**
+     * 货币1换算成货币2的url
+     */
     private String url1to2;
-    //货币1换算成货币3的url
+    /**
+     * 货币1换算成货币3的url
+     */
     private String url1to3;
-    //货币2换算成货币1的url
+    /**
+     * 货币2换算成货币1的url
+     */
     private String url2to1;
-    //货币2换算成货币3的url
+    /**
+     * 货币2换算成货币3的url
+     */
     private String url2to3;
-    //货币3换算成货币1的url
+    /**
+     * 货币3换算成货币1的url
+     */
     private String url3to1;
-    //货币3换算成货币2的url
+    /**
+     * 货币3换算成货币2的url
+     */
     private String url3to2;
 
-    //是否可添加
+    /**
+     * 是否可添加
+     */
     private boolean isAdd = true;
 
-    //点击光标所在的item，默认为1
+    /**
+     * 点击光标所在的item，默认为1
+     */
     private int mClickItem = 1;
-    
-    //货币名称
+
+    private int mItem1 = 1;
+    private int mItem2 = 2;
+    private int mItem3 = 3;
+
+    /**
+     * 最多保留的小数位数
+     */
+    private int maxDecimal = 4;
+
+    /**
+     * 货币名称
+     */
     private View mCoin;
     private TextView mCoinName;
     
@@ -231,6 +261,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del, R.id.btn_empty,
                 R.id.rl_country1, R.id.rl_country2, R.id.rl_country3})
     public void onClickNum(View view) {
+        char zero = '0';
+
         Log.e(TAG, mMoney.toString() + "长度：" + mMoney.length());
         switch (view.getId()) {
             case R.id.btn_AC:
@@ -252,12 +284,14 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 mClickItem = 3;
                 Log.e(TAG, "测试光标所在的item" + mClickItem);
                 break;
+            default:
+                break;
         }
         if (isAdd) {
             switch (view.getId()) {
                 case R.id.btn_0:
                     //如果长度大于0且首位不为0
-                    if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
+                    if (mMoney.length() > 0 && mMoney.charAt(0) != zero) {
                         mMoney.append("0");
                         Log.d(TAG, "点击0");
                     }
@@ -265,7 +299,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 //点击0
                 case R.id.btn_empty:
                     //如果长度大于0且首位不为0
-                    if (mMoney.length() > 0 && mMoney.charAt(0) != '0') {
+                    if (mMoney.length() > 0 && mMoney.charAt(0) != zero) {
                         mMoney.append("0");
                         Log.d(TAG, "点击0");
                     }
@@ -299,9 +333,10 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     break;
                 case R.id.btn_point:
                     //如果不包含.，则可以添加.；如果长度不为0，则可以添加.
-                    if (!mMoney.toString().contains(".")) {
-                        if (mMoney.toString().length() == 0)
+                    if (!mMoney.toString().contains(getString(R.string.point))) {
+                        if (mMoney.toString().length() == 0) {
                             mMoney.append("0");
+                        }
                         mMoney.append(".");
                     }
                     break;
@@ -311,35 +346,37 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         mMoney.deleteCharAt(mMoney.length() - 1);
                     }
                     break;
+                default:
+                    break;
             }
         }
 
         //显示金额
-        if (mMoney.equals("") || mMoney.length() == 0) {
+        if (mMoney.equals(getString(R.string.none)) || mMoney.length() == 0) {
             mPresenter.onClickAC(mTvMoney1, mTvMoney2, mTvMoney3);
         } else {
-            if (mClickItem == 1) {
+            if (mClickItem == mItem1) {
                 double money1 = Double.parseDouble(mMoney.toString());
                 //设置money1
-                if (TextUtils.howManyDecimal(money1) <= 4) {
+                if (TextUtils.howManyDecimal(money1) <= maxDecimal) {
                     mTvMoney1.setText(mMoney);
                 } else {
                     //超过4位小数，不可再添加数字
                     isAdd = false;
                 }
-            } else if (mClickItem == 2) {
+            } else if (mClickItem == mItem2) {
                 double money2 = Double.parseDouble(mMoney.toString());
                 //设置money2
-                if (TextUtils.howManyDecimal(money2) <= 4) {
+                if (TextUtils.howManyDecimal(money2) <= maxDecimal) {
                     mTvMoney2.setText(mMoney);
                 } else {
                     //超过4位小数，不可再添加数字
                     isAdd = false;
                 }
-            } else if (mClickItem == 3) {
+            } else if (mClickItem == mItem3) {
                 double money3 = Double.parseDouble(mMoney.toString());
                 //设置money3
-                if (TextUtils.howManyDecimal(money3) <= 4) {
+                if (TextUtils.howManyDecimal(money3) <= maxDecimal) {
                     mTvMoney3.setText(mMoney);
                 } else {
                     //超过4位小数，不可再添加数字
@@ -351,7 +388,16 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         }
     }
 
-    //获取汇率
+    /**
+     * 获取汇率
+     * @param tv1
+     * @param tv2
+     * @param tv3
+     * @param tvMoney1
+     * @param tvMoney2
+     * @param tvMoney3
+     * @param onClickItem
+     */
     public void getCurrency(TextView tv1, TextView tv2, TextView tv3,
                             final TextView tvMoney1, final TextView tvMoney2, final TextView tvMoney3,
                             final int onClickItem) {
@@ -384,7 +430,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //获取请求成功
                     Log.e(TAG, str);
                     //把json转变成对象
-                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    final Currency currency = GsonUtils.getObject(str, Currency.class);
                     if (!mPresenter.isResultRight(currency)) {
                         if (getActivity() != null) {
                             DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
@@ -419,10 +465,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //获取请求成功
                     Log.e(TAG, str);
                     //把json转变成对象
-                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    final Currency currency = GsonUtils.getObject(str, Currency.class);
                     if (!mPresenter.isResultRight(currency)) {
                         if (getActivity() != null) {
-                            //DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
@@ -440,7 +485,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
                 }
             });
-        } else if (onClickItem == 2) {
+        } else if (onClickItem == mItem2) {
             Log.e(TAG, "获取链接url2to1：" + url2to1);
             Log.e(TAG, "获取链接url2to3：" + url2to3);
 
@@ -457,7 +502,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //获取请求成功
                     Log.e(TAG, str);
                     //把json转变成对象
-                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    final Currency currency = GsonUtils.getObject(str, Currency.class);
                     if (!mPresenter.isResultRight(currency)) {
                         if (getActivity() != null) {
                             DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
@@ -492,10 +537,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //获取请求成功
                     Log.e(TAG, str);
                     //把json转变成对象
-                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    final Currency currency = GsonUtils.getObject(str, Currency.class);
                     if (!mPresenter.isResultRight(currency)) {
                         if (getActivity() != null) {
-                            //DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
@@ -512,7 +556,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     }
                 }
             });
-        } else if (onClickItem == 3) {
+        } else if (onClickItem == mItem3) {
             Log.e(TAG, "获取链接url3to1：" + url3to1);
             Log.e(TAG, "获取链接url3to2：" + url3to2);
 
@@ -529,7 +573,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //获取请求成功
                     Log.e(TAG, str);
                     //把json转变成对象
-                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    final Currency currency = GsonUtils.getObject(str, Currency.class);
                     if (!mPresenter.isResultRight(currency)) {
                         if (getActivity() != null) {
                             DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
@@ -564,10 +608,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //获取请求成功
                     Log.e(TAG, str);
                     //把json转变成对象
-                    final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                    final Currency currency = GsonUtils.getObject(str, Currency.class);
                     if (!mPresenter.isResultRight(currency)) {
                         if (getActivity() != null) {
-                            //DialogUtils.showAlertDialog(getActivity(), null, currency.getReason());
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
@@ -588,11 +631,19 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     }
 
-    //货币显示的规则
+    /**
+     * 货币显示的规则
+     * @param tvMoney1
+     * @param tvMoney2
+     * @param tvMoney3
+     * @param moneyTo
+     * @param to
+     * @param onClickItem
+     */
     private void setMoney(TextView tvMoney1, TextView tvMoney2, TextView tvMoney3, double moneyTo, int to, int onClickItem) {
         if (onClickItem == 1) {
-            if (to == 2) {
-                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+            if (to == mItem2) {
+                if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于1：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney2.setText("0");
@@ -603,8 +654,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //保留4位小数
                     tvMoney2.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
-            } else if (to == 3) {
-                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+            } else if (to == mItem3) {
+                if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于2：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney3.setText("0");
@@ -616,9 +667,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
             }
-        }else if (onClickItem == 2) {
+        }else if (onClickItem == mItem2) {
             if (to == 1) {
-                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于1：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney1.setText("0");
@@ -629,8 +680,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //保留4位小数
                     tvMoney1.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
-            } else if (to == 3) {
-                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+            } else if (to == mItem3) {
+                if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于2：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney3.setText("0");
@@ -642,9 +693,9 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
             }
-        } else if (onClickItem == 3) {
+        } else if (onClickItem == mItem3) {
             if (to == 1) {
-                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+                if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于1：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney1.setText("0");
@@ -655,8 +706,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //保留4位小数
                     tvMoney1.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
-            } else if (to == 2) {
-                if (TextUtils.howManyDecimal(moneyTo) <= 4) {
+            } else if (to == mItem2) {
+                if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于2：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney2.setText("0");
@@ -672,13 +723,14 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     }
 
-    
-    //点击国家弹出选择货币种类Dialog
+
+    /**
+     * 点击国家弹出选择货币种类Dialog
+     * @param textView
+     */
     @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})
     public void onClickCountry(TextView textView) {
         final List<Coin.ResultBean.ListBean> coinList = new ArrayList<>();
-        //String url = "http://op.juhe.cn/onebox/exchange/list?key=e179779db8e8afee7e459cc5af3f7b5b";
-        //ExchangePresenter.newInstance().getDataFromNet(url, currencyList);
         ExchangePresenter.newInstance().getCoinFromLocal(coinList, getContext());
         switch (textView.getId()) {
             case R.id.country_title1:
@@ -692,6 +744,8 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
             case R.id.country_title3:
                 mCoin = getActivity().getWindow().getDecorView().findViewById(R.id.country_coin3);
                 mCoinName = mCoin.findViewById(R.id.country_coin_type3);
+                break;
+            default:
                 break;
         }
 

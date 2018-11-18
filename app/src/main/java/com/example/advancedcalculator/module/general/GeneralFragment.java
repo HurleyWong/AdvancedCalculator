@@ -22,9 +22,10 @@ import butterknife.OnClick;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/23
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public class GeneralFragment extends BaseFragment implements GeneralContract.View {
@@ -95,25 +96,36 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
 
     private StringBuffer mMoney = new StringBuffer("");
 
-    //运算结果表达式
+    /**
+     * 运算结果表达式
+     */
     private StringBuffer result = new StringBuffer();
 
-    //运算结果
+    /**
+     * 运算结果
+     */
     private String num = "0";
 
-    //是否计算过，初始为false
+    /**
+     * 是否计算过，初始为false
+     */
     private boolean isCal = false;
 
-    //是否可以删除
+    /**
+     * 是否可以删除
+     */
     private boolean isDelete = true;
 
-    //是否可以在计算结果后添加数字
+    /**
+     * 是否可以在计算结果后添加数字
+     */
     private boolean isAddNum = true;
+
 
     private static GeneralPresenter mPresenter = GeneralPresenter.newInstance();
 
     
-    public static final GeneralFragment newInstance() {
+    public static GeneralFragment newInstance() {
         return new GeneralFragment();
     }
     
@@ -157,13 +169,16 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 mMoney = new StringBuffer("");
                 break;
             case R.id.btn_0:
+                char zero = '0';
                 if (!isAddNum) {
                     mMoney.delete(0, mMoney.length());
                     isAddNum = true;
                 }
                 //如果长度大于0且首位不为0或含有.
-                if (mMoney.length() > 0 && (mMoney.charAt(0) != '0' || mMoney.toString().contains("."))) {
-                    mMoney.append(0);
+                if (mMoney.length() > 0) {
+                    if (mMoney.charAt(0) != zero || mMoney.toString().contains(getString(R.string.point))) {
+                        mMoney.append(0);
+                    }
                 }
                 break;
             case R.id.btn_1:
@@ -235,8 +250,9 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                     isAddNum = true;
                 }
                 //如果长度为0，则补0
-                if (mMoney.toString().length() == 0)
+                if (mMoney.toString().length() == 0) {
                     mMoney.append("0");
+                }
                 //如果最后一个为符号，则补0
                 mPresenter.addZeroIfChar(mMoney);
                 //判断是否能添加.
@@ -311,15 +327,19 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 if (mMoney.length() != 0) {
                     String last = mMoney.substring(mMoney.length() - 1);
                     //如果最后一位是符号
-                    if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷") || last.equals("=")) {
+                    if (last.equals(getString(R.string.add))
+                            || last.equals(getString(R.string.subtract))
+                            || last.equals(getString(R.string.multiply))
+                            || last.equals(getString(R.string.divide))
+                            || last.equals(getString(R.string.equal))) {
                         break;
                     } else {
                         String strLastNum = mPresenter.getLastNum(mMoney);
                         double lastNumAfterDivide = Double.parseDouble(strLastNum) / 100;
                         String strLastNumAfterDivied = String.valueOf(lastNumAfterDivide);
                         mPresenter.deleteLastNum(mMoney);
-                        if (strLastNumAfterDivied.contains(".")
-                                && strLastNumAfterDivied.substring(strLastNumAfterDivied.length() - 1).equals("0")) {
+                        if (strLastNumAfterDivied.contains(getString(R.string.point))
+                                && strLastNumAfterDivied.substring(strLastNumAfterDivied.length() - 1).equals(getString(R.string.zero))) {
                             int lastNum = (int) lastNumAfterDivide;
                             mMoney.append(lastNum);
                         } else {
@@ -331,9 +351,10 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                     break;
                 }
             case R.id.btn_equal:
+                char substract = '-';
                 if (mMoney.length() != 0) {
                     mPresenter.changeIfLastIsChar(mMoney);
-                    if (mMoney.charAt(0) == '-') {
+                    if (mMoney.charAt(0) == substract) {
                         mMoney.insert(0, "0");
                     }
                     Log.e(TAG, "长度是" + mMoney.length());
@@ -348,12 +369,14 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                     isAddNum = false;
                 }
                 break;
+            default:
+                break;
         }
         //如果已输入，将AC换成C
         if (mMoney.length() > 0) {
             mBtnAC.setText("C");
         }
-        if (mMoney.equals("") || mMoney.length() == 0) {
+        if (mMoney.equals(getString(R.string.none)) || mMoney.length() == 0) {
             mBtnAC.setText("AC");
             mTvNum.setText("0");
         } else {

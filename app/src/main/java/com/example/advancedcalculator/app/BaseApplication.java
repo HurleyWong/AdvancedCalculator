@@ -18,6 +18,7 @@ import java.util.ArrayList;
 /**
  * Application基类
  */
+@SuppressWarnings({"ALL", "AlibabaClassMustHaveAuthor"})
 public abstract class BaseApplication extends Application {
     protected static BaseApplication instance;
     protected ArrayList<Activity> mActivityList;

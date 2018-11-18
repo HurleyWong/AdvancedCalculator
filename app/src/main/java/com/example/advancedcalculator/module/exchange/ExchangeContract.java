@@ -5,9 +5,10 @@ import com.example.advancedcalculator.base.IBaseView;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/23
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public interface ExchangeContract {

@@ -10,9 +10,10 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/23
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public class GeneralPresenter extends BasePresenter implements GeneralContract.Presenter {
@@ -23,7 +24,10 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
     }
 
 
-    //如果StringBuffer的最后一个字符为符号，则去掉
+    /**
+     * 如果StringBuffer的最后一个字符为符号，则去掉
+     * @param buffer
+     */
     public void deleteLastStr(StringBuffer buffer) {
         //获取算数式的最后一个字符
         String last = buffer.substring(buffer.length() - 1);
@@ -34,7 +38,11 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         }
     }
 
-    //判断是否能添加.
+    /**
+     * 判断是否能添加.
+     * @param buffer
+     * @return
+     */
     public boolean isAddPointOrNot(StringBuffer buffer) {
         String str = buffer.toString();
         //如果StringBuffer中含有符号
@@ -67,7 +75,10 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         }
     }
 
-    //如果StringBuffer的最后一个字符是.，则补0
+    /**
+     * 如果StringBuffer的最后一个字符是.，则补0
+     * @param buffer
+     */
     public void addZeroIfPoint(StringBuffer buffer) {
         String last = buffer.substring(buffer.length() - 1);
         if (last.equals(".")) {
@@ -75,7 +86,10 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         }
     }
 
-    //如果StringBuffer的最后一个字符是符号，则补0
+    /**
+     * 如果StringBuffer的最后一个字符是符号，则补0
+     * @param buffer
+     */
     public void addZeroIfChar(StringBuffer buffer) {
         String last = buffer.substring(buffer.length() - 1);
         if (last.equals("+") || last.equals("-") || last.equals("*") || last.equals("÷")) {
@@ -83,7 +97,10 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         }
     }
 
-    //如果StringBuffer的最后一个字符是符号，则根据不同的符号进行不同的操作
+    /**
+     * 如果StringBuffer的最后一个字符是符号，则根据不同的符号进行不同的操作
+     * @param buffer
+     */
     public void changeIfLastIsChar(StringBuffer buffer) {
         String last = buffer.substring(buffer.length() - 1);
         //如果最后一位是+号或-号
@@ -97,7 +114,13 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
     }
 
 
-    //替换乘号*为x
+    /**
+     * 替换乘号*为x
+     * @param buffer
+     * @param s1
+     * @param s2
+     * @return
+     */
     public StringBuffer replaceMultiply(StringBuffer buffer, String s1, String s2) {
         //如果StringBuffer中含有某个字符
         if (buffer.toString().contains(s1)) {
@@ -108,7 +131,11 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         return buffer;
     }
 
-    //获得最后的数字
+    /**
+     * 获得最后的数字
+     * @param buffer
+     * @return
+     */
     public String getLastNum(StringBuffer buffer) {
         String strBuffer = buffer.toString();
         //如果StringBuffer中包含符号
@@ -130,7 +157,11 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
         }
     }
 
-    //删除最后的数字
+    /**
+     * 删除最后的数字
+     * @param buffer
+     * @return
+     */
     public String deleteLastNum(StringBuffer buffer) {
         String strBuffer = buffer.toString();
         //如果StringBuffer中包含符号

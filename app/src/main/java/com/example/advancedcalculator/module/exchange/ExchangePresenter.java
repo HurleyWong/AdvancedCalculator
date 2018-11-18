@@ -21,9 +21,10 @@ import okhttp3.Request;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/23
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public class ExchangePresenter extends BasePresenter implements ExchangeContract.Presenter {
@@ -51,7 +52,7 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
                 //获取请求成功
                 Log.e(TAG, str);
                 //把json转变成对象
-                final Currency currency = GsonUtils.getInstance().getObject(str, Currency.class);
+                final Currency currency = GsonUtils.getObject(str, Currency.class);
                 for (int i = 0; i < currency.getResult().size(); i++) {
                     mCurrencyList.add(currency.getResult().get(i).getResult());
                     Log.e(TAG, mCurrencyList.get(i));
@@ -81,7 +82,7 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
                 //获取请求成功
                 Log.e(TAG, str);
                 //把json转变成对象
-                final Coin coin = GsonUtils.getInstance().getObject(str, Coin.class);
+                final Coin coin = GsonUtils.getObject(str, Coin.class);
                 for (int i = 0; i < coin.getResult().getList().size(); i++) {
                     coinList.add(new Coin.ResultBean.ListBean(coin.getResult().getList().get(i).getName(), coin.getResult().getList().get(i).getCode()));
                     Log.e(TAG, coin.getResult().getList().get(i).getName());
@@ -100,7 +101,7 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
      */
     public List getCoinFromLocal(final List<Coin.ResultBean.ListBean> coinList, Context context) {
         String jsonContext = FileUtils.readFileFromAssets("coin.json", context);
-        final Coin coin = GsonUtils.getInstance().getObject(jsonContext, Coin.class);
+        final Coin coin = GsonUtils.getObject(jsonContext, Coin.class);
         for (int i = 0; i < coin.getResult().getList().size(); i++) {
             coinList.add(new Coin.ResultBean.ListBean(coin.getResult().getList().get(i).getName(), coin.getResult().getList().get(i).getCode()));
             Log.d(TAG, coin.getResult().getList().get(i).getName());
@@ -108,7 +109,12 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
         return coinList;
     }
 
-    //点击AC，清空所有数据
+    /**
+     * 点击AC，清空所有数据
+     * @param tv1
+     * @param tv2
+     * @param tv3
+     */
     public void onClickAC(TextView tv1, TextView tv2, TextView tv3) {
         tv1.setText("0");
         tv2.setText("0");

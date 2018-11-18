@@ -13,9 +13,10 @@ import java.util.List;
 
 /**
  * <pre>
- *      author : Hurley
- *      e-mail : 1401682479@qq.com
- *      time   : 2018/10/23
+ *      @author hurley
+ *      date : 2018/10/23
+ *      github : https://github.com/HurleyJames
+ *      desc :
  * </pre>
  */
 public class RelationPresenter extends BasePresenter implements RelationContract.Presenter {
@@ -27,10 +28,15 @@ public class RelationPresenter extends BasePresenter implements RelationContract
         return new RelationPresenter();
     }
 
-    //从本地读取数据
+    /**
+     * 从本地读取数据
+     * @param relationList
+     * @param context
+     * @return
+     */
     public List getRelationByJSON(final List<Relation.ResultBean.RelationBean> relationList, Context context){
         String jsonContext = FileUtils.readFileFromAssets("relation.json", context);
-        final Relation relation = GsonUtils.getInstance().getObject(jsonContext, Relation.class);
+        final Relation relation = GsonUtils.getObject(jsonContext, Relation.class);
         for (int i = 0; i < relation.getResult().getRelation().size(); i++) {
             relationList.add(new Relation.ResultBean.RelationBean(relation.getResult().getRelation().get(i).getName(),
                     relation.getResult().getRelation().get(i).getFather(),
@@ -43,12 +49,17 @@ public class RelationPresenter extends BasePresenter implements RelationContract
                     relation.getResult().getRelation().get(i).getWife(),
                     relation.getResult().getRelation().get(i).getSon(),
                     relation.getResult().getRelation().get(i).getDaughter()));
-            //Log.e(TAG, relation.getResult().getRelation().get(i).getName());
         }
         return relationList;
     }
 
 
+    /**
+     * 获得关系称呼
+     * @param buffer
+     * @param relationList
+     * @return
+     */
     public String getRelationship(StringBuffer buffer, List<Relation.ResultBean.RelationBean> relationList) {
         //去除所有"的"字符
         String call = buffer.toString().replace("的", "");
@@ -66,7 +77,8 @@ public class RelationPresenter extends BasePresenter implements RelationContract
                 Log.d(TAG, "i的位置：" + i);
                 Log.d(TAG, "第一个关系：" + call.substring(1, 3));
                 temp = call.substring(1, 3);
-                for (int j = 3; j < call.length(); j = j + 2) {
+                int gap = 2;
+                for (int j = 3; j < call.length(); j = j + gap) {
                     nextRelation = call.substring(j, j + 2);
                     Log.e(TAG, "下一个关系：" + nextRelation);
 

@@ -6,6 +6,15 @@
     <string name="exchange">汇率</string>
     <string name="relation">关系</string>
 
+    <!-- 计算器 -->
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">*</string>
+    <string name="divide">÷</string>
+    <string name="equal">=</string>
+    <string name="none"></string>
+    <string name="zero">0</string>
+    <string name="point">.</string>
 
     <!-- 汇率 -->
     <string name="currency_dialog_title">选择币种</string>
