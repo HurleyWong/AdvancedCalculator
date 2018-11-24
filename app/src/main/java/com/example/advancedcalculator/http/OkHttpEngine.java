@@ -18,12 +18,10 @@ import okhttp3.Response;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/10/30
+ *      desc   : 对OkHttp进行封装
  * </pre>
  */
 
-/**
- * 对OkHttp进行封装
- */
 public class OkHttpEngine {
     private static final String TAG = "OkHttpEngine";
     
@@ -50,7 +48,6 @@ public class OkHttpEngine {
     
     /**
      * 异步GET请求
-     *
      * @param url
      * @param callback
      */

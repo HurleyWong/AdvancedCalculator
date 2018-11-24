@@ -12,9 +12,17 @@ import okhttp3.Request;
  * </pre>
  */
 public abstract class ResultCallback {
-    //请求失败
+    /**
+     * 请求失败
+     * @param request
+     * @param e
+     */
     public abstract void onError(Request request, Exception e);
 
-    //请求成功
+    /**
+     * 请求成功
+     * @param str
+     * @throws IOException
+     */
     public abstract void onResponse(String str) throws IOException;
 }

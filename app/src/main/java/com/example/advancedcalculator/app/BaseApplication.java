@@ -12,13 +12,10 @@ import java.util.ArrayList;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/11/07
+ *      desc   : Applicaiton基类
  * </pre>
  */
 
-/**
- * Application基类
- */
-@SuppressWarnings({"ALL", "AlibabaClassMustHaveAuthor"})
 public abstract class BaseApplication extends Application {
     protected static BaseApplication instance;
     protected ArrayList<Activity> mActivityList;
@@ -53,12 +50,17 @@ public abstract class BaseApplication extends Application {
         }
     }
 
-    //关闭所有Activity
+    /**
+     * 关闭所有Activity
+     */
     public void exit() {
         finishAllActivity();
     }
-    
-    //获取当前Activity
+
+    /**
+     * 获取当前Activity
+     * @return
+     */
     public Activity getCurrentActivity() {
         if (mActivityList != null && mActivityList.size() > 0) {
             return mActivityList.get(mActivityList.size() - 1);

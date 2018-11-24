@@ -12,7 +12,6 @@ import com.example.advancedcalculator.R;
  *      @author hurley
  *      date : 2018/10/30
  *      github : https://github.com/HurleyJames
- *      desc :
  * </pre>
  */
 public class CurrencyViewHolder extends RecyclerView.ViewHolder {
