@@ -80,7 +80,7 @@ public class CalculatorUtils {
 
         //遍历输出
         for (String aList : list){
-            Log.e(TAG, "遍历输出" + aList);
+            Log.d(TAG, "遍历输出" + aList);
         }
 
 
@@ -137,21 +137,21 @@ public class CalculatorUtils {
      */
     public static String calculate(ArrayList arrayList) {
         int length = arrayList.size();
-        Log.e(TAG, "传过来的长度1：" + length);
+        Log.d(TAG, "传过来的长度1：" + length);
         //转化为字符串数组
         String[] arr = new String[length];
 
         for (int i = 0; i < arrayList.size(); i ++) {
             arr[i] = (String) arrayList.get(i);
         }
-        Log.e(TAG, "传过来的List：" + arrayList.toString());
+        Log.d(TAG, "传过来的List：" + arrayList.toString());
 
         List<String> list = new ArrayList<>();
 
         for (String anArr : arr) {
             int size = list.size();
-            Log.e(TAG, "list是啥：" + list.toString());
-            Log.e(TAG, "传过来的长度2：" + size);
+            Log.d(TAG, "list是啥：" + list.toString());
+            Log.d(TAG, "传过来的长度2：" + size);
             switch (anArr){
                 case "+":
                     BigDecimal a = new BigDecimal(list.remove(size - 2)).add(new BigDecimal(list.remove(size - 2)));

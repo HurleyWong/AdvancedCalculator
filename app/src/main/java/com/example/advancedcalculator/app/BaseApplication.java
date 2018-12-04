@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *      author : Hurley
  *      e-mail : 1401682479@qq.com
  *      time   : 2018/11/07
- *      desc   : Applicaiton基类
+ *      desc   : Application基类
  * </pre>
  */
 
