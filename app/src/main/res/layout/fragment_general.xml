@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,9 +19,9 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:text="0"
-            android:textSize="60sp"
+            android:textSize="@dimen/sp60"
             android:textColor="@color/black"
-            android:padding="25dp"
+            android:padding="@dimen/dp25"
             />
     </RelativeLayout>
 
@@ -46,8 +45,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="AC"
-                android:textSize="18sp"
+                android:text="@string/AC"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/orange"/>
 
             <View
@@ -61,7 +60,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="7"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -75,7 +74,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="4"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -89,7 +88,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="1"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -103,7 +102,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="％"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -142,7 +141,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="8"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -156,7 +155,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="5"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -170,7 +169,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="2"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -184,7 +183,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -220,7 +219,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="9"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -234,7 +233,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="6"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -248,7 +247,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="3"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -262,7 +261,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="."
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -298,7 +297,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="－"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -312,7 +311,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="＋"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -327,7 +326,7 @@
                 android:gravity="center"
                 android:background="@color/orange"
                 android:text="＝"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>

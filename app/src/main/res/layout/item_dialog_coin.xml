@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_coin_type"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_height="@dimen/dp50"
+    android:layout_marginLeft="@dimen/dp20"
+    android:layout_marginRight="@dimen/dp20"
     android:orientation="horizontal">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="人民币"
-        android:textSize="16sp"
+        android:textSize="@dimen/sp16"
         android:textColor="@color/black"/>
     <TextView
         android:id="@+id/tv_coin_subtitle"
@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/tv_coin_title"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/dp10"
         android:text="CNY"
-        android:textSize="16sp"
+        android:textSize="@dimen/sp16"
         android:textColor="@color/black"/>
 </RelativeLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,14 +15,14 @@
         <com.example.advancedcalculator.widget.SingleLineZoomTextView
             android:id="@+id/tv_call"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/dp100"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:text=""
-            android:textSize="32sp"
+            android:textSize="@dimen/sp32"
             android:textColor="@color/black"
-            android:padding="25dp"
+            android:padding="@dimen/dp25"
             android:singleLine="true"/>
 
         <TextView
@@ -34,9 +33,9 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:text="我"
-            android:textSize="32sp"
+            android:textSize="@dimen/sp32"
             android:textColor="@color/black"
-            android:padding="25dp"/>
+            android:padding="@dimen/dp25"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -59,7 +58,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="夫"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -73,7 +72,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="妻"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -104,7 +103,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="AC"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/orange"/>
         </LinearLayout>
 
@@ -125,7 +124,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="父"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -139,7 +138,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="母"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -153,7 +152,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="兄"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -167,7 +166,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="弟"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -187,7 +186,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="姐"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -201,7 +200,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="妹"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -215,7 +214,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="子"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
 
             <View
@@ -229,7 +228,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="女"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -248,7 +247,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="互查"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/grey"/>
 
             <View
@@ -262,7 +261,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="＝"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 android:textColor="@color/white"
                 android:background="@color/orange"/>
         </LinearLayout>

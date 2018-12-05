@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initViewPager() {
         List<String> titles = new ArrayList<>();
-        titles.add(getString(R.string.calcalator));
+        titles.add(getString(R.string.calculator));
         titles.add(getString(R.string.exchange));
         titles.add(getString(R.string.relation));
         

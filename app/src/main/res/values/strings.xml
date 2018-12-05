@@ -2,7 +2,7 @@
     <string name="app_name">超级计算器</string>
 
     <!-- 主界面 -->
-    <string name="calcalator">计算</string>
+    <string name="calculator">计算</string>
     <string name="exchange">汇率</string>
     <string name="relation">关系</string>
 
@@ -15,9 +15,24 @@
     <string name="none"></string>
     <string name="zero">0</string>
     <string name="point">.</string>
+    <string name="AC">AC</string>
+
+    <!-- 数字键盘 -->
+    <string name="num1">1</string>
+    <string name="num2">2</string>
+    <string name="num3">3</string>
+    <string name="num4">4</string>
+    <string name="num5">5</string>
+    <string name="num6">6</string>
+    <string name="num7">7</string>
+    <string name="num8">8</string>
+    <string name="num9">9</string>
+    <string name="num0">0</string>
+
 
     <!-- 汇率 -->
     <string name="currency_dialog_title">选择币种</string>
+    <string name="currency_dialog_cancel">取消</string>
 
     <!-- 汇率错误代码 -->
     <string name="error_10001">错误的请求KEY</string>
