@@ -21,9 +21,9 @@ import java.util.List;
  * </pre>
  */
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
-    
+
     private static final String TAG = "CurrencyAdapter";
-    
+
     OnItemClickListener mOnItemClickListener;
 
     /**
@@ -31,24 +31,24 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
      */
     private List<Coin.ResultBean.ListBean> mCurrencyList;
     private Context mContext;
-    
+
     public CurrencyAdapter(Context mContext, List<Coin.ResultBean.ListBean> mCurrencyList) {
         this.mContext = mContext;
         this.mCurrencyList = mCurrencyList;
     }
-    
+
     @Override
     public CurrencyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CurrencyViewHolder holder = new CurrencyViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_dialog_coin, parent, false));
+        CurrencyViewHolder holder = new CurrencyViewHolder(LayoutInflater.from(mContext).inflate(R.layout.dialog_coin_recycle_item, parent, false));
         return holder;
     }
-    
+
     @Override
     public void onBindViewHolder(final CurrencyViewHolder holder, final int position) {
         holder.mTvCoinTitle.setText(mCurrencyList.get(position).getName());
         holder.mTvCoinSubTitle.setText(mCurrencyList.get(position).getCode());
-        
-        
+
+
         if (mOnItemClickListener != null) {
             //点击事件
             holder.mRlCoinType.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
                     mOnItemClickListener.onItemClick(holder.mRlCoinType, pos);
                 }
             });
-            
+
             //长点击事件
             holder.mRlCoinType.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -70,16 +70,17 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
             });
         }
     }
-    
+
     @Override
     public int getItemCount() {
         return mCurrencyList.size();
     }
-    
-    
+
+
     public interface OnItemClickListener {
         /**
          * RecyclerView点击事件
+         *
          * @param view
          * @param position
          */
@@ -87,12 +88,13 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
 
         /**
          * RecyclerView长点击事件
+         *
          * @param view
          * @param position
          */
         void onItemLongClick(View view, int position);
     }
-    
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }

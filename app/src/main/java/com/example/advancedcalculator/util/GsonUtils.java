@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * <pre>
  *      @author hurley
@@ -25,7 +26,7 @@ public class GsonUtils {
         String str = gson.toJson(value);
         return str;
     }
-    
+
     /**
      * 把json转变成对象
      *
@@ -46,8 +47,8 @@ public class GsonUtils {
         }
         return t;
     }
-    
-    
+
+
     /**
      * 把json转变成集合
      *
@@ -68,11 +69,11 @@ public class GsonUtils {
         }
         return list;
     }
-    
+
     public static boolean isJsonWrong(String json) {
         return !isJsonRight(json);
     }
-    
+
     public static boolean isJsonRight(String json) {
         if (TextUtils.isEmpty(json)) {
             return false;
@@ -84,7 +85,7 @@ public class GsonUtils {
         }
         return true;
     }
-    
+
 }
 
 

@@ -24,14 +24,14 @@ import okhttp3.Response;
 
 public class OkHttpEngine {
     private static final String TAG = "OkHttpEngine";
-    
+
     private static volatile OkHttpEngine mInstance;
     private OkHttpClient mOkHttpClient;
     private Handler mHandler;
-    
+
     public static OkHttpEngine getInstance() {
         if (mInstance == null) {
-            synchronized(OkHttpEngine.class) {
+            synchronized (OkHttpEngine.class) {
                 if (mInstance == null) {
                     mInstance = new OkHttpEngine();
                 }
@@ -39,15 +39,16 @@ public class OkHttpEngine {
         }
         return mInstance;
     }
-    
+
     private OkHttpEngine() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS).writeTimeout(20, TimeUnit.SECONDS).readTimeout(20, TimeUnit.SECONDS);
         mOkHttpClient = builder.build();
         mHandler = new Handler();
     }
-    
+
     /**
      * 异步GET请求
+     *
      * @param url
      * @param callback
      */
@@ -59,6 +60,7 @@ public class OkHttpEngine {
 
     /**
      * 处理结果
+     *
      * @param call
      * @param callback
      */
@@ -68,12 +70,12 @@ public class OkHttpEngine {
             public void onFailure(Call call, IOException e) {
                 requestError(call.request(), e, callback);
             }
-            
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 requestSuccess(response.body().string(), callback);
             }
-            
+
             private void requestSuccess(final String str, final ResultCallback callback) {
                 mHandler.post(new Runnable() {
                     @Override
@@ -88,7 +90,7 @@ public class OkHttpEngine {
                     }
                 });
             }
-            
+
             private void requestError(final Request request, final Exception e, final ResultCallback back) {
                 mHandler.post(new Runnable() {
                     @Override
@@ -98,11 +100,11 @@ public class OkHttpEngine {
                     }
                 });
             }
-            
+
         });
     }
-    
-    
+
+
 }
 
 

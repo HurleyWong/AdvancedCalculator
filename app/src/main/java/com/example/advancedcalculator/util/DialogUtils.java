@@ -3,7 +3,6 @@ package com.example.advancedcalculator.util;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +16,7 @@ import android.widget.TextView;
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.module.adapter.CurrencyAdapter;
 import com.example.advancedcalculator.module.bean.Coin;
-import com.example.advancedcalculator.module.bean.Currency;
 import com.example.advancedcalculator.module.exchange.ExchangeFragment;
-import com.example.advancedcalculator.module.exchange.ExchangePresenter;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ import java.util.List;
  * </pre>
  */
 public class DialogUtils {
-    
+
     private static final String TAG = "DialogUtils";
 
     /**
@@ -41,6 +38,7 @@ public class DialogUtils {
     public interface EditDialogListener {
         /**
          * 确定
+         *
          * @param dialog
          * @param editText
          */
@@ -48,11 +46,12 @@ public class DialogUtils {
 
         /**
          * 取消
+         *
          * @param dialog
          */
         void onCancel(Dialog dialog);
     }
-    
+
     /**
      * 通用的带输入框的Dialog
      *
@@ -95,21 +94,21 @@ public class DialogUtils {
         //Dialog主题
         int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity, dialogTheme);
-        View contentView = LayoutInflater.from(activity).inflate(R.layout.dialog_coin_type, null);
+        View contentView = LayoutInflater.from(activity).inflate(R.layout.dialog_coin_type_recycle_item, null);
         showIconDialog.setContentView(contentView);
 
 
         //设置Dialog标题
         TextView titleTv = contentView.findViewById(R.id.tv_dialog_title);
         titleTv.setText(title);
-        
+
         //设置Dialog内容
         RecyclerView contentRv = contentView.findViewById(R.id.rv_dialog_content);
         contentRv.setLayoutManager(new LinearLayoutManager(activity));
         contentRv.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
         adapter = new CurrencyAdapter(activity, currencyList);
         contentRv.setAdapter(adapter);
-        
+
         //RecyclerView中item点击事件
         adapter.setOnItemClickListener(new CurrencyAdapter.OnItemClickListener() {
             @Override
@@ -128,7 +127,7 @@ public class DialogUtils {
                 //长点击事件
             }
         });
-        
+
         //点击取消按钮
         TextView cancelTv = contentView.findViewById(R.id.tv_dialog_cancel);
         cancelTv.setOnClickListener(new View.OnClickListener() {
@@ -138,21 +137,22 @@ public class DialogUtils {
                 dismissDialog(showIconDialog);
             }
         });
-        
+
         //显示Dialog
         showIconDialog.setOwnerActivity(activity);
         if (showIconDialog.getOwnerActivity() != null && !showIconDialog.getOwnerActivity().isFinishing()) {
             showIconDialog.show();
         }
-        
+
         return showIconDialog;
     }
 
     /**
      * 警告Dialog
+     *
      * @param activity
-     * @param title             标题
-     * @param content           内容
+     * @param title    标题
+     * @param content  内容
      */
     public static void showAlertDialog(Activity activity,
                                        String title,
@@ -177,6 +177,7 @@ public class DialogUtils {
 
     /**
      * 关闭Dialog
+     *
      * @param dialog
      */
     public static void dismissDialog(Dialog dialog) {

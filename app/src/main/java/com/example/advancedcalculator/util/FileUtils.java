@@ -20,6 +20,7 @@ public class FileUtils {
 
     /**
      * 读取位于assets文件夹中的文件并转换成字符串
+     *
      * @param fileName
      * @param context
      * @return

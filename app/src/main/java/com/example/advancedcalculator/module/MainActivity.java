@@ -28,19 +28,19 @@ import butterknife.ButterKnife;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    
+
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
-    
+
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
-        
+
         initViewPager();
     }
 
@@ -52,17 +52,17 @@ public class MainActivity extends AppCompatActivity {
         titles.add(getString(R.string.calculator));
         titles.add(getString(R.string.exchange));
         titles.add(getString(R.string.relation));
-        
+
         //为TabLayout设置标题
         for (int i = 0; i < titles.size(); i++) {
             mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(i)));
         }
-        
+
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(GeneralFragment.newInstance());
         fragments.add(ExchangeFragment.newInstance());
         fragments.add(RelationFragment.newInstance());
-        
+
         BaseFragmentAdapter adapter = new BaseFragmentAdapter(getSupportFragmentManager(), fragments, titles);
         //给ViewPager设置适配器
         mViewPager.setAdapter(adapter);
@@ -71,5 +71,5 @@ public class MainActivity extends AppCompatActivity {
         //给TabLayout设置适配器
         mTabLayout.setTabsFromPagerAdapter(adapter);
     }
-    
+
 }

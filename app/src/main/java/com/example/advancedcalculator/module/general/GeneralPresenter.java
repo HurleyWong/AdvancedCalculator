@@ -26,6 +26,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 如果StringBuffer的最后一个字符为符号，则去掉
+     *
      * @param buffer
      */
     public void deleteLastStr(StringBuffer buffer) {
@@ -40,6 +41,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 判断是否能添加.
+     *
      * @param buffer
      * @return
      */
@@ -77,6 +79,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 如果StringBuffer的最后一个字符是.，则补0
+     *
      * @param buffer
      */
     public void addZeroIfPoint(StringBuffer buffer) {
@@ -88,6 +91,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 如果StringBuffer的最后一个字符是符号，则补0
+     *
      * @param buffer
      */
     public void addZeroIfChar(StringBuffer buffer) {
@@ -99,6 +103,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 如果StringBuffer的最后一个字符是符号，则根据不同的符号进行不同的操作
+     *
      * @param buffer
      */
     public void changeIfLastIsChar(StringBuffer buffer) {
@@ -116,6 +121,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 替换乘号*为x
+     *
      * @param buffer
      * @param s1
      * @param s2
@@ -133,6 +139,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 获得最后的数字
+     *
      * @param buffer
      * @return
      */
@@ -159,6 +166,7 @@ public class GeneralPresenter extends BasePresenter implements GeneralContract.P
 
     /**
      * 删除最后的数字
+     *
      * @param buffer
      * @return
      */

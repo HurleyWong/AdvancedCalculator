@@ -12,12 +12,12 @@ import com.example.advancedcalculator.base.IBaseView;
  * </pre>
  */
 public interface GeneralContract {
-    
+
     interface Presenter extends IBasePresenter {
-    
+
     }
-    
+
     interface View extends IBaseView {
-    
+
     }
 }

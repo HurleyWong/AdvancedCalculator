@@ -14,13 +14,14 @@ import android.content.Intent;
  */
 public class JumpUtils {
     private static final String TAG = "JumpUtils";
-    
+
     private static JumpUtils singletion;
     private static Context mContext;
     private static Intent mIntent;
 
     /**
      * 单例模式
+     *
      * @param context
      * @return
      */
@@ -32,7 +33,7 @@ public class JumpUtils {
         mContext = context;
         return singletion;
     }
-    
+
     public JumpUtils with(Intent intent) {
         if (intent != null) {
             mIntent = intent;
@@ -42,7 +43,7 @@ public class JumpUtils {
         }
         return singletion;
     }
-    
+
     public void jumpTo(String className) {
         if (mContext == null) {
             return;
@@ -56,10 +57,10 @@ public class JumpUtils {
         mContext = null;
         singletion = null;
     }
-    
+
     public void jumpTo(Class<?> clazz) {
         if (mContext == null) {
-            return ;
+            return;
         }
         if (mIntent == null) {
             mIntent = new Intent();

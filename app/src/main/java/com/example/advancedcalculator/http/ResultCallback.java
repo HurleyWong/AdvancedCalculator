@@ -14,6 +14,7 @@ import okhttp3.Request;
 public abstract class ResultCallback {
     /**
      * 请求失败
+     *
      * @param request
      * @param e
      */
@@ -21,6 +22,7 @@ public abstract class ResultCallback {
 
     /**
      * 请求成功
+     *
      * @param str
      * @throws IOException
      */

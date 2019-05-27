@@ -19,6 +19,7 @@ public class ActivityUtils {
 
     /**
      * 添加Fragment
+     *
      * @param fragmentManager
      * @param fragment
      * @param frameId
@@ -31,6 +32,7 @@ public class ActivityUtils {
 
     /**
      * 替换Fragment
+     *
      * @param fragmentManager
      * @param fragment
      * @param frameId
@@ -41,6 +43,7 @@ public class ActivityUtils {
 
     /**
      * 隐藏并添加Fragment
+     *
      * @param fragmentManager
      * @param fromFragment
      * @param toFragment
@@ -53,6 +56,7 @@ public class ActivityUtils {
 
     /**
      * 隐藏并显示Fragment
+     *
      * @param fragmentManager
      * @param fromFragment
      * @param toFragment
@@ -64,6 +68,7 @@ public class ActivityUtils {
 
     /**
      * 隐藏Fragment
+     *
      * @param fragmentManager
      * @param fragment
      */

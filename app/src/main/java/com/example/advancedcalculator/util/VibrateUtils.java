@@ -2,6 +2,7 @@ package com.example.advancedcalculator.util;
 
 import android.content.Context;
 import android.os.Vibrator;
+
 /**
  * <pre>
  *      @author hurley
@@ -17,8 +18,9 @@ public class VibrateUtils {
 
     /**
      * 开启震动
-     * @param context       调用震动的Context
-     * @param millSecond    震动时长，毫秒
+     *
+     * @param context    调用震动的Context
+     * @param millSecond 震动时长，毫秒
      */
     @SuppressWarnings("static-access")
     public static void startVibrate(Context context, int millSecond) {

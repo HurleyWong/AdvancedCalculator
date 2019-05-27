@@ -27,8 +27,9 @@ public class CalculatorUtils {
 
     /**
      * 中缀转后缀
-     * @param buffer   表达式
-     * @return          返回一个ArrayList对象，即一个后缀表达式
+     *
+     * @param buffer 表达式
+     * @return 返回一个ArrayList对象，即一个后缀表达式
      */
     public static ArrayList Suffix(StringBuffer buffer) {
 
@@ -49,7 +50,7 @@ public class CalculatorUtils {
         //作为结果集合，后缀表达式保存在里面
         ArrayList<String> result = new ArrayList<>();
 
-        for (int i = 0; i < buffer.length(); i ++) {
+        for (int i = 0; i < buffer.length(); i++) {
             //判断是不是数字
             if ((buffer.charAt(i) >= '0' && buffer.charAt(i) <= '9') || buffer.charAt(i) == '.') {
                 //如果此位为'.'，且中间字符串为空，自动补0
@@ -62,7 +63,7 @@ public class CalculatorUtils {
                     temp.append(buffer.charAt(i));
                 }
                 //对最后一位进行单独判断，如果是字符串最后一位，直接进行添加到list操作
-                if (i == buffer.length() - 1){
+                if (i == buffer.length() - 1) {
                     list.add(temp.toString());
                 }
             } else {
@@ -79,7 +80,7 @@ public class CalculatorUtils {
         }
 
         //遍历输出
-        for (String aList : list){
+        for (String aList : list) {
             Log.d(TAG, "遍历输出" + aList);
         }
 
@@ -116,8 +117,7 @@ public class CalculatorUtils {
                         stack.push(s);
                     }
                 }
-            }
-            else {
+            } else {
                 //是数字
                 result.add(s);
             }
@@ -132,8 +132,9 @@ public class CalculatorUtils {
 
     /**
      * 用于计算后缀表达式的结果
-     * @param arrayList     后缀表达式
-     * @return              运算的最终结果
+     *
+     * @param arrayList 后缀表达式
+     * @return 运算的最终结果
      */
     public static String calculate(ArrayList arrayList) {
         int length = arrayList.size();
@@ -141,7 +142,7 @@ public class CalculatorUtils {
         //转化为字符串数组
         String[] arr = new String[length];
 
-        for (int i = 0; i < arrayList.size(); i ++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             arr[i] = (String) arrayList.get(i);
         }
         Log.d(TAG, "传过来的List：" + arrayList.toString());
@@ -152,7 +153,7 @@ public class CalculatorUtils {
             int size = list.size();
             Log.d(TAG, "list是啥：" + list.toString());
             Log.d(TAG, "传过来的长度2：" + size);
-            switch (anArr){
+            switch (anArr) {
                 case "+":
                     BigDecimal a = new BigDecimal(list.remove(size - 2)).add(new BigDecimal(list.remove(size - 2)));
                     //去掉结果末尾的0

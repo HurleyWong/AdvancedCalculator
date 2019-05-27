@@ -12,12 +12,12 @@ import com.example.advancedcalculator.base.IBaseView;
  * </pre>
  */
 public interface RelationContract {
-    
+
     interface Presenter extends IBasePresenter {
-    
+
     }
-    
+
     interface View extends IBaseView {
-    
+
     }
 }

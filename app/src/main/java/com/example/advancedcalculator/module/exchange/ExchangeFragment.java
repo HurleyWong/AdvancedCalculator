@@ -1,12 +1,6 @@
 package com.example.advancedcalculator.module.exchange;
 
-import android.app.Dialog;
-import android.app.Fragment;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.advancedcalculator.R;
 import com.example.advancedcalculator.base.BaseFragment;
@@ -48,91 +41,91 @@ import okhttp3.Request;
  */
 public class ExchangeFragment extends BaseFragment implements ExchangeContract.View {
     private static final String TAG = "ExchangeFragment";
-    
+
     @BindView(R.id.ll_country)
     LinearLayout mLlCountry;
-    
+
     @BindView(R.id.img_flag1)
     ImageView mIvFlag1;
-    
+
     @BindView(R.id.country_title1)
     TextView mTvTitle1;
-    
+
     @BindView(R.id.country_money1)
     TextView mTvMoney1;
-    
+
     @BindView(R.id.country_coin_type1)
     TextView mTvCoinType1;
-    
+
     @BindView(R.id.img_flag2)
     ImageView mIvFlag2;
-    
+
     @BindView(R.id.country_title2)
     TextView mTvTitle2;
-    
+
     @BindView(R.id.country_money2)
     TextView mTvMoney2;
-    
+
     @BindView(R.id.country_coin_type2)
     TextView mTvCoinType2;
-    
+
     @BindView(R.id.img_flag3)
     ImageView mIvFlag3;
-    
+
     @BindView(R.id.country_title3)
     TextView mTvTitle3;
-    
+
     @BindView(R.id.country_money3)
     TextView mTvMoney3;
-    
+
     @BindView(R.id.country_coin_type3)
     TextView mTvCoinType3;
-    
+
     @BindView(R.id.ll_keyboard)
     LinearLayout mLlKeyBoard;
-    
+
     @BindView(R.id.btn_7)
     TextView mTvBtn7;
-    
+
     @BindView(R.id.btn_4)
     TextView mTvBtn4;
-    
+
     @BindView(R.id.btn_0)
     TextView mTvBtn0;
-    
+
     @BindView(R.id.btn_8)
     TextView mTvBtn8;
-    
+
     @BindView(R.id.btn_5)
     TextView mTvBtn5;
-    
+
     @BindView(R.id.btn_2)
     TextView mTvBtn2;
-    
+
     @BindView(R.id.btn_empty)
     TextView mTvBtnEmpty;
-    
+
     @BindView(R.id.btn_9)
     TextView mTvBtn9;
-    
+
     @BindView(R.id.btn_6)
     TextView mTvBtn6;
-    
+
     @BindView(R.id.btn_3)
     TextView mTvBtn3;
-    
+
     @BindView(R.id.btn_point)
     TextView mTvBtnPoint;
-    
+
     @BindView(R.id.btn_AC)
     TextView mTvBtnAC;
-    
+
     @BindView(R.id.btn_del)
     RelativeLayout mRlBtnDel;
-    
+
     @BindView(R.id.divide_vertical1)
     View mViewDivide1;
-    
+
     @BindView(R.id.ll_column1)
     LinearLayout mLlColumn1;
 
@@ -144,7 +137,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     @BindView(R.id.rl_country3)
     RelativeLayout mRlCountry3;
-    
+
     private StringBuffer mMoney = new StringBuffer("");
 
     /**
@@ -210,29 +203,29 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
      */
     private View mCoin;
     private TextView mCoinName;
-    
+
     private CurrencyAdapter mAdapter;
 
     private List<String> mCurrencyList;
-    
+
     private ExchangePresenter mPresenter = ExchangePresenter.newInstance();
 
     public ExchangeFragment mFragment;
-    
+
     public static ExchangeFragment newInstance() {
         return new ExchangeFragment();
     }
-    
+
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_exchange_rate;
+        return R.layout.exchange_rate_fragment;
     }
-    
+
     @Override
     public void initViews() {
-    
+
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
@@ -251,15 +244,15 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
         return root;
     }
-    
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
     @OnClick({R.id.btn_0, R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6,
-                R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del, R.id.btn_empty,
-                R.id.rl_country1, R.id.rl_country2, R.id.rl_country3})
+            R.id.btn_7, R.id.btn_8, R.id.btn_9, R.id.btn_point, R.id.btn_AC, R.id.btn_del, R.id.btn_empty,
+            R.id.rl_country1, R.id.rl_country2, R.id.rl_country3})
     public void onClickNum(View view) {
         char zero = '0';
 
@@ -390,6 +383,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     /**
      * 获取汇率
+     *
      * @param tv1
      * @param tv2
      * @param tv3
@@ -437,7 +431,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
-                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                        for (int i = 0; i < currency.getResult().size(); i++) {
                             mCurrencyList.add(currency.getResult().get(i).getResult());
                             Log.e(TAG, mCurrencyList.get(i));
                         }
@@ -471,7 +465,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
-                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                        for (int i = 0; i < currency.getResult().size(); i++) {
                             mCurrencyList.add(currency.getResult().get(i).getResult());
                             Log.e(TAG, mCurrencyList.get(i));
                         }
@@ -509,7 +503,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
-                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                        for (int i = 0; i < currency.getResult().size(); i++) {
                             mCurrencyList.add(currency.getResult().get(i).getResult());
                             Log.e(TAG, mCurrencyList.get(i));
                         }
@@ -543,7 +537,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
-                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                        for (int i = 0; i < currency.getResult().size(); i++) {
                             mCurrencyList.add(currency.getResult().get(i).getResult());
                             Log.e(TAG, mCurrencyList.get(i));
                         }
@@ -580,7 +574,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
-                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                        for (int i = 0; i < currency.getResult().size(); i++) {
                             mCurrencyList.add(currency.getResult().get(i).getResult());
                             Log.e(TAG, mCurrencyList.get(i));
                         }
@@ -614,7 +608,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         }
                         mPresenter.onClickAC(tvMoney1, tvMoney2, tvMoney3);
                     } else {
-                        for (int i = 0; i < currency.getResult().size(); i ++) {
+                        for (int i = 0; i < currency.getResult().size(); i++) {
                             mCurrencyList.add(currency.getResult().get(i).getResult());
                             Log.e(TAG, mCurrencyList.get(i));
                         }
@@ -633,6 +627,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     /**
      * 货币显示的规则
+     *
      * @param tvMoney1
      * @param tvMoney2
      * @param tvMoney3
@@ -667,7 +662,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     tvMoney3.setText(String.valueOf(TextUtils.saveFourDecimal(moneyTo)));
                 }
             }
-        }else if (onClickItem == mItem2) {
+        } else if (onClickItem == mItem2) {
             if (to == 1) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
                     Log.e(TAG, "moneyTo等于1：" + moneyTo);
@@ -726,6 +721,7 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
 
     /**
      * 点击国家弹出选择货币种类Dialog
+     *
      * @param textView
      */
     @OnClick({R.id.country_title1, R.id.country_title2, R.id.country_title3})

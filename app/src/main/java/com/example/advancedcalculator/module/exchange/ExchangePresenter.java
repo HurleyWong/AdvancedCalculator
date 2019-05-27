@@ -111,6 +111,7 @@ public class ExchangePresenter extends BasePresenter implements ExchangeContract
 
     /**
      * 点击AC，清空所有数据
+     *
      * @param tv1
      * @param tv2
      * @param tv3

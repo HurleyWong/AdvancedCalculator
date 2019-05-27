@@ -1,6 +1,7 @@
 package com.example.advancedcalculator.util;
 
 import java.text.DecimalFormat;
+
 /**
  * <pre>
  *      @author hurley
@@ -13,6 +14,7 @@ public class TextUtils {
 
     /**
      * 保留两位小数
+     *
      * @param num
      * @return
      */
@@ -23,6 +25,7 @@ public class TextUtils {
 
     /**
      * 判断有几位小数
+     *
      * @param num
      * @return
      */

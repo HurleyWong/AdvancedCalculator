@@ -19,7 +19,7 @@ import android.view.WindowManager;
  * </pre>
  */
 public class ScreenUtils {
-    
+
     private static final String TAG = "ScreenUtils";
 
     public static DisplayMetrics getDisplayMetrics() {
@@ -28,6 +28,7 @@ public class ScreenUtils {
 
     /**
      * 获得屏幕宽度
+     *
      * @return
      */
     public static int getScreenWidth() {
@@ -37,6 +38,7 @@ public class ScreenUtils {
 
     /**
      * 获得屏幕高度
+     *
      * @return
      */
     public static int getScreenHeight() {
@@ -46,6 +48,7 @@ public class ScreenUtils {
 
     /**
      * 获取屏幕密度
+     *
      * @return
      */
     public static float getScreenDensity() {
@@ -55,6 +58,7 @@ public class ScreenUtils {
 
     /**
      * 获取控件的高度或宽度
+     *
      * @param view
      * @param isHeight
      * @return
@@ -80,6 +84,7 @@ public class ScreenUtils {
 
     /**
      * dp转px
+     *
      * @param context
      * @param dpValue
      * @return
@@ -91,6 +96,7 @@ public class ScreenUtils {
 
     /**
      * px转dp
+     *
      * @param context
      * @param pxValue
      * @return
@@ -100,5 +106,5 @@ public class ScreenUtils {
         return (int) (pxValue / scale + 0.5f);
     }
 
-    
+
 }

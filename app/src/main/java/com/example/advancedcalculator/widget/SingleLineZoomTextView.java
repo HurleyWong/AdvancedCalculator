@@ -39,6 +39,7 @@ public class SingleLineZoomTextView extends TextView {
     /**
      * getTextSize返回值是以像素（px）为单位，而setTextSize默认是以sp为单位
      * 所以需要传入像素单位setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+     *
      * @param text
      * @param textWidth
      */
@@ -72,6 +73,7 @@ public class SingleLineZoomTextView extends TextView {
 
     /**
      * 字符串所占像素宽度
+     *
      * @param textSize
      * @param text
      * @return

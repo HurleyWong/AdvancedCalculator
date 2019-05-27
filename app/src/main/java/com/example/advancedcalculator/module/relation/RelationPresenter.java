@@ -30,11 +30,12 @@ public class RelationPresenter extends BasePresenter implements RelationContract
 
     /**
      * 从本地读取数据
+     *
      * @param relationList
      * @param context
      * @return
      */
-    public List getRelationByJSON(final List<Relation.ResultBean.RelationBean> relationList, Context context){
+    public List getRelationByJSON(final List<Relation.ResultBean.RelationBean> relationList, Context context) {
         String jsonContext = FileUtils.readFileFromAssets("relation.json", context);
         final Relation relation = GsonUtils.getObject(jsonContext, Relation.class);
         for (int i = 0; i < relation.getResult().getRelation().size(); i++) {
@@ -56,6 +57,7 @@ public class RelationPresenter extends BasePresenter implements RelationContract
 
     /**
      * 获得关系称呼
+     *
      * @param buffer
      * @param relationList
      * @return
@@ -63,7 +65,7 @@ public class RelationPresenter extends BasePresenter implements RelationContract
     public String getRelationship(StringBuffer buffer, List<Relation.ResultBean.RelationBean> relationList) {
         //去除所有"的"字符
         String call = buffer.toString().replace("的", "");
-        Log.e(TAG, call.substring(1,3));
+        Log.e(TAG, call.substring(1, 3));
         //中间称呼
         String temp = "";
         //下一个关系
@@ -128,7 +130,7 @@ public class RelationPresenter extends BasePresenter implements RelationContract
                     for (int k = 0; k < relationList.size(); k++) {
                         if (relationList.get(k).getName().equals(temp)) {
                             i = k;
-                            Log.e(TAG, "temp的位置："  + i);
+                            Log.e(TAG, "temp的位置：" + i);
                         }
                     }
                 }

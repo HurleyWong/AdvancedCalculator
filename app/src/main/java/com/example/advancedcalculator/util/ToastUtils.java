@@ -2,6 +2,7 @@ package com.example.advancedcalculator.util;
 
 import android.content.Context;
 import android.widget.Toast;
+
 /**
  * <pre>
  *      @author hurley
@@ -15,6 +16,7 @@ public class ToastUtils {
 
     /**
      * 短时间Toast
+     *
      * @param context
      * @param text
      */
@@ -24,6 +26,7 @@ public class ToastUtils {
 
     /**
      * 长时间Toast
+     *
      * @param context
      * @param text
      */
@@ -33,6 +36,7 @@ public class ToastUtils {
 
     /**
      * 显示具体时长的Toast
+     *
      * @param context
      * @param text
      * @param duration
@@ -43,6 +47,7 @@ public class ToastUtils {
 
     /**
      * 显示具体时长和位置的Toast
+     *
      * @param context
      * @param text
      * @param duration

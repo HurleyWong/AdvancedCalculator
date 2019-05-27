@@ -19,11 +19,11 @@ import java.util.ArrayList;
 public abstract class BaseApplication extends Application {
     protected static BaseApplication instance;
     protected ArrayList<Activity> mActivityList;
-    
+
     public static BaseApplication getInstance() {
         return instance;
     }
-    
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,7 +32,7 @@ public abstract class BaseApplication extends Application {
             mActivityList = new ArrayList<>();
         }
     }
-    
+
     protected boolean inMainProcess() {
         String packageName = getPackageName();
         String processName = AppUtils.getProcessName(this);
@@ -59,6 +59,7 @@ public abstract class BaseApplication extends Application {
 
     /**
      * 获取当前Activity
+     *
      * @return
      */
     public Activity getCurrentActivity() {
@@ -67,17 +68,6 @@ public abstract class BaseApplication extends Application {
         }
         return null;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
 }

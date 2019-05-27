@@ -122,7 +122,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this,root);
+        ButterKnife.bind(this, root);
         return root;
     }
 
@@ -191,7 +191,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
                 count--;
                 //删除
                 if (mRelation.length() >= deleteNum) {
-                    mRelation.delete(mRelation.length()-3, mRelation.length());
+                    mRelation.delete(mRelation.length() - 3, mRelation.length());
                 }
                 break;
             default:

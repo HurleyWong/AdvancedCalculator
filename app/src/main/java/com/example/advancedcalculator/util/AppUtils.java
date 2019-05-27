@@ -14,17 +14,18 @@ import android.text.TextUtils;
  */
 public class AppUtils {
     private static final String TAG = "AppUtils";
-    
+
     /**
      * 获取当前进程名
+     *
      * @param context
-     * @return  进程名
+     * @return 进程名
      */
     public static final String getProcessName(Context context) {
         String processName = null;
-    
+
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        
+
         while (true) {
             for (ActivityManager.RunningAppProcessInfo info : manager.getRunningAppProcesses()) {
                 if (info.pid == android.os.Process.myPid()) {
@@ -32,11 +33,11 @@ public class AppUtils {
                     break;
                 }
             }
-            
+
             if (!TextUtils.isEmpty(processName)) {
                 return processName;
             }
-            
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

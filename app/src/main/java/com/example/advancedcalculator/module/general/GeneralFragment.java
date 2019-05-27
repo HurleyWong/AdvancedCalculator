@@ -1,15 +1,12 @@
 package com.example.advancedcalculator.module.general;
 
 import android.os.Bundle;
-import android.os.Message;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.advancedcalculator.R;
@@ -30,67 +27,67 @@ import butterknife.OnClick;
  */
 public class GeneralFragment extends BaseFragment implements GeneralContract.View {
     private static final String TAG = "GeneralFragment";
-    
+
     @BindView(R.id.rl_screen)
     RelativeLayout mRlScreen;
-    
+
     @BindView(R.id.tv_num)
     TextView mTvNum;
-    
+
     @BindView(R.id.ll_keyboard)
     LinearLayout mLlKeyBoard;
-    
+
     @BindView(R.id.btn_AC)
     TextView mBtnAC;
-    
+
     @BindView(R.id.btn_7)
     TextView mBtn7;
-    
+
     @BindView(R.id.btn_4)
     TextView mBtn4;
-    
+
     @BindView(R.id.btn_1)
     TextView mBtn1;
-    
+
     @BindView(R.id.btn_del)
     RelativeLayout mBtnDel;
-    
+
     @BindView(R.id.btn_8)
     TextView mBtn8;
-    
+
     @BindView(R.id.btn_5)
     TextView mBtn5;
-    
+
     @BindView(R.id.btn_2)
     TextView mBtn2;
-    
+
     @BindView(R.id.btn_0)
     TextView mBtn0;
-    
+
     @BindView(R.id.btn_divide)
     TextView mBtnDivide;
-    
+
     @BindView(R.id.btn_9)
     TextView mBtn9;
-    
+
     @BindView(R.id.btn_6)
     TextView mBtn6;
-    
+
     @BindView(R.id.btn_3)
     TextView mBtn3;
-    
+
     @BindView(R.id.btn_point)
     TextView mBtnPoint;
-    
+
     @BindView(R.id.btn_multiply)
     TextView mBtnMultiply;
-    
+
     @BindView(R.id.btn_subtract)
     TextView mBtnSub;
-    
+
     @BindView(R.id.btn_add)
     TextView mBtnAdd;
-    
+
     @BindView(R.id.btn_equal)
     TextView mBtnEqual;
 
@@ -124,28 +121,28 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
 
     private static GeneralPresenter mPresenter = GeneralPresenter.newInstance();
 
-    
+
     public static GeneralFragment newInstance() {
         return new GeneralFragment();
     }
-    
-    
+
+
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_general;
+        return R.layout.general_fragment;
     }
-    
+
     @Override
     public void initViews() {
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, root);
         return root;
     }
-    
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -276,7 +273,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 if (mMoney.length() == 0) {
                     mMoney.append("0");
                 }
-                if (mMoney.length() != 0){
+                if (mMoney.length() != 0) {
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
                 }
@@ -289,7 +286,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 if (mMoney.length() == 0) {
                     mMoney.append("0");
                 }
-                if (mMoney.length() != 0){
+                if (mMoney.length() != 0) {
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
                 }
@@ -303,7 +300,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 if (mMoney.length() == 0) {
                     mMoney.append("0");
                 }
-                if (mMoney.length() != 0){
+                if (mMoney.length() != 0) {
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
                 }
@@ -316,7 +313,7 @@ public class GeneralFragment extends BaseFragment implements GeneralContract.Vie
                 if (mMoney.length() == 0) {
                     mMoney.append("0");
                 }
-                if (mMoney.length() != 0){
+                if (mMoney.length() != 0) {
                     //如果最后一位是.，则先补0
                     mPresenter.addZeroIfPoint(mMoney);
                 }

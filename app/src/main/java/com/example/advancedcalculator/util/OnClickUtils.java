@@ -24,6 +24,7 @@ public class OnClickUtils {
 
     /**
      * 是否在短时间内进行了双击操作
+     *
      * @return
      */
     public static boolean isOnDoubleClick() {
