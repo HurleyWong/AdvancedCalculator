@@ -286,7 +286,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //如果长度大于0且首位不为0
                     if (mMoney.length() > 0 && mMoney.charAt(0) != zero) {
                         mMoney.append("0");
-                        Log.d(TAG, "点击0");
                     }
                     break;
                 //点击0
@@ -294,7 +293,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                     //如果长度大于0且首位不为0
                     if (mMoney.length() > 0 && mMoney.charAt(0) != zero) {
                         mMoney.append("0");
-                        Log.d(TAG, "点击0");
                     }
                     break;
                 case R.id.btn_1:
@@ -405,7 +403,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         url3to1 = ExchangeUtils.getUrl(baseUrl, coin3, coin1);
         url3to2 = ExchangeUtils.getUrl(baseUrl, coin3, coin2);
 
-        Log.e(TAG, "传过来的item：" + onClickItem);
 
         if (onClickItem == 1) {
             Log.e(TAG, "获取链接url1to2：" + url1to2);
@@ -440,7 +437,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         double money2 = ExchangeUtils.showExchangedMoney(money1,
                                 Double.parseDouble(mCurrencyList.get(0)));
 
-                        Log.e(TAG, "怎么会为空？" + money2);
                         setMoney(tvMoney1, tvMoney2, tvMoney3, money2, 2, onClickItem);
                     }
                 }
@@ -473,7 +469,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         double money1 = Double.parseDouble(tvMoney1.getText().toString());
                         double money3 = ExchangeUtils.showExchangedMoney(money1,
                                 Double.parseDouble(mCurrencyList.get(0)));
-                        Log.e(TAG, "怎么会为空？" + money3);
                         setMoney(tvMoney1, tvMoney2, tvMoney3, money3, 3, onClickItem);
                     }
 
@@ -512,7 +507,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         double money1 = ExchangeUtils.showExchangedMoney(money2,
                                 Double.parseDouble(mCurrencyList.get(0)));
 
-                        Log.e(TAG, "怎么会为空？" + money1);
                         setMoney(tvMoney1, tvMoney2, tvMoney3, money1, 1, onClickItem);
                     }
                 }
@@ -545,7 +539,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         double money2 = Double.parseDouble(tvMoney2.getText().toString());
                         double money3 = ExchangeUtils.showExchangedMoney(money2,
                                 Double.parseDouble(mCurrencyList.get(0)));
-                        Log.e(TAG, "怎么会为空？" + money3);
                         setMoney(tvMoney1, tvMoney2, tvMoney3, money3, 3, onClickItem);
                     }
                 }
@@ -583,7 +576,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         double money1 = ExchangeUtils.showExchangedMoney(money3,
                                 Double.parseDouble(mCurrencyList.get(0)));
 
-                        Log.e(TAG, "怎么会为空？" + money1);
                         setMoney(tvMoney1, tvMoney2, tvMoney3, money1, 1, onClickItem);
                     }
                 }
@@ -616,7 +608,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                         double money3 = Double.parseDouble(tvMoney3.getText().toString());
                         double money2 = ExchangeUtils.showExchangedMoney(money3,
                                 Double.parseDouble(mCurrencyList.get(0)));
-                        Log.e(TAG, "怎么会为空？" + money2);
                         setMoney(tvMoney1, tvMoney2, tvMoney3, money2, 2, onClickItem);
                     }
                 }
@@ -639,7 +630,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         if (onClickItem == 1) {
             if (to == mItem2) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
-                    Log.e(TAG, "moneyTo等于1：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney2.setText("0");
                     } else {
@@ -651,7 +641,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 }
             } else if (to == mItem3) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
-                    Log.e(TAG, "moneyTo等于2：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney3.setText("0");
                     } else {
@@ -665,7 +654,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         } else if (onClickItem == mItem2) {
             if (to == 1) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
-                    Log.e(TAG, "moneyTo等于1：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney1.setText("0");
                     } else {
@@ -677,7 +665,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 }
             } else if (to == mItem3) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
-                    Log.e(TAG, "moneyTo等于2：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney3.setText("0");
                     } else {
@@ -691,7 +678,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
         } else if (onClickItem == mItem3) {
             if (to == 1) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
-                    Log.e(TAG, "moneyTo等于1：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney1.setText("0");
                     } else {
@@ -703,7 +689,6 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 }
             } else if (to == mItem2) {
                 if (TextUtils.howManyDecimal(moneyTo) <= maxDecimal) {
-                    Log.e(TAG, "moneyTo等于2：" + moneyTo);
                     if (moneyTo == 0.0) {
                         tvMoney2.setText("0");
                     } else {
@@ -745,12 +730,10 @@ public class ExchangeFragment extends BaseFragment implements ExchangeContract.V
                 break;
         }
 
-        Log.e(TAG, "顺序1");
         DialogUtils.showCoinDialog(getActivity(), getString(R.string.currency_dialog_title),
                 textView, mCoinName, mAdapter, coinList,
                 mTvTitle1, mTvTitle2, mTvTitle3, mTvMoney1, mTvMoney2, mTvMoney3, mClickItem);
 
-        Log.e(TAG, "顺序3");
     }
 
 }

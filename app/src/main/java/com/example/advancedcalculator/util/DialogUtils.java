@@ -94,7 +94,7 @@ public class DialogUtils {
         //Dialog主题
         int dialogTheme = R.style.defaultDialogTheme;
         final Dialog showIconDialog = new Dialog(activity, dialogTheme);
-        View contentView = LayoutInflater.from(activity).inflate(R.layout.dialog_coin_type_recycle_item, null);
+        View contentView = LayoutInflater.from(activity).inflate(R.layout.coin_type_dialog, null);
         showIconDialog.setContentView(contentView);
 
 
@@ -114,11 +114,9 @@ public class DialogUtils {
             @Override
             public void onItemClick(View view, int position) {
                 //点击事件
-                Log.e(TAG, "顺序2");
                 tvCoinCode.setText(currencyList.get(position).getCode());
                 tvCoinName.setText(currencyList.get(position).getName());
                 dismissDialog(showIconDialog);
-                Log.e(TAG, "这里传入的item变了吗？" + onClickItem);
                 ExchangeFragment.newInstance().getCurrency(tv1, tv2, tv3, tvMoney1, tvMoney2, tvmoney3, onClickItem);
             }
 

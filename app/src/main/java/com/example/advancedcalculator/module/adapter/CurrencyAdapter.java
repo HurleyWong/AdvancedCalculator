@@ -51,20 +51,20 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
 
         if (mOnItemClickListener != null) {
             //点击事件
-            holder.mRlCoinType.setOnClickListener(new View.OnClickListener() {
+            holder.mLlCoinType.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemClickListener.onItemClick(holder.mRlCoinType, pos);
+                    mOnItemClickListener.onItemClick(holder.mLlCoinType, pos);
                 }
             });
 
             //长点击事件
-            holder.mRlCoinType.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.mLlCoinType.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemClickListener.onItemLongClick(holder.mRlCoinType, pos);
+                    mOnItemClickListener.onItemLongClick(holder.mLlCoinType, pos);
                     return false;
                 }
             });
