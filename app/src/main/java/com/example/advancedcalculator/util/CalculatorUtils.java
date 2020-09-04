@@ -138,21 +138,17 @@ public class CalculatorUtils {
      */
     public static String calculate(ArrayList arrayList) {
         int length = arrayList.size();
-        Log.d(TAG, "传过来的长度1：" + length);
         //转化为字符串数组
         String[] arr = new String[length];
 
         for (int i = 0; i < arrayList.size(); i++) {
             arr[i] = (String) arrayList.get(i);
         }
-        Log.d(TAG, "传过来的List：" + arrayList.toString());
 
         List<String> list = new ArrayList<>();
 
         for (String anArr : arr) {
             int size = list.size();
-            Log.d(TAG, "list是啥：" + list.toString());
-            Log.d(TAG, "传过来的长度2：" + size);
             switch (anArr) {
                 case "+":
                     BigDecimal a = new BigDecimal(list.remove(size - 2)).add(new BigDecimal(list.remove(size - 2)));
@@ -184,7 +180,6 @@ public class CalculatorUtils {
             if (list.get(0).length() < maxLength) {
                 BigDecimal decimal = new BigDecimal(list.get(0));
                 //默认直接输出
-                Log.e(TAG, "最终结果：" + decimal.toPlainString());
                 return decimal.toPlainString();
             } else {
                 //如果结果过长时，采用科学计数法输出

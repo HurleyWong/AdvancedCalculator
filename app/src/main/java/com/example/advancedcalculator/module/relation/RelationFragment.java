@@ -111,7 +111,7 @@ public class RelationFragment extends BaseFragment implements RelationContract.V
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_relationship;
+        return R.layout.relation_fragment;
     }
 
     @Override
