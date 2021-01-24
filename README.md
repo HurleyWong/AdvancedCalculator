@@ -13,4 +13,4 @@
 其中基础数字计算的算法采用的是中缀转后缀表达式的算法。
 
 ## 截图
-![](/assets/advanced-calculator.JPEG)
+![](/assets/screenshot.jpeg)
